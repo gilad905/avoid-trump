@@ -1,6 +1,5 @@
 var PlayState = {};
-PlayState.AT = {};
-var AT = PlayState.AT;
+var AT = {};
 
 AT.SPEED = 200;
 AT._timer = null;
@@ -41,12 +40,13 @@ PlayState.init = function(args) {
 
     AT.level = 0;
     AT.counter = 0;
+    AT.sceneNumber = -1;
 
     AT.refreshCounter();
 
-    // this.timers
-    // this._timer = game.time.create(false);
-    // timer.loop(2000, updateCounter, this);
+    AT.timer = this.game.time.create(false);
+
+    this.game.input.keyboard.onDownCallback = AT.onKeyDown;
 };
 
 PlayState.create = function() {
@@ -61,6 +61,8 @@ PlayState.create = function() {
 
     var data = this.game.cache.getJSON(`level:${AT.level}`);
     AT.loadLevel(data);
+    AT.scenes = data.scenes;
+    AT.nextScene();
 
     // if (!this.music)
     //     this.music = this.game.add.audio('music');
@@ -73,13 +75,30 @@ PlayState.create = function() {
     // this.game.input.enabled = true;
 };
 
+AT.nextScene = function() {
+    AT.sceneNumber++;
+    var scene = this.scenes[this.sceneNumber];
+    this.timer.stop();
+    if (scene) {
+        // console.log(scene);
+        // if (scene.char)
+            // scene.charCode = scene.char.charCodeAt(0);
+        if (scene.isAvoidTask) {
+            scene.obj = new AvoidTask(scene);
+        } else {
+            this.timer.add(scene.dur * 1000, this.nextScene, this);
+            this.timer.start();
+        }
+    }
+    this.scene = scene;
+};
+
 PlayState.update = function() {
     AT.handleCollisions();
     AT.handleInput();
 };
 
-AT.createUI = function() {
-};
+AT.createUI = function() {};
 
 AT.refreshCounter = function() {
     PlayState.game.debug.text(this.counter, 100, 200, 'white', '50px Courier');

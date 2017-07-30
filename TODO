@@ -16,3 +16,10 @@ Avoid Task:
 
 
 - Move all PlayState properties to a one PlayState property parent
+
+
+////////////////////////////////////////////////
+
+open animation timer
+when ends: start task (with timer)
+when ends: open next anim timer
