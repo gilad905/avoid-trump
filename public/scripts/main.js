@@ -1,6 +1,9 @@
 var PlayState = {};
+PlayState.AT = {};
+var AT = PlayState.AT;
 
-PlayState.SPEED = 200;
+AT.SPEED = 200;
+AT._timer = null;
 
 window.onload = function() {
     // let game = new Phaser.Game(docoment.window.width, do, Phaser.AUTO, 'game');
@@ -25,7 +28,7 @@ PlayState.preload = function() {
 
 PlayState.init = function(args) {
     this.game.renderer.renderSession.roundPixels = true;
-    this.keys = this.game.input.keyboard.addKeys({
+    AT.keys = this.game.input.keyboard.addKeys({
         left: Phaser.KeyCode.LEFT,
         right: Phaser.KeyCode.RIGHT,
         up: Phaser.KeyCode.UP,
@@ -35,20 +38,15 @@ PlayState.init = function(args) {
     // this.keys.up.onDown.add(function() {
     //     this.hero.move(this._DIR.UP);
     // }, this);
-    //
-    // this.keys.down.onDown.add(function() {
-    //     this.hero.move(this._DIR.DOWN);
-    // }, this);
-    //
-    // this.keys.left.onDown.add(function() {
-    //     this.hero.move(this._DIR.LEFT);
-    // }, this);
-    //
-    // this.keys.right.onDown.add(function() {
-    //     this.hero.move(this._DIR.RIGHT);
-    // }, this);
 
-    this.level = 0;
+    AT.level = 0;
+    AT.counter = 0;
+
+    AT.refreshCounter();
+
+    // this.timers
+    // this._timer = game.time.create(false);
+    // timer.loop(2000, updateCounter, this);
 };
 
 PlayState.create = function() {
@@ -59,9 +57,10 @@ PlayState.create = function() {
     // };
 
     // this.game.add.image(0, 0, 'background');
+    this.game.stage.backgroundColor = "#4488AA";
 
-    var data = this.game.cache.getJSON(`level:${this.level}`);
-    this.loadLevel(data);
+    var data = this.game.cache.getJSON(`level:${AT.level}`);
+    AT.loadLevel(data);
 
     // if (!this.music)
     //     this.music = this.game.add.audio('music');
@@ -74,10 +73,14 @@ PlayState.create = function() {
     // this.game.input.enabled = true;
 };
 
-PlayState.createUI = function() {
+PlayState.update = function() {
+    AT.handleCollisions();
+    AT.handleInput();
 };
 
-PlayState.update = function() {
-    this.handleCollisions();
-    this.handleInput();
+AT.createUI = function() {
+};
+
+AT.refreshCounter = function() {
+    PlayState.game.debug.text(this.counter, 100, 200, 'white', '50px Courier');
 };

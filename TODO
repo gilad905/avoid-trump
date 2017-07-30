@@ -1,0 +1,18 @@
+Basic character mechanincs:
+//- Collisions
+X- Movement
+X- Animations
+
+Avoid Task:
+- Timer:
+    - after 10 seconds, an avoid task starts:
+        - a character appears for 10 seconds
+        - if the character is pressed:
+            end avoid task
+            raise counter
+        else:
+            end on time
+- Circle animation
+
+
+- Move all PlayState properties to a one PlayState property parent

@@ -22,26 +22,24 @@ Hero.prototype = Object.create(Phaser.Sprite.prototype);
 Hero.prototype.constructor = Hero;
 
 Hero.prototype.move = function(keys) {
-    // console.log(this.body.velocity);
+    if (keys.left.isDown)
+        this.body.velocity.x = -AT.SPEED;
+    else if (keys.right.isDown)
+        this.body.velocity.x = AT.SPEED;
+    else
+        this.body.velocity.x = 0;
 
-    // if (keys.left.isDown)
-    //     this.body.velocity.x = -this.SPEED;
-    // else if (keys.right.isDown)
-    //     this.body.velocity.x = this.SPEED;
-    // else
-    //     this.body.velocity.x = 0;
-    //
-    // if (keys.up.isDown)
-    //     this.body.velocity.y = -this.SPEED;
-    // else if (keys.down.isDown)
-    //     this.body.velocity.y = this.SPEED;
-    // else
-    //     this.body.velocity.y = 0;
-    //
-    // if (this.body.velocity.x > 0)
-    //     this.scale.x = 1;
-    // else
-    //     this.scale.x = -1;
+    if (keys.up.isDown)
+        this.body.velocity.y = -AT.SPEED;
+    else if (keys.down.isDown)
+        this.body.velocity.y = AT.SPEED;
+    else
+        this.body.velocity.y = 0;
+
+    if (this.body.velocity.x > 0)
+        this.scale.x = 1;
+    else
+        this.scale.x = -1;
 };
 
 // Hero.prototype.jump = function() {
@@ -69,7 +67,7 @@ Hero.prototype.getAnimName = function() {
 //     });
 // };
 
-Hero.prototype.keys.update = function() {
+Hero.prototype.update = function() {
     const ALL_MOVE_ANIMS = ['stop', 'walk'];
     // const ALL_MOVE_ANIMS = ['stop', 'jump', 'fall', 'walk'];
     var newAnim = this.getAnimName();

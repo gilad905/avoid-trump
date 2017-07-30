@@ -1,4 +1,4 @@
-PlayState.loadLevel = function(data) {
+AT.loadLevel = function(data) {
     // this.addGroups();
 
     // this.spawnDeco(data.decoration);
@@ -14,7 +14,7 @@ PlayState.loadLevel = function(data) {
     // this.fadeCamera(true);
 };
 
-PlayState.addGroups = function() {
+AT.addGroups = function() {
     // this.platforms = this.game.add.group();
     // this.coins = this.game.add.group();
     // this.spiders = this.game.add.group();
@@ -22,12 +22,12 @@ PlayState.addGroups = function() {
     // this.deco = this.game.add.group();
 };
 
-// PlayState.spawnDeco = function(deco) {
+// AT.spawnDeco = function(deco) {
 //     for (var iDeco = 0, aDeco; aDeco = deco[iDeco]; iDeco++)
 //         this.deco.create(aDeco.x, aDeco.y, 'deco', aDeco.frame);
 // };
 
-// PlayState.spawnDoor = function(door) {
+// AT.spawnDoor = function(door) {
 //     this.door = this.game.add.sprite(door.x, door.y, 'door');
 //     this.door.anchor.set(0.5, 1);
 //     this.door.animations.add('closed', [0]);
@@ -38,19 +38,19 @@ PlayState.addGroups = function() {
 //     this.door.body.allowGravity = false;
 // };
 
-PlayState.spawnCharacters = function(data) {
+AT.spawnCharacters = function(data) {
     // data.spiders.forEach(this.spawnSpider, this);
     // spawn hero
-    this.hero = new Hero(this.game, data.hero.x, data.hero.y);
-    this.game.add.existing(this.hero);
+    this.hero = new Hero(PlayState.game, data.hero.x, data.hero.y);
+    PlayState.game.add.existing(this.hero);
 };
 
-// PlayState.spawnSpider = function(spider) {
+// AT.spawnSpider = function(spider) {
 //     var sprite = new Spider(this.game, spider.x, spider.y);
 //     this.spiders.add(sprite);
 // };
 
-// PlayState.spawnCoin = function(coin) {
+// AT.spawnCoin = function(coin) {
 //     var sprite = this.coins.create(coin.x, coin.y, 'coin');
 //     sprite.anchor.set(0.5, 0.5);
 //     sprite.animations.add('rotate', [0, 1, 2, 1], 6, true);

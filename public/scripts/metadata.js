@@ -1,4 +1,4 @@
-// PlayState._DIR = {
+// AT._DIR = {
 //     UP: {
 //         x: 0,
 //         y: -1,
