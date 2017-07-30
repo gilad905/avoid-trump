@@ -50,8 +50,13 @@ PlayState.init = function(args) {
 };
 
 PlayState.create = function() {
-    // const VOLUME = 0.2;
+    AT.graphics = this.game.add.graphics();
+    // AT.graphics = this.game.add.graphics(this.game.world.centerX, this.game.world.centerY);
 
+    // AT.bmd = this.game.make.bitmapData(this.game.width, this.game.height);
+    // AT.bmd.addToWorld();
+
+    // const VOLUME = 0.2;
     // this.sfx = {
     //     jump: this.game.add.audio('sfx:jump', VOLUME),
     // };
@@ -80,11 +85,9 @@ AT.nextScene = function() {
     var scene = this.scenes[this.sceneNumber];
     this.timer.stop();
     if (scene) {
-        // console.log(scene);
-        // if (scene.char)
-            // scene.charCode = scene.char.charCodeAt(0);
         if (scene.isAvoidTask) {
             scene.obj = new AvoidTask(scene);
+            PlayState.game.add.existing(scene.obj);
         } else {
             this.timer.add(scene.dur * 1000, this.nextScene, this);
             this.timer.start();

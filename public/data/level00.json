@@ -4,28 +4,32 @@
         "y": 525
     },
     "scenes": [{
-            "dur": 2,
+            "dur": 0,
             "isAvoidTask": false
         },
         {
-            "dur": 1,
+            "dur": 3,
             "isAvoidTask": true,
-            "char": "y"
+            "char": "y",
+            "style": "0x000000"
         },
         {
-            "dur": 1,
+            "dur": 4,
             "isAvoidTask": true,
-            "char": "x"
+            "char": "x",
+            "style": "0xffd900"
         },
         {
-            "dur": 1,
+            "dur": 2,
             "isAvoidTask": true,
-            "char": "w"
+            "char": "w",
+            "style": "0xffffff"
         },
         {
-            "dur": 1,
+            "dur": 3,
             "isAvoidTask": true,
-            "char": "p"
+            "char": "p",
+            "style": "0xf29292"
         }
     ]
 }
