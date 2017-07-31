@@ -1,50 +1,49 @@
 (function(that) {
     that.AvoidTask = function(scene) {
-        if (!that.AvoidTask.ACNHOR)
-            that.AvoidTask.ACNHOR = {
-                y: 100,
-                x: PlayState.game.width / 2,
-            };
-        if (!that.AvoidTask.UP_RADIAN)
-            that.AvoidTask.UP_RADIAN = PlayState.game.math.degToRad(270);
+        if (!AvoidTask._staticsSet) {
+            AvoidTask._staticsSet = true;
+            setStatics();
+        }
 
         // this._group = PlayState.game.add.group();
         Phaser.Sprite.call(this, PlayState.game);
 
         this._timer = PlayState.game.time.create(false);
+        this._sceneDurationInverse = 1 / (scene.dur * 1000);
         this._timer.add(scene.dur * 1000, this._onTimedOut, this);
         this._char = scene.char;
         this._style = scene.style;
-        this._circleSpeed = -360 / (scene.dur * 1000);
         this._timer.start();
-        this._play();
+        this._display();
+    }
+
+    function setStatics() {
+        AvoidTask.ANCHOR = {
+            y: 100,
+            x: PlayState.game.width / 2,
+        };
+        AvoidTask.START_RADIAN = PlayState.game.math.degToRad(-90);
+        AvoidTask.DELTA_RADIAN = AvoidTask.START_RADIAN - PlayState.game.math.degToRad(270);
     }
 
     that.AvoidTask.prototype = Object.create(Phaser.Sprite.prototype);
     that.AvoidTask.prototype.constructor = that.AvoidTask;
     var prototype = that.AvoidTask.prototype;
 
-    that.AvoidTask.ACNHOR = null;
-    that.AvoidTask.UP_RADIAN = null;
-
     prototype.update = function() {
-        // if (this._char == 'x')
-            // debugger;
-        var arcLength = this._timer.duration * this._circleSpeed + 270;
+        var arcLength = this._timer.duration * this._sceneDurationInverse;
+        var arcEnd = AvoidTask.START_RADIAN + AvoidTask.DELTA_RADIAN * arcLength;
         AT.graphics.clear();
         AT.graphics.lineStyle(8, this._style);
         AT.graphics.arc(
-        // this._arc = AT.graphics.arc(
-            AvoidTask.ACNHOR.x,
-            AvoidTask.ACNHOR.y,
-            70,
-            AvoidTask.UP_RADIAN,
-            PlayState.game.math.degToRad(arcLength),
+            AvoidTask.ANCHOR.x,
+            AvoidTask.ANCHOR.y,
+            50,
+            AvoidTask.START_RADIAN,
+            arcEnd,
             false
         );
-        // AT.graphics.arc(0, 0, 135, 0, 1.5707963267948966, false);
-
-        // console.log(PlayState.game.math.degToRad(arcLength) + "," + arcLength);
+        // console.log(arcLength + "," + PlayState.game.math.degToRad(arcLength));
     };
 
     prototype.complete = function() {
@@ -60,31 +59,25 @@
     };
 
     prototype._remove = function() {
-        // AT.graphics.clear();
-        // this._arc.destroy();
+        AT.graphics.clear();
         if (this.text)
             this.text.destroy();
 
         this._timer.stop();
     }
 
-    prototype._play = function() {
+    prototype._display = function() {
         var style = {
-            font: "bold 32px Arial",
+            font: "bold 45px Arial",
             fill: "#fff",
             boundsAlignH: "center",
-            boundsAlignV: "middle"
+            boundsAlignV: "middle",
+            align: "center",
         };
-        this.text = PlayState.game.add.text(AvoidTask.ACNHOR.x, AvoidTask.ACNHOR.y, this._char, style);
-
-        // this._circle = new Phaser.Circle(300, 300, 100);
-        // PlayState.game.add.tween(this._circle).to({
-        //     x: 100,
-        //     y: 100,
-        //     radius: 1
-        // }, 3000, "Sine.easeInOut", true, 0, -1, true);
-
-        // AT.bmd.clear();
-        // AT.bmd.circle(this._circle.x, this._circle.y, this._circle.radius);
+        this.text = PlayState.game.add.text(AvoidTask.ANCHOR.x, AvoidTask.ANCHOR.y, this._char, style);
+        this.text.anchor = {
+            x: .5,
+            y: .5
+        };
     };
 })(this);

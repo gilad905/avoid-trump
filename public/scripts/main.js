@@ -84,6 +84,8 @@ AT.nextScene = function() {
     AT.sceneNumber++;
     var scene = this.scenes[this.sceneNumber];
     this.timer.stop();
+    if (this.scene && this.scene.obj)
+        this.scene.obj.destroy();
     if (scene) {
         if (scene.isAvoidTask) {
             scene.obj = new AvoidTask(scene);
