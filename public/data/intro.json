@@ -1,0 +1,42 @@
+{
+    "scenes": [{
+            "dur": 3,
+            "isAvoidTask": false
+        }, {
+            "dur": 3,
+            "isAvoidTask": true,
+            "char": "y",
+            "style": "0x000000"
+        },
+        {
+            "dur": 1,
+            "isAvoidTask": true,
+            "char": "x",
+            "style": "0xffd900"
+        },
+        {
+            "dur": 2,
+            "isAvoidTask": true,
+            "char": "w",
+            "style": "0xffffff"
+        },
+        {
+            "dur": 3,
+            "isAvoidTask": true,
+            "char": "p",
+            "style": "0xf29292"
+        },
+        {
+            "dur": 1,
+            "isAvoidTask": true,
+            "char": "l",
+            "style": "0x123123"
+        },
+        {
+            "dur": 4,
+            "isAvoidTask": true,
+            "char": "m",
+            "style": "0x765765"
+        }
+    ]
+}

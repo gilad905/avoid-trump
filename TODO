@@ -1,2 +1,5 @@
-- win / lose messages, restart on lose
 - tween 2 characters for animations
+
+- start menu (state): explanation + start button
+- on fail - freeze the game, 'too bad' message + restart button
+- on end - 'well done' message + restart button

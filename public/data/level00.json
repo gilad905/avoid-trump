@@ -11,7 +11,9 @@
             "dur": 3,
             "isAvoidTask": true,
             "char": "y",
-            "style": "0x000000"
+            "style": "0x000000",
+            "x": 537,
+            "y": 161
         },
         {
             "dur": 2,
@@ -21,7 +23,9 @@
             "dur": 1,
             "isAvoidTask": true,
             "char": "x",
-            "style": "0xffd900"
+            "style": "0xffd900",
+            "x": 441,
+            "y": 89
         },
         {
             "dur": 5,
@@ -31,7 +35,9 @@
             "dur": 1,
             "isAvoidTask": true,
             "char": "w",
-            "style": "0xffffff"
+            "style": "0xffffff",
+            "x": 300,
+            "y": 77
         },
         {
             "dur": 1,
@@ -41,7 +47,29 @@
             "dur": 1,
             "isAvoidTask": true,
             "char": "p",
-            "style": "0xf29292"
+            "style": "0xf29292",
+            "x": 481,
+            "y": 119
+        },
+        {
+            "dur": 6,
+            "isAvoidTask": false
+        },
+        {
+            "dur": 1,
+            "isAvoidTask": true,
+            "char": "l",
+            "style": "0x123123",
+            "x": 652,
+            "y": 126
+        },
+        {
+            "dur": 4,
+            "isAvoidTask": true,
+            "char": "m",
+            "style": "0x765765",
+            "x": 325,
+            "y": 198
         }
     ]
 }
