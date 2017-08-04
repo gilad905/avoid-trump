@@ -9,17 +9,17 @@ AT.loadLevel = function(data) {
     });
 
     // const GRAVITY = 1200;
-    // this.game.physics.arcade.gravity.y = GRAVITY;
+    // game.physics.arcade.gravity.y = GRAVITY;
 
     // this.fadeCamera(true);
 };
 
 AT.addGroups = function() {
-    // this.platforms = this.game.add.group();
-    // this.coins = this.game.add.group();
-    // this.spiders = this.game.add.group();
-    // this.enemyWalls = this.game.add.group();
-    // this.deco = this.game.add.group();
+    // this.platforms = game.add.group();
+    // this.coins = game.add.group();
+    // this.spiders = game.add.group();
+    // this.enemyWalls = game.add.group();
+    // this.deco = game.add.group();
 };
 
 // AT.spawnDeco = function(deco) {
@@ -28,25 +28,25 @@ AT.addGroups = function() {
 // };
 
 // AT.spawnDoor = function(door) {
-//     this.door = this.game.add.sprite(door.x, door.y, 'door');
+//     this.door = game.add.sprite(door.x, door.y, 'door');
 //     this.door.anchor.set(0.5, 1);
 //     this.door.animations.add('closed', [0]);
 //     this.door.animations.add('open', [1]);
 //     this.door.animations.play('closed');
 //
-//     this.game.physics.enable(this.door);
+//     game.physics.enable(this.door);
 //     this.door.body.allowGravity = false;
 // };
 
 AT.spawnCharacters = function(data) {
     // data.spiders.forEach(this.spawnSpider, this);
     // spawn hero
-    this.hero = new Hero(PlayState.game, data.hero.x, data.hero.y);
-    PlayState.game.add.existing(this.hero);
+    this.hero = new Hero(game, data.hero.x, data.hero.y);
+    game.add.existing(this.hero);
 };
 
 // AT.spawnSpider = function(spider) {
-//     var sprite = new Spider(this.game, spider.x, spider.y);
+//     var sprite = new Spider(game, spider.x, spider.y);
 //     this.spiders.add(sprite);
 // };
 
@@ -56,6 +56,6 @@ AT.spawnCharacters = function(data) {
 //     sprite.animations.add('rotate', [0, 1, 2, 1], 6, true);
 //     sprite.animations.play('rotate');
 //
-//     this.game.physics.enable(sprite);
+//     game.physics.enable(sprite);
 //     sprite.body.allowGravity = false;
 // };

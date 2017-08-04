@@ -4,7 +4,7 @@ function Hero(game, x, y) {
     // call Phaser.Sprite constructor
     Phaser.Sprite.call(this, game, x, y, 'hero');
     this.anchor.set(0.5, 0.5);
-    this.game.physics.enable(this);
+    game.physics.enable(this);
     this.body.collideWorldBounds = true;
 
     this.animations.add('stop', [0]);

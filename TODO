@@ -3,3 +3,11 @@
 - start menu (state): explanation + start button
 - on fail - freeze the game, 'too bad' message + restart button
 - on end - 'well done' message + restart button
+
+
+if timer ended:
+   if onFailed:
+      run onFailed
+   run finish
+finish:
+   run finish

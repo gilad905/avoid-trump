@@ -1,77 +1,55 @@
 AT.SPEED = 200;
 AT._timer = null;
 
-PlayState.init = function(args) {
-    // this.keys.up.onDown.add(function() {
-    //     this.hero.move(this._DIR.UP);
-    // }, this);
+sPlay.init = function(args) {
+   // this.keys.up.onDown.add(function() {
+   //     this.hero.move(this._DIR.UP);
+   // }, this);
 
-    AT.level = 0;
-    AT.counter = 0;
-    AT.timer = this.game.time.create(false);
-
-    AT.refreshCounter();
-
-    this.game.input.keyboard.onDownCallback = AT.onKeyDown;
+   AT.level = 0;
+   AT.timer = game.time.create(false);
 };
 
-PlayState.create = function() {
-    AT.graphics = this.game.add.graphics();
+sPlay.create = function() {
+   AT.graphics = game.add.graphics();
 
-    // const VOLUME = 0.2;
-    // this.sfx = {
-    //     jump: this.game.add.audio('sfx:jump', VOLUME),
-    // };
+   // const VOLUME = 0.2;
+   // this.sfx = {
+   //     jump: game.add.audio('sfx:jump', VOLUME),
+   // };
 
-    // this.game.add.image(0, 0, 'background');
+   // game.add.image(0, 0, 'background');
 
-    var data = this.game.cache.getJSON(`level:${AT.level}`);
-    AT.loadLevel(data);
-    AT.startScenes(data.scenes);
+   var data = game.cache.getJSON(`level:${AT.level}`);
+   AT.loadLevel(data);
+   AT.startScenes(data.scenes);
 
-    // if (!this.music)
-    //     this.music = this.game.add.audio('music');
-    // this.music.loopFull();
+   // if (!this.music)
+   //     this.music = game.add.audio('music');
+   // this.music.loopFull();
 
-    // Session variables
+   // Session variables
 
-    // this.createUI();
+   // this.createUI();
 
-    // this.game.input.enabled = true;
+   // game.input.enabled = true;
 };
 
-PlayState.update = function() {
-    AT.handleCollisions();
-    AT.handleInput();
-};
-
-AT.startScenes = function(data) {
-    this.scenes = data;
-    this.sceneNumber = -1;
-    this.nextScene();
-};
-
-AT.nextScene = function() {
-    this.sceneNumber++;
-    var scene = this.scenes[this.sceneNumber];
-    if (this.scene && this.scene.obj)
-        this.scene.obj.destroy();
-    if (scene) {
-        if (scene.isAvoidTask) {
-            scene.obj = new AvoidTask(scene);
-            scene.obj.onFinished(this.nextScene, null, this);
-            scene.obj.start();
-        } else {
-            this.timer.stop();
-            this.timer.add(scene.dur * 1000, this.nextScene, this);
-            this.timer.start();
-        }
-    }
-    this.scene = scene;
+sPlay.update = function() {
+   AT.handleCollisions();
+   AT.handleInput();
 };
 
 AT.createUI = function() {};
 
-AT.refreshCounter = function() {
-    PlayState.game.debug.text(this.counter, 100, 200, 'white', '50px Courier');
+AT.showSuccessMessage = function() {
+   var style = {
+      font: "bold 45px Arial",
+      fill: "lightgreen",
+   };
+
+   var text = game.add.text(100, 100, "Well done!", style);
+   game.time.events.add(1000 * 1, function() {
+      text.destroy();
+   }, this);
 };
