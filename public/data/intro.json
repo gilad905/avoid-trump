@@ -1,40 +1,40 @@
 {
     "scenes": [{
             "dur": 3,
-            "isAvoidTask": false
+            "type": "Wait"
         }, {
             "dur": 3,
-            "isAvoidTask": true,
+            "type": "AvoidTask",
             "char": "y",
             "style": "0x000000"
         },
         {
             "dur": 1,
-            "isAvoidTask": true,
+            "type": "AvoidTask",
             "char": "x",
             "style": "0xffd900"
         },
         {
             "dur": 2,
-            "isAvoidTask": true,
+            "type": "AvoidTask",
             "char": "w",
             "style": "0xffffff"
         },
         {
             "dur": 3,
-            "isAvoidTask": true,
+            "type": "AvoidTask",
             "char": "p",
             "style": "0xf29292"
         },
         {
             "dur": 1,
-            "isAvoidTask": true,
+            "type": "AvoidTask",
             "char": "l",
             "style": "0x123123"
         },
         {
             "dur": 4,
-            "isAvoidTask": true,
+            "type": "AvoidTask",
             "char": "m",
             "style": "0x765765"
         }

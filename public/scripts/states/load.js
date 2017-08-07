@@ -34,29 +34,14 @@ sLoad.preload = function() {
 
    game.load.image('black', 'assets/black.png');
 
-   // game.load.audio('sfx:jump', 'audio/jump.wav');
-
-   game.load.spritesheet('hero', 'assets/hero.png', 37, 42);
+   game.load.spritesheet('hero', 'assets/hero.png', 36, 42);
 };
 
 sLoad.create = function() {
-   // var text = game.add.text(game.width / 2, game.height / 2, 'Loading...', {
-   //     font: "bold 24px Arial",
-   //     fill: "#fff",
-   //     boundsAlignH: "center",
-   //     boundsAlignV: "middle",
-   //     wordWrap: true,
-   //     wordWrapWidth: 600,
-   // });
-   // text.anchor = {
-   //     x: .5,
-   //     y: .5
-   // };
-
    game.stage.backgroundColor = "#4488AA";
 
-   game.state.start('sFailed');
    // game.state.start('sIntro');
+   game.state.start('sPlay');
 };
 
 AT.startScenes = function(data) {
@@ -71,8 +56,8 @@ AT.nextScene = function() {
    if (this.scene && this.scene.obj)
       this.scene.obj.destroy();
    if (scene) {
-      if (scene.isAvoidTask) {
-         scene.obj = new AvoidTask(scene);
+      if (["AvoidTask", "AnimScene"].includes(scene.type)) {
+         scene.obj = scene.type == "AvoidTask" ? new AvoidTask(scene) : new AnimScene(scene);
          scene.obj.onFinished(this.nextScene, null, this);
          scene.obj.start();
       } else {

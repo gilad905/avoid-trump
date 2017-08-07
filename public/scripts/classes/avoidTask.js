@@ -18,27 +18,9 @@
 
       this._timer = game.time.create(false);
       this._timer.add(scene.dur * 1000, this._fail, this);
-
-      // game.input.keyboard.onDownCallback = this.onKeyDown;
-   }
-
-   // that.AvoidTask.onKeyDown = function(event) {
-   //    if (event.key == this.scene.char) {
-   //       if (this._onSuccess)
-   //          this._onSuccess.callback.call(this._onSuccess.context, this._onSuccess.args);
-   //       this.finish();
-   //    }
-   // }
-
-   prototype._openKeyListener(keys, char) {
-      
    }
 
    function setStatics() {
-      // AvoidTask.ANCHOR = {
-      //     y: 100,
-      //     x: game.width / 2,
-      // };
       that.AvoidTask.START_RADIAN = game.math.degToRad(-90);
       that.AvoidTask.DELTA_RADIAN = AvoidTask.START_RADIAN - game.math.degToRad(270);
    }
@@ -56,7 +38,6 @@
          boundsAlignV: "middle",
       };
       this._text = game.add.text(this._scene.x, this._scene.y, this._scene.char, style);
-      // this._text = game.add.text(AvoidTask.ANCHOR.x, AvoidTask.ANCHOR.y, this._scene.char, style);
       this._text.anchor = {
          x: .5,
          y: .5
@@ -69,6 +50,8 @@
       AT.graphics.clear();
       this._text.destroy();
       this._timer.stop();
+      if (this._onFinished)
+         this._onFinished.callback.call(this._onFinished.context, this._onFinished.args);
    }
 
    prototype.update = function() {
@@ -78,8 +61,6 @@
          AT.graphics.clear();
          AT.graphics.lineStyle(8, this._scene.style);
          AT.graphics.arc(
-            // AvoidTask.ANCHOR.x,
-            // AvoidTask.ANCHOR.y,
             this._scene.x,
             this._scene.y,
             50,
@@ -98,8 +79,8 @@
       };
    };
 
-   prototype.onSuccess = function(callback, args, context) {
-      this._onSuccess = {
+   prototype.onFinished = function(callback, args, context) {
+      this._onFinished = {
          callback: callback,
          args: args,
          context: context,
