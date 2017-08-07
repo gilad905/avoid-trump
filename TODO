@@ -1,13 +1,5 @@
-- tween 2 characters for animations
-
-- start menu (state): explanation + start button
-- on fail - freeze the game, 'too bad' message + restart button
-- on end - 'well done' message + restart button
-
-
-if timer ended:
-   if onFailed:
-      run onFailed
-   run finish
-finish:
-   run finish
+mkdir man
+magick convert -coalesce man.gif man/man%05d.png
+#in batch file:
+cd man
+forfiles /c "magick convert @FILE -strokewidth 0 -fill white -draw ""rectangle 0,0 100,100 "" @FILE"
