@@ -1,75 +1,103 @@
 {
-    "hero": {
-        "x": 21,
-        "y": 525
-    },
-    "scenes": [{
-            "dur": 2,
-            "isAvoidTask": false
-        },
-        {
-            "dur": 3,
-            "isAvoidTask": true,
-            "char": "y",
-            "style": "0x000000",
-            "y": 145,
-            "x": 369
-        },
-        {
-            "dur": 2,
-            "isAvoidTask": false
-        },
-        {
-            "dur": 1,
-            "isAvoidTask": true,
-            "char": "x",
-            "style": "0xffd900",
-            "y": 268,
-            "x": 795
-        },
-        {
-            "dur": 5,
-            "isAvoidTask": false
-        },
-        {
-            "dur": 1,
-            "isAvoidTask": true,
-            "char": "w",
-            "style": "0xffffff",
-            "y": 204,
-            "x": 511
-        },
-        {
-            "dur": 1,
-            "isAvoidTask": false
-        },
-        {
-            "dur": 1,
-            "isAvoidTask": true,
-            "char": "p",
-            "style": "0xf29292",
-            "y": 105,
-            "x": 116
-        },
-        {
-            "dur": 6,
-            "isAvoidTask": false
-        },
-        {
-            "dur": 1,
-            "isAvoidTask": true,
-            "char": "l",
-            "style": "0x123123",
-            "y": 268,
-            "x": 795
-        },
-        {
-            "dur": 4,
-            "isAvoidTask": true,
-            "char": "m",
-            "style": "0x765765",
-            "y": 145,
-            "x": 369
-        }
-    ]
+   "hero": {
+      "x": 21,
+      "y": 525
+   },
+   "scenes": [{
+         "dur": 2,
+         "type": "AnimScene",
+         "sprite": "hero",
+         "x": 100,
+         "y": 100,
+         "anim": "walk"
+      },
+      {
+         "dur": 2,
+         "type": "AnimScene",
+         "sprite": "hero",
+         "anim": "die"
+      },
+      {
+         "dur": 0,
+         "type": "AnimScene",
+         "sprite": "hero",
+         "anim": "stop"
+      },
+      {
+         "dur": 3,
+         "type": "AvoidTask",
+         "char": "y",
+         "style": "0x000000",
+         "x": 537,
+         "y": 161
+      },
+      {
+         "dur": 2,
+         "type": "Wait"
+      },
+      {
+         "dur": 0.5,
+         "type": "AnimScene",
+         "sprite": "hero",
+         "anim": "die"
+      },
+      {
+         "dur": 0,
+         "type": "AnimScene",
+         "sprite": "hero",
+         "anim": "stop"
+      },
+      {
+         "dur": 1,
+         "type": "AvoidTask",
+         "char": "x",
+         "style": "0xffd900",
+         "x": 441,
+         "y": 89
+      },
+      {
+         "dur": 5,
+         "type": "Wait"
+      },
+      {
+         "dur": 1,
+         "type": "AvoidTask",
+         "char": "w",
+         "style": "0xffffff",
+         "x": 300,
+         "y": 77
+      },
+      {
+         "dur": 1,
+         "type": "Wait"
+      },
+      {
+         "dur": 1,
+         "type": "AvoidTask",
+         "char": "p",
+         "style": "0xf29292",
+         "x": 481,
+         "y": 119
+      },
+      {
+         "dur": 6,
+         "type": "Wait"
+      },
+      {
+         "dur": 1,
+         "type": "AvoidTask",
+         "char": "l",
+         "style": "0x123123",
+         "x": 652,
+         "y": 126
+      },
+      {
+         "dur": 4,
+         "type": "AvoidTask",
+         "char": "m",
+         "style": "0x765765",
+         "x": 325,
+         "y": 198
+      }
+   ]
 }

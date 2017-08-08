@@ -34,7 +34,7 @@ sLoad.preload = function() {
 
     // game.load.audio('sfx:jump', 'audio/jump.wav');
 
-    game.load.spritesheet('hero', 'assets/hero.png', 37, 42);
+    game.load.spritesheet('hero', 'assets/hero.png', 36, 42);
 };
 
 var loadingStyle = {
@@ -75,10 +75,14 @@ AT.nextScene = function() {
     if (this.scene.data && this.scene.obj)
         this.scene.obj.destroy();
     if (sceneData) {
-        if (sceneData.isAvoidTask) {
+        if (sceneData.type == "AvoidTask") {
             this.scene.obj = new AvoidTask(sceneData, this.scene.isFake);
             this.scene.obj.onSuccess(this.nextScene, null, this);
             this.scene.obj.onFailed(this.scene.onTaskFailed, null, this);
+            this.scene.obj.start();
+        } else if (sceneData.type == "AnimScene") {
+            this.scene.obj = new AnimScene(sceneData);
+            this.scene.obj.onFinished(this.nextScene, null, this);
             this.scene.obj.start();
         } else {
             this.timer.stop();

@@ -50,6 +50,12 @@ sPlay.update = function() {
     AT.handleInput();
 };
 
+sPlay.render = function() {
+    this.game.debug.inputInfo(32, 32);
+};
+
+
+
 AT.createUI = function() {};
 
 AT.showSuccessMessage = function() {
