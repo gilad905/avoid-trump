@@ -1,32 +1,17 @@
 (function(that) {
-    const DURATION = 500;
-    var fader;
-
-    sFailed.init = function() {
+    sWin.init = function() {
         game.input.keyboard.enabled = false;
     };
 
-    sFailed.create = function() {
+    sWin.create = function() {
         AT.graphics = game.add.graphics();
-        fadeBackground();
         showMessage();
         showButton();
     };
 
-    function fadeBackground() {
-        fader = game.add.sprite(0, 0, 'black');
-        fader.width = game.width;
-        fader.height = game.height;
-        fader.alpha = 0;
-
-        game.add.tween(fader).to({
-            alpha: .3,
-        }, DURATION, null, true);
-    }
-
     function showMessage() {
-        game.add.text(100, 100, 'Awwww... you failed!', {
-            fill: 'red',
+        game.add.text(100, 100, 'Nice! you\'re a goddamn genius!!!', {
+            fill: 'lightgreen',
         });
     }
 
@@ -34,7 +19,7 @@
         AT.addTextButton(
             game.width - 200,
             game.height - 100, -1, -1,
-            'RESTART', {
+            'NEXT LEVEL', {
                 fill: 'white',
             }, null,
             function() {

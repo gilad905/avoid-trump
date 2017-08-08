@@ -11,3 +11,5 @@ if timer ended:
    run finish
 finish:
    run finish
+
+- change classes._functions to a closure with a var for 'this'
