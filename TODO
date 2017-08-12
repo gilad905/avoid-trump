@@ -5,3 +5,11 @@ cd man
 forfiles /c "magick convert @FILE -strokewidth 0 -fill white -draw ""rectangle 0,0 100,100 "" @FILE"
 
 - change classes._functions to a closure with a var for 'this'
+
+
+{
+   "dur": 0,
+   "type": "AnimScene",
+   "sprite": "man",
+   "anim": "stop"
+},

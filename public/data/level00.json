@@ -1,103 +1,101 @@
 {
-   "hero": {
-      "x": 21,
-      "y": 525
-   },
-   "scenes": [{
-         "dur": 2,
-         "type": "AnimScene",
-         "sprite": "hero",
-         "x": 100,
-         "y": 100,
-         "anim": "walk"
-      },
-      {
-         "dur": 2,
-         "type": "AnimScene",
-         "sprite": "hero",
-         "anim": "die"
-      },
-      {
-         "dur": 0,
-         "type": "AnimScene",
-         "sprite": "hero",
-         "anim": "stop"
-      },
-      {
-         "dur": 3,
-         "type": "AvoidTask",
-         "char": "y",
-         "style": "0x000000",
-         "x": 537,
-         "y": 161
-      },
-      {
-         "dur": 2,
-         "type": "Wait"
-      },
-      {
-         "dur": 0.5,
-         "type": "AnimScene",
-         "sprite": "hero",
-         "anim": "die"
-      },
-      {
-         "dur": 0,
-         "type": "AnimScene",
-         "sprite": "hero",
-         "anim": "stop"
-      },
-      {
-         "dur": 1,
-         "type": "AvoidTask",
-         "char": "x",
-         "style": "0xffd900",
-         "x": 441,
-         "y": 89
-      },
-      {
-         "dur": 5,
-         "type": "Wait"
-      },
-      {
-         "dur": 1,
-         "type": "AvoidTask",
-         "char": "w",
-         "style": "0xffffff",
-         "x": 300,
-         "y": 77
-      },
-      {
-         "dur": 1,
-         "type": "Wait"
-      },
-      {
-         "dur": 1,
-         "type": "AvoidTask",
-         "char": "p",
-         "style": "0xf29292",
-         "x": 481,
-         "y": 119
-      },
-      {
-         "dur": 6,
-         "type": "Wait"
-      },
-      {
-         "dur": 1,
-         "type": "AvoidTask",
-         "char": "l",
-         "style": "0x123123",
-         "x": 652,
-         "y": 126
-      },
-      {
-         "dur": 4,
-         "type": "AvoidTask",
-         "char": "m",
-         "style": "0x765765",
-         "x": 325,
-         "y": 198
-      }
-   ]
+    "man": {
+        "x": 800,
+        "y": 400
+    },
+    "woman": {
+        "x": 450,
+        "y": 300,
+        "scaleX": -1
+    },
+    "scenes": [{
+        "dur": 1,
+        "type": "Wait"
+    }, {
+        "dur": 2,
+        "type": "AnimScene",
+        "sprite": "man",
+        "x": 520,
+        "y": 300,
+        "anim": "walk"
+    }, {
+        "dur": 2,
+        "type": "AnimScene",
+        "sprite": "man",
+        "anim": "hand",
+        "locker": false
+    }, {
+        "dur": 2,
+        "type": "AnimScene",
+        "sprite": "woman",
+        "anim": "uptight",
+        "locker": false
+    }, {
+        "dur": 3,
+        "type": "AvoidTask",
+        "char": "y",
+        "style": "0x000000",
+        "x": 537,
+        "y": 161
+    }, {
+        "dur": 0,
+        "type": "AnimScene",
+        "sprite": "man",
+        "anim": "stop"
+    }, {
+        "dur": 1,
+        "type": "AnimScene",
+        "sprite": "woman",
+        "anim": "walk",
+        "x": 300,
+        "y": 270
+    }, {
+        "dur": 0.2,
+        "type": "AnimScene",
+        "sprite": "woman",
+        "anim": "stop"
+    }, {
+        "dur": 1,
+        "type": "AnimScene",
+        "sprite": "man",
+        "anim": "walk",
+        "x": 500,
+        "y": 290
+    }, {
+        "dur": 1,
+        "type": "AnimScene",
+        "sprite": "man",
+        "anim": "hand",
+        "x": 300,
+        "y": 270,
+        "locker": false
+    }, {
+        "dur": 1,
+        "type": "AvoidTask",
+        "char": "x",
+        "style": "0xffd900",
+        "x": 441,
+        "y": 89
+    }, {
+        "dur": 0.8,
+        "type": "AnimScene",
+        "sprite": "woman",
+        "anim": "jump",
+        "x": 600,
+        "y": 250
+    }, {
+        "dur": 3,
+        "type": "AnimScene",
+        "sprite": "woman",
+        "anim": "run",
+        "x": 1500,
+        "y": 100,
+        "locker": false
+    }, {
+        "dur": 0.5,
+        "type": "AnimScene",
+        "sprite": "man",
+        "anim": "stop",
+        "scaleX": -1
+    }]
 }

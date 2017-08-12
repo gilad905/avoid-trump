@@ -7,6 +7,7 @@
         AT.graphics = game.add.graphics();
         showMessage();
         showButton();
+        AT.fadeBackground();
     };
 
     function showMessage() {
@@ -28,5 +29,4 @@
                 });
             });
     }
-
 })(this);

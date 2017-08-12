@@ -1,6 +1,11 @@
 var AT = {};
 var game;
 
+AT.debug = false;
+
+// AT.STARTING_STATE = 'sPlay';
+AT.STARTING_STATE = 'sIntro';
+
 (function() {
     var states = ['sLoad', 'sPlay', 'sIntro', 'sFailed', 'sWin'];
     for (var i in states)
@@ -16,8 +21,11 @@ var game;
 })();
 
 sLoad.init = function(args) {
-    game.stage.disableVisibilityChange = true;
+    // game.input.resetLocked = true;
+    if (!AT.debug)
+        game.stage.disableVisibilityChange = true;
     game.renderer.renderSession.roundPixels = true;
+
     AT.keys = game.input.keyboard.addKeys({
         left: Phaser.KeyCode.LEFT,
         right: Phaser.KeyCode.RIGHT,
@@ -34,7 +42,8 @@ sLoad.preload = function() {
 
     // game.load.audio('sfx:jump', 'audio/jump.wav');
 
-    game.load.spritesheet('hero', 'assets/hero.png', 36, 42);
+    game.load.spritesheet('man', 'assets/man.png', 272, 334);
+    game.load.spritesheet('woman', 'assets/woman.png', 272, 334);
 };
 
 var loadingStyle = {
@@ -55,7 +64,7 @@ sLoad.create = function() {
 
     game.stage.backgroundColor = "#4488AA";
 
-    game.state.start('sIntro');
+    game.state.start(AT.STARTING_STATE);
 };
 
 AT.startScenes = function(data, options) {
@@ -120,6 +129,19 @@ AT.addTextButton = function(x, y, width, height, text, textStyle, buttonStyle, o
 
     gButton.add(button);
     gButton.add(text);
+}
+
+AT.fadeBackground = function() {
+    const DURATION = 500;
+
+    fader = game.add.sprite(0, 0, 'black');
+    fader.width = game.width;
+    fader.height = game.height;
+    fader.alpha = 0;
+
+    game.add.tween(fader).to({
+        alpha: .3,
+    }, DURATION, null, true);
 }
 
 AT.getTextButtonDefaults = function(text, button) {

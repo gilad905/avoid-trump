@@ -1,5 +1,4 @@
 (function(that) {
-    const DURATION = 500;
     var fader;
 
     sFailed.init = function() {
@@ -8,21 +7,10 @@
 
     sFailed.create = function() {
         AT.graphics = game.add.graphics();
-        fadeBackground();
+        AT.fadeBackground();
         showMessage();
         showButton();
     };
-
-    function fadeBackground() {
-        fader = game.add.sprite(0, 0, 'black');
-        fader.width = game.width;
-        fader.height = game.height;
-        fader.alpha = 0;
-
-        game.add.tween(fader).to({
-            alpha: .3,
-        }, DURATION, null, true);
-    }
 
     function showMessage() {
         game.add.text(100, 100, 'Awwww... you failed!', {

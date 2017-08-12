@@ -4,7 +4,8 @@ AT.loadLevel = function(data) {
     // this.spawnDeco(data.decoration);
     // data.platforms.forEach(this.spawnPlatform, this);
     this.spawnCharacters({
-        hero: data.hero,
+        man: data.man,
+        woman: data.woman,
         // spiders: data.spiders,
     });
 
@@ -39,10 +40,11 @@ AT.addGroups = function() {
 // };
 
 AT.spawnCharacters = function(data) {
-    // data.spiders.forEach(this.spawnSpider, this);
-    // spawn hero
-    this.hero = new Hero(game, data.hero.x, data.hero.y);
-    game.add.existing(this.hero);
+    this.woman = new Woman(game, data.woman);
+    game.add.existing(this.woman);
+    
+    this.man = new Man(game, data.man);
+    game.add.existing(this.man);
 };
 
 // AT.spawnSpider = function(spider) {

@@ -3,13 +3,23 @@ AT._timer = null;
 
 sPlay.init = function(args) {
     // this.keys.up.onDown.add(function() {
-    //     this.hero.move(this._DIR.UP);
+    //     this.man.move(this._DIR.UP);
     // }, this);
 
     AT.level = 0;
     AT.timer = game.time.create(false);
 
     game.input.keyboard.enabled = true;
+
+    game.input.mouse.capture = true;
+    AT.mouseInput = game.input.activePointer;
+
+    if (AT.debug) {
+        console.log(" X  -  Y ");
+        game.input.onDown.add(function() {
+            console.log(AT.mouseInput.worldX.toFixed() + " - " + AT.mouseInput.worldY.toFixed());
+        }, this);
+    }
 };
 
 sPlay.create = function() {
@@ -50,9 +60,11 @@ sPlay.update = function() {
     AT.handleInput();
 };
 
-sPlay.render = function() {
-    this.game.debug.inputInfo(32, 32);
-};
+if (AT.debug) {
+    sPlay.render = function() {
+        // game.debug.inputInfo(32, 32);
+    };
+}
 
 
 

@@ -4,12 +4,13 @@
         "\n" +
         "Careful! Trump is coming for you!\n" +
         "Avoid shaking Trump's hand by quickly pressing the correct keys.\n" +
-        "When you see a key like in the example, you need to press that key before the time runs out.\n" +
+        "When you see a key like in the example ------------->\n" +
+        "you need to press that key before the time runs out.\n" +
         "Good luck!\n";
 
     var style = {
         font: "bold 24px Arial",
-        fill: "#fff",
+        fill: "white",
         boundsAlignH: "center",
         boundsAlignV: "middle",
         wordWrap: true,
@@ -21,9 +22,19 @@
     };
 
     sIntro.create = function() {
+        // AT.test = game.add.sprite(100, 100, 'woman');
+        // var tween = game.add.tween(AT.test);
+        // tween.to({
+            // x: 800,
+            // y: 100
+        // }, 10 * 1000);
+        // tween.start();
+
         AT.graphics = game.add.graphics();
+
         var data = game.cache.getJSON('intro');
         AT.loadIntro();
+
         var taskX = game.width - 100;
         var taskY = game.height / 2;
         for (var i in data.scenes) {
@@ -52,6 +63,7 @@
             style,
             null,
             function() {
+                // game.state.start('sPlay', false, false, {
                 game.state.start('sPlay', true, false, {
                     level: 0
                 });
