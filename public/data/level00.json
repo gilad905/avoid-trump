@@ -1,4 +1,5 @@
 {
+    "winMessage": "Nice! you're a goddamn genius!!!",
     "man": {
         "x": 800,
         "y": 400
@@ -70,7 +71,7 @@
         "y": 270,
         "locker": false
     }, {
-        "dur": 1,
+        "dur": 2,
         "type": "AvoidTask",
         "char": "x",
         "style": "0xffd900",

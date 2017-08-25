@@ -35,7 +35,7 @@
     var prototype = that.AvoidTask.prototype;
 
     prototype._openKeyListener = function() {
-        this._keyListenerExisted = AT.keys[this._upChar];
+        this._keyListenerExisted = (AT.keys[this._upChar] !== undefined);
         if (!this._keyListenerExisted) {
             var key = Phaser.KeyCode[this._upChar];
             AT.keys[this._upChar] = game.input.keyboard.addKey(key);

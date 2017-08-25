@@ -11,7 +11,7 @@
     };
 
     function showMessage() {
-        game.add.text(100, 100, 'Nice! you\'re a goddamn genius!!!', {
+        game.add.text(100, 100, AT.winMessage, {
             fill: 'lightgreen',
         });
     }
@@ -19,13 +19,16 @@
     function showButton() {
         AT.addTextButton(
             game.width - 200,
-            game.height - 100, -1, -1,
+            game.height - 100,
+            -1,
+            -1,
             'NEXT LEVEL', {
                 fill: 'white',
             }, null,
             function() {
+                var nextLevel = ((AT.level + 1) % AT.LEVEL_COUNT);
                 game.state.start('sPlay', true, false, {
-                    level: AT.level,
+                    level: nextLevel,
                 });
             });
     }

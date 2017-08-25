@@ -2,19 +2,12 @@ AT.SPEED = 200;
 AT._timer = null;
 
 sPlay.init = function(args) {
-    // this.keys.up.onDown.add(function() {
-    //     this.man.move(this._DIR.UP);
-    // }, this);
-
-    AT.level = 0;
+    AT.level = args.level;
     AT.timer = game.time.create(false);
 
-    game.input.keyboard.enabled = true;
+    AT.initInput();
 
-    game.input.mouse.capture = true;
-    AT.mouseInput = game.input.activePointer;
-
-    if (AT.debug) {
+    if (AT.DEBUG) {
         console.log(" X  -  Y ");
         game.input.onDown.add(function() {
             console.log(AT.mouseInput.worldX.toFixed() + " - " + AT.mouseInput.worldY.toFixed());
@@ -25,14 +18,8 @@ sPlay.init = function(args) {
 sPlay.create = function() {
     AT.graphics = game.add.graphics();
 
-    // const VOLUME = 0.2;
-    // this.sfx = {
-    //     jump: game.add.audio('sfx:jump', VOLUME),
-    // };
-
-    // game.add.image(0, 0, 'background');
-
     var data = game.cache.getJSON(`level:${AT.level}`);
+    AT.winMessage = data.winMessage;
     AT.loadLevel(data);
     AT.startScenes(data.scenes, {
         onTaskFailed: function() {
@@ -43,16 +30,6 @@ sPlay.create = function() {
         },
         isFake: false,
     });
-
-    // if (!this.music)
-    //     this.music = game.add.audio('music');
-    // this.music.loopFull();
-
-    // Session variables
-
-    // this.createUI();
-
-    // game.input.enabled = true;
 };
 
 sPlay.update = function() {
@@ -60,7 +37,7 @@ sPlay.update = function() {
     AT.handleInput();
 };
 
-if (AT.debug) {
+if (AT.DEBUG) {
     sPlay.render = function() {
         // game.debug.inputInfo(32, 32);
     };

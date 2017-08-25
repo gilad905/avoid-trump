@@ -1,6 +1,6 @@
 {
     "scenes": [{
-            "dur": 3,
+            "dur": 1,
             "type": "Wait"
         }, {
             "dur": 3,

@@ -18,18 +18,11 @@
     };
 
     sIntro.init = function() {
+        AT.initInput();
         AT.timer = game.time.create(false);
     };
 
     sIntro.create = function() {
-        // AT.test = game.add.sprite(100, 100, 'woman');
-        // var tween = game.add.tween(AT.test);
-        // tween.to({
-            // x: 800,
-            // y: 100
-        // }, 10 * 1000);
-        // tween.start();
-
         AT.graphics = game.add.graphics();
 
         var data = game.cache.getJSON('intro');
@@ -53,6 +46,10 @@
         );
     }
 
+    sIntro.update = function() {
+        AT.debugMousePosition();
+    };
+
     AT.loadIntro = function() {
         game.add.text(100, 100, introText, style);
 
@@ -65,7 +62,7 @@
             function() {
                 // game.state.start('sPlay', false, false, {
                 game.state.start('sPlay', true, false, {
-                    level: 0
+                    level: 0,
                 });
             }
         );

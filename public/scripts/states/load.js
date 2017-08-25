@@ -1,10 +1,7 @@
 var AT = {};
 var game;
 
-AT.debug = false;
-
-// AT.STARTING_STATE = 'sPlay';
-AT.STARTING_STATE = 'sIntro';
+// AT.DEBUG = true;
 
 (function() {
     var states = ['sLoad', 'sPlay', 'sIntro', 'sFailed', 'sWin'];
@@ -22,7 +19,7 @@ AT.STARTING_STATE = 'sIntro';
 
 sLoad.init = function(args) {
     // game.input.resetLocked = true;
-    if (!AT.debug)
+    if (!AT.DEBUG)
         game.stage.disableVisibilityChange = true;
     game.renderer.renderSession.roundPixels = true;
 
@@ -35,12 +32,13 @@ sLoad.init = function(args) {
 };
 
 sLoad.preload = function() {
-    game.load.json('level:0', 'data/level00.json');
     game.load.json('intro', 'data/intro.json');
 
-    game.load.image('black', 'assets/black.png');
+    game.load.json('level:0', 'data/level00.json');
+    game.load.json('level:1', 'data/level01.json');
+    AT.LEVEL_COUNT = 2;
 
-    // game.load.audio('sfx:jump', 'audio/jump.wav');
+    game.load.image('black', 'assets/black.png');
 
     game.load.spritesheet('man', 'assets/man.png', 272, 334);
     game.load.spritesheet('woman', 'assets/woman.png', 272, 334);
@@ -64,7 +62,10 @@ sLoad.create = function() {
 
     game.stage.backgroundColor = "#4488AA";
 
-    game.state.start(AT.STARTING_STATE);
+    game.state.start('sIntro');
+    // game.state.start('sPlay', true, false, {
+        // level: 1,
+    // });
 };
 
 AT.startScenes = function(data, options) {
@@ -130,6 +131,12 @@ AT.addTextButton = function(x, y, width, height, text, textStyle, buttonStyle, o
     gButton.add(button);
     gButton.add(text);
 }
+
+AT.initInput = function() {
+    game.input.keyboard.enabled = true;
+    game.input.mouse.capture = true;
+    AT.mouseInput = game.input.activePointer;
+};
 
 AT.fadeBackground = function() {
     const DURATION = 500;
