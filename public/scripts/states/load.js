@@ -40,7 +40,8 @@ sLoad.preload = function() {
 
     game.load.image('black', 'assets/black.png');
 
-    game.load.spritesheet('man', 'assets/man.png', 272, 334);
+    game.load.spritesheet('man', 'assets/trump.png', 272, 334);
+    // game.load.spritesheet('man', 'assets/man.png', 272, 334);
     game.load.spritesheet('woman', 'assets/woman.png', 272, 334);
 };
 
