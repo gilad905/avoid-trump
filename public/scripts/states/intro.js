@@ -46,10 +46,6 @@
         );
     }
 
-    sIntro.update = function() {
-        AT.debugMousePosition();
-    };
-
     AT.loadIntro = function() {
         game.add.text(100, 100, introText, style);
 

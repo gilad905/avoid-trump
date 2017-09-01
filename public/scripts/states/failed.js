@@ -1,12 +1,6 @@
 (function(that) {
-    var fader;
-
-    sFailed.init = function() {
+    AT.failed = function() {
         game.input.keyboard.enabled = false;
-    };
-
-    sFailed.create = function() {
-        AT.graphics = game.add.graphics();
         AT.fadeBackground();
         showMessage();
         showButton();
@@ -31,5 +25,4 @@
                 });
             });
     }
-
 })(this);

@@ -1,10 +1,6 @@
 (function(that) {
-    sWin.init = function() {
+    AT.win = function() {
         game.input.keyboard.enabled = false;
-    };
-
-    sWin.create = function() {
-        AT.graphics = game.add.graphics();
         showMessage();
         showButton();
         AT.fadeBackground();

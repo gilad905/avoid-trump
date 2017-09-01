@@ -1,7 +1,7 @@
 var AT = {};
 var game;
 
-// AT.DEBUG = true;
+AT.DEBUG = true;
 
 (function() {
     var states = ['sLoad', 'sPlay', 'sIntro', 'sFailed', 'sWin'];
@@ -65,7 +65,7 @@ sLoad.create = function() {
 
     game.state.start('sIntro');
     // game.state.start('sPlay', true, false, {
-        // level: 1,
+    // level: 1,
     // });
 };
 
@@ -137,6 +137,12 @@ AT.initInput = function() {
     game.input.keyboard.enabled = true;
     game.input.mouse.capture = true;
     AT.mouseInput = game.input.activePointer;
+    if (AT.DEBUG) {
+        console.log(" X  -  Y ");
+        game.input.onDown.add(function() {
+            console.log(AT.mouseInput.worldX.toFixed() + " - " + AT.mouseInput.worldY.toFixed());
+        }, this);
+    }
 };
 
 AT.fadeBackground = function() {
