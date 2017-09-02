@@ -24,10 +24,8 @@ sLoad.init = function(args) {
     game.renderer.renderSession.roundPixels = true;
 
     AT.keys = game.input.keyboard.addKeys({
-        left: Phaser.KeyCode.LEFT,
-        right: Phaser.KeyCode.RIGHT,
-        up: Phaser.KeyCode.UP,
-        down: Phaser.KeyCode.DOWN,
+        enter: Phaser.KeyCode.ENTER,
+        esc: Phaser.KeyCode.ESC,
     });
 };
 
@@ -41,7 +39,6 @@ sLoad.preload = function() {
     game.load.image('black', 'assets/black.png');
 
     game.load.spritesheet('man', 'assets/trump.png', 272, 334);
-    // game.load.spritesheet('man', 'assets/man.png', 272, 334);
     game.load.spritesheet('woman', 'assets/woman.png', 272, 334);
 };
 
@@ -54,6 +51,11 @@ var loadingStyle = {
     wordWrapWidth: 600,
 };
 
+AT.BG = {
+    MAIN_COLOR: "#4488AA",
+    BG_DARK_COLOR: "#4488AA",
+};
+
 sLoad.create = function() {
     var text = game.add.text(game.width / 2, game.height / 2, 'Loading...', loadingStyle);
     text.anchor = {
@@ -61,7 +63,7 @@ sLoad.create = function() {
         y: .5,
     };
 
-    game.stage.backgroundColor = "#4488AA";
+    game.stage.backgroundColor = AT.BG.MAIN_COLOR;
 
     game.state.start('sIntro');
     // game.state.start('sPlay', true, false, {
@@ -137,18 +139,22 @@ AT.initInput = function() {
     game.input.keyboard.enabled = true;
     game.input.mouse.capture = true;
     AT.mouseInput = game.input.activePointer;
-    if (AT.DEBUG) {
-        console.log(" X  -  Y ");
-        game.input.onDown.add(function() {
-            console.log(AT.mouseInput.worldX.toFixed() + " - " + AT.mouseInput.worldY.toFixed());
-        }, this);
-    }
+    // if (AT.DEBUG) {
+    //     console.log(" X  -  Y ");
+    //     game.input.onDown.add(function() {
+    //         console.log(AT.mouseInput.worldX.toFixed() + " - " + AT.mouseInput.worldY.toFixed());
+    //     }, this);
+    // }
+};
+
+AT.gotoIntro = function() {
+    game.state.start('sIntro');
 };
 
 AT.fadeBackground = function() {
     const DURATION = 500;
 
-    fader = game.add.sprite(0, 0, 'black');
+    var fader = game.add.sprite(0, 0, 'black');
     fader.width = game.width;
     fader.height = game.height;
     fader.alpha = 0;

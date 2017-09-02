@@ -1,6 +1,6 @@
 (function(that) {
     AT.win = function() {
-        game.input.keyboard.enabled = false;
+        AT.keys.enter.onDown.add(nextLevel);
         showMessage();
         showButton();
         AT.fadeBackground();
@@ -15,17 +15,18 @@
     function showButton() {
         AT.addTextButton(
             game.width - 200,
-            game.height - 100,
-            -1,
-            -1,
+            game.height - 100, -1, -1,
             'NEXT LEVEL', {
                 fill: 'white',
             }, null,
-            function() {
-                var nextLevel = ((AT.level + 1) % AT.LEVEL_COUNT);
-                game.state.start('sPlay', true, false, {
-                    level: nextLevel,
-                });
-            });
+            nextLevel
+        );
+    }
+
+    function nextLevel() {
+        var levelNum = ((AT.level + 1) % AT.LEVEL_COUNT);
+        game.state.start('sPlay', true, false, {
+            level: levelNum,
+        });
     }
 })(this);

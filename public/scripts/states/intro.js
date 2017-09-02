@@ -19,6 +19,7 @@
 
     sIntro.init = function() {
         AT.initInput();
+        AT.keys.enter.onDown.add(startPlay);
         AT.timer = game.time.create(false);
     };
 
@@ -26,7 +27,7 @@
         AT.graphics = game.add.graphics();
 
         var data = game.cache.getJSON('intro');
-        AT.loadIntro();
+        loadIntro();
 
         var taskX = game.width - 100;
         var taskY = game.height / 2;
@@ -46,7 +47,7 @@
         );
     }
 
-    AT.loadIntro = function() {
+    function loadIntro() {
         game.add.text(100, 100, introText, style);
 
         AT.addTextButton(
@@ -55,13 +56,13 @@
             'START',
             style,
             null,
-            function() {
-                // game.state.start('sPlay', false, false, {
-                game.state.start('sPlay', true, false, {
-                    level: 0,
-                });
-            }
+            startPlay
         );
     };
 
+    function startPlay() {
+        game.state.start('sPlay', true, false, {
+            level: 0,
+        });
+    }
 })(this);

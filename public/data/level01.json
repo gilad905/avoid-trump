@@ -153,6 +153,13 @@
         "sprite": "woman",
         "anim": "jumpUp",
         "x": 130,
-        "y": -200
+        "y": -200,
+        "locker": false
+    }, {
+        "dur": 0.5,
+        "type": "AnimScene",
+        "sprite": "man",
+        "anim": "stop",
+        "scaleX": -1
     }]
 }

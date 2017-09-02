@@ -6,6 +6,7 @@ sPlay.init = function(args) {
     AT.timer = game.time.create(false);
 
     AT.initInput();
+    AT.keys.esc.onDown.add(AT.gotoIntro);
 };
 
 sPlay.create = function() {
@@ -26,12 +27,8 @@ sPlay.update = function() {
     AT.handleInput();
 };
 
-// if (AT.DEBUG) {
-// sPlay.render = function() {
-// game.debug.inputInfo(32, 32);
-// };
-// }
-
-
-
-AT.createUI = function() {};
+if (AT.DEBUG) {
+    sPlay.render = function() {
+        game.debug.inputInfo(32, 32);
+    };
+}

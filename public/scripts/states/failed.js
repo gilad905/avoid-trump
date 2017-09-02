@@ -1,6 +1,6 @@
 (function(that) {
     AT.failed = function() {
-        game.input.keyboard.enabled = false;
+        AT.keys.enter.onDown.add(restartLevel);
         AT.fadeBackground();
         showMessage();
         showButton();
@@ -19,10 +19,13 @@
             'RESTART', {
                 fill: 'white',
             }, null,
-            function() {
-                game.state.start('sPlay', true, false, {
-                    level: AT.level,
-                });
-            });
+            restartLevel
+        );
+    }
+
+    function restartLevel() {
+        game.state.start('sPlay', true, false, {
+            level: AT.level,
+        });
     }
 })(this);
