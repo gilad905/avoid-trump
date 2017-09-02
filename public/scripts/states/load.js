@@ -1,7 +1,7 @@
 var AT = {};
 var game;
 
-AT.DEBUG = true;
+// AT.DEBUG = true;
 
 (function() {
     var states = ['sLoad', 'sPlay', 'sIntro', 'sFailed', 'sWin'];
@@ -56,9 +56,16 @@ AT.BG = {
     BG_DARK_COLOR: "#4488AA",
 };
 
+AT.addFader = function() {
+    AT.fader = game.add.sprite(0, 0, 'black');
+    AT.fader.width = game.width;
+    AT.fader.height = game.height;
+    AT.fader.alpha = 0;
+};
+
 sLoad.create = function() {
-    var text = game.add.text(game.width / 2, game.height / 2, 'Loading...', loadingStyle);
-    text.anchor = {
+    var loadingText = game.add.text(game.width / 2, game.height / 2, 'Loading...', loadingStyle);
+    loadingText.anchor = {
         x: .5,
         y: .5,
     };
@@ -152,16 +159,9 @@ AT.gotoIntro = function() {
 };
 
 AT.fadeBackground = function() {
-    const DURATION = 500;
-
-    var fader = game.add.sprite(0, 0, 'black');
-    fader.width = game.width;
-    fader.height = game.height;
-    fader.alpha = 0;
-
-    game.add.tween(fader).to({
-        alpha: .3,
-    }, DURATION, null, true);
+    game.add.tween(AT.fader).to({
+        alpha: 0.7,
+    }, 500, Phaser.Easing.Circular.In, true);
 }
 
 AT.getTextButtonDefaults = function(text, button) {

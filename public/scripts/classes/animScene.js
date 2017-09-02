@@ -17,7 +17,7 @@
 
     prototype.startAnimation = function(sprite) {
         var spriteAnim = sprite.animations.getAnimation(this._scene.anim);
-        spriteAnim.play(null, true);
+        spriteAnim.play(null);
         if (this._scene.locker === false)
             this.finish();
         else

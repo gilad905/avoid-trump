@@ -157,9 +157,12 @@
         "locker": false
     }, {
         "dur": 0.5,
+        "type": "Wait"
+    }, {
+        "dur": 0.5,
         "type": "AnimScene",
         "sprite": "man",
-        "anim": "stop",
+        "anim": "shocked",
         "scaleX": -1
     }]
 }
