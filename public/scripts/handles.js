@@ -1,3 +1,5 @@
-AT.handleCollisions = function() {};
+(function() {
+    AT.HandleCollisions = function() {};
 
-AT.handleInput = function() {};
+    AT.HandleInput = function() {};
+})();

@@ -4,20 +4,20 @@
 
     sPlay.init = function(args) {
         AT.level = args.level;
-        AT.timer = game.time.create(false);
+        AT.timer = Game.time.create(false);
 
-        AT.initInput();
-        AT.keys.esc.onDown.add(AT.gotoIntro);
+        AT.InitInput();
+        AT.keys.esc.onDown.add(AT.GotoIntro);
     };
 
     sPlay.create = function() {
-        AT.addFader();
-        AT.graphics = game.add.graphics();
+        AT.AddFader();
+        AT.graphics = Game.add.graphics();
 
-        var data = game.cache.getJSON(`level:${AT.level}`);
+        var data = Game.cache.getJSON(`level:${AT.level}`);
         AT.winMessage = data.winMessage;
-        AT.loadLevel(data);
-        AT.startScenes(data.scenes, {
+        AT.LoadLevel(data);
+        AT.StartScenes(data.scenes, {
             onTaskFailed: AT.failed,
             onEnd: AT.win,
             isFake: false,
@@ -25,13 +25,13 @@
     };
 
     sPlay.update = function() {
-        AT.handleCollisions();
-        AT.handleInput();
+        AT.HandleCollisions();
+        AT.HandleInput();
     };
 
     if (AT.DEBUG) {
         sPlay.render = function() {
-            game.debug.inputInfo(32, 32);
+            Game.debug.inputInfo(32, 32);
         };
     }
 })();

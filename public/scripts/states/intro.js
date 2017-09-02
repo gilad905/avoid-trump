@@ -18,29 +18,29 @@
     };
 
     sIntro.init = function() {
-        AT.initInput();
+        AT.InitInput();
         AT.keys.enter.onDown.add(startPlay);
-        AT.timer = game.time.create(false);
+        AT.timer = Game.time.create(false);
     };
 
     sIntro.create = function() {
-        AT.graphics = game.add.graphics();
+        AT.graphics = Game.add.graphics();
 
-        var data = game.cache.getJSON('intro');
+        var data = Game.cache.getJSON('intro');
         loadIntro();
 
-        var taskX = game.width - 100;
-        var taskY = game.height / 2;
+        var taskX = Game.width - 100;
+        var taskY = Game.height / 2;
         for (var i in data.scenes) {
             data.scenes[i].x = taskX;
             data.scenes[i].y = taskY;
         }
-        AT.startScenes(
+        AT.StartScenes(
             data.scenes, {
-                onTaskFailed: AT.nextScene,
+                onTaskFailed: AT.NextScene,
                 onEnd: function() {
                     AT.scene.number = -1;
-                    AT.nextScene();
+                    AT.NextScene();
                 },
                 isFake: false,
             }
@@ -48,11 +48,11 @@
     }
 
     function loadIntro() {
-        game.add.text(100, 100, introText, style);
+        Game.add.text(100, 100, introText, style);
 
-        AT.addTextButton(
-            game.width - 150,
-            game.height - 100, -1, -1,
+        AT.AddTextButton(
+            Game.width - 150,
+            Game.height - 100, -1, -1,
             'START',
             style,
             null,
@@ -61,7 +61,7 @@
     };
 
     function startPlay() {
-        game.state.start('sPlay', true, false, {
+        Game.state.start('sPlay', true, false, {
             level: 0,
         });
     }

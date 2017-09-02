@@ -1,3 +1,0 @@
-- change classes._functions to a closure with a var for 'this'
-- change scene data to csv
-- run scenes while in win state

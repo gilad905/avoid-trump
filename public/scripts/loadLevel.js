@@ -1,17 +1,18 @@
-AT.loadLevel = function(data) {
-    this.spawnCharacters({
-        man: data.man,
-        woman: data.woman,
-    });
-};
+(function() {
+    AT.LoadLevel = function(data) {
+        spawnCharacters({
+            man: data.man,
+            woman: data.woman,
+        });
+    };
 
-AT.addGroups = function() {
-};
+    function addGroups() {};
 
-AT.spawnCharacters = function(data) {
-    this.woman = new Woman(game, data.woman);
-    game.add.existing(this.woman);
+    function spawnCharacters(data) {
+        AT.woman = new Woman(Game, data.woman);
+        Game.add.existing(AT.woman);
 
-    this.man = new Man(game, data.man);
-    game.add.existing(this.man);
-};
+        AT.man = new Man(Game, data.man);
+        Game.add.existing(AT.man);
+    };
+})();

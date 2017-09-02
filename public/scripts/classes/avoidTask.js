@@ -3,100 +3,73 @@
         if (!scene || !scene.char || !scene.x || !scene.y || !scene.style)
             throw "Avoid task: scene argument(s) missing";
 
-        this._playing = false;
+        this.playing = false;
 
-        if (!AvoidTask._staticsSet) {
-            AvoidTask._staticsSet = true;
+        if (!AvoidTask.staticsSet) {
+            AvoidTask.staticsSet = true;
             setStatics();
         }
 
-        Phaser.Sprite.call(this, game);
-        game.add.existing(this);
+        Phaser.Sprite.call(this, Game);
+        Game.add.existing(this);
 
-        this._scene = scene;
-        this._upChar = scene.char.toUpperCase();
-        this._sceneDurationInverse = 1 / (scene.dur * 1000);
+        this.scene = scene;
+        this.upChar = scene.char.toUpperCase();
+        this.sceneDurationInverse = 1 / (scene.dur * 1000);
 
-        this._timer = game.time.create(false);
-        this._timer.add(scene.dur * 1000, this._fail, this);
+        this.timer = Game.time.create(false);
+        this.timer.add(scene.dur * 1000, this.fail, this);
 
-        this._isFake = isFake;
+        this.isFake = isFake;
         if (!isFake)
-            this._openKeyListener();
+            this.openKeyListener();
     }
 
     function setStatics() {
-        that.AvoidTask.START_RADIAN = game.math.degToRad(-90);
-        that.AvoidTask.DELTA_RADIAN = AvoidTask.START_RADIAN - game.math.degToRad(270);
+        that.AvoidTask.START_RADIAN = Game.math.degToRad(-90);
+        that.AvoidTask.DELTA_RADIAN = AvoidTask.START_RADIAN - Game.math.degToRad(270);
     }
 
     that.AvoidTask.prototype = Object.create(Phaser.Sprite.prototype);
     that.AvoidTask.prototype.constructor = that.AvoidTask;
     var prototype = that.AvoidTask.prototype;
 
-    prototype._openKeyListener = function() {
-        this._keyListenerExisted = (AT.keys[this._upChar] !== undefined);
-        if (!this._keyListenerExisted) {
-            var key = Phaser.KeyCode[this._upChar];
-            AT.keys[this._upChar] = game.input.keyboard.addKey(key);
+    prototype.openKeyListener = function() {
+        this.keyListenerExisted = (AT.keys[this.upChar] !== undefined);
+        if (!this.keyListenerExisted) {
+            var key = Phaser.KeyCode[this.upChar];
+            AT.keys[this.upChar] = Game.input.keyboard.addKey(key);
         }
     }
 
-    prototype._closeKeyListener = function() {
-        if (!this._keyListenerExisted) {
-            var key = Phaser.KeyCode[this._upChar];
-            delete AT.keys[this._upChar];
-            game.input.keyboard.removeKey(key);
-        }
-    }
-
-    prototype.start = function() {
-        this._playing = true;
-        var style = {
-            font: "bold 45px Arial",
-            fill: "#fff",
-            boundsAlignH: "center",
-            boundsAlignV: "middle",
-        };
-        this._text = game.add.text(this._scene.x, this._scene.y, this._scene.char, style);
-        this._text.anchor = {
-            x: .5,
-            y: .5
-        };
-
-        this._timer.start();
-    };
-
-    prototype._finish = function(clearGraphics) {
-        this._playing = false;
-        this._closeKeyListener();
-        this._timer.stop();
-        if (clearGraphics || clearGraphics === undefined) {
-            this._text.destroy();
-            AT.graphics.clear();
+    prototype.closeKeyListener = function() {
+        if (!this.keyListenerExisted) {
+            var key = Phaser.KeyCode[this.upChar];
+            delete AT.keys[this.upChar];
+            Game.input.keyboard.removeKey(key);
         }
     }
 
     prototype.update = function() {
-        if (this._playing) {
-            if (!this._isFake) {
-                if (AT.keys[this._upChar].isDown)
-                    this._success();
+        if (this.playing) {
+            if (!this.isFake) {
+                if (AT.keys[this.upChar].isDown)
+                    this.success();
                 else
-                    this._drawArc()
+                    this.drawArc()
             } else
-                this._drawArc();
+                this.drawArc();
         }
     };
 
-    prototype._drawArc = function() {
-        var arcLength = this._timer.duration * this._sceneDurationInverse;
+    prototype.drawArc = function() {
+        var arcLength = this.timer.duration * this.sceneDurationInverse;
         var arcEnd = AvoidTask.START_RADIAN + AvoidTask.DELTA_RADIAN * arcLength;
         AT.graphics.clear();
-        AT.graphics.lineStyle(8, this._scene.style);
+        AT.graphics.lineStyle(8, this.scene.style);
         AT.graphics.arc(
-            this._scene.x,
-            this._scene.y,
+            this.scene.x,
+            this.scene.y,
             50,
             AvoidTask.START_RADIAN,
             arcEnd,
@@ -104,32 +77,59 @@
         );
     };
 
-    prototype.onFailed = function(callback, args, context) {
-        this._onFailed = {
+    prototype.finish = function(clearGraphics) {
+        this.playing = false;
+        this.closeKeyListener();
+        this.timer.stop();
+        if (clearGraphics || clearGraphics === undefined) {
+            this.text.destroy();
+            AT.graphics.clear();
+        }
+    }
+
+    prototype.fail = function() {
+        if (this.OnFailed)
+            this.OnFailed.callback.call(this.OnFailed.context, this.OnFailed.args);
+        this.finish();
+    };
+
+    prototype.success = function() {
+        if (this.OnSuccess)
+            this.OnSuccess.callback.call(this.OnSuccess.context, this.OnSuccess.args);
+        this.finish();
+    };
+
+    prototype.Start = function() {
+        this.playing = true;
+        var style = {
+            font: "bold 45px Arial",
+            fill: "#fff",
+            boundsAlignH: "center",
+            boundsAlignV: "middle",
+        };
+        this.text = Game.add.text(this.scene.x, this.scene.y, this.scene.char, style);
+        this.text.anchor = {
+            x: .5,
+            y: .5
+        };
+
+        this.timer.start();
+    };
+
+    prototype.OnFailed = function(callback, args, context) {
+        this.OnFailed = {
             callback: callback,
             args: args,
             context: context,
         };
     };
 
-    prototype.onSuccess = function(callback, args, context) {
-        this._onSuccess = {
+    prototype.OnSuccess = function(callback, args, context) {
+        this.OnSuccess = {
             callback: callback,
             args: args,
             context: context,
         };
-    };
-
-    prototype._fail = function() {
-        if (this._onFailed)
-            this._onFailed.callback.call(this._onFailed.context, this._onFailed.args);
-        this._finish();
-    };
-
-    prototype._success = function() {
-        if (this._onSuccess)
-            this._onSuccess.callback.call(this._onSuccess.context, this._onSuccess.args);
-        this._finish();
     };
 
 })(this);

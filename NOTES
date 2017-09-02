@@ -1,0 +1,3 @@
+- change classes._functions to lowercase, globals to upper
+- change scene data to csv
+- run scenes while in win state

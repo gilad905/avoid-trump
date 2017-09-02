@@ -1,11 +1,11 @@
-function Man(game, data) {
+function Man(Game, data) {
     let X = 7;
 
     // call Phaser.Sprite constructor
-    Phaser.Sprite.call(this, game, data.x, data.y, 'man');
-    Phaser.Sprite.call(this, game, data.x, data.y, 'man');
+    Phaser.Sprite.call(this, Game, data.x, data.y, 'man');
+    Phaser.Sprite.call(this, Game, data.x, data.y, 'man');
     this.anchor.set(0.5, 0.5);
-    game.physics.enable(this);
+    Game.physics.enable(this);
     // this.body.collideWorldBounds = true;
 
     if (data.scaleX !== undefined)
