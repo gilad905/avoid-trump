@@ -1,7 +1,8 @@
 var AT = {};
 var Game;
 
-// AT.DEBUG = true;
+AT.DEBUG = true;
+
 (function() {
 
     (function() {
@@ -50,12 +51,14 @@ var Game;
             y: .5,
         };
 
-        Game.stage.backgroundColor = AT.BG.MAIN_COLOR;
+        Game.stage.backgroundColor = AT.BG_COLOR;
+        // document.getElementsByTagName("body")[0].style.background = "black";
+        document.getElementsByTagName("body")[0].style.background = AT.BG_COLOR;
 
-        Game.state.start('sIntro');
-        // Game.state.start('sPlay', true, false, {
-        // level: 1,
-        // });
+        // Game.state.start('sIntro');
+        Game.state.start('sPlay', true, false, {
+            level: 0,
+        });
     };
 
     //////////////////////////////////////////////////////////////
@@ -69,10 +72,8 @@ var Game;
         wordWrap: true,
         wordWrapWidth: 600,
     };
-    AT.BG = {
-        MAIN_COLOR: "#4488AA",
-        BG_DARK_COLOR: "#4488AA",
-    };
+
+    AT.BG_COLOR = "#4488AA";
 
     function textButtonDefaults(text, button) {
         text = text || {};

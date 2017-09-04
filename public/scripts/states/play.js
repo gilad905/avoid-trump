@@ -22,6 +22,8 @@
             onEnd: AT.win,
             isFake: false,
         });
+
+        AT.RefreshLevelEditor();
     };
 
     sPlay.update = function() {

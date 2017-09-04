@@ -1,3 +1,22 @@
-- change classes._functions to lowercase, globals to upper
-- change scene data to csv
-- run scenes while in win state
+scene editor:
+    a table with all scene data
+    textarea with level json
+    copy button
+
+    whenever changing any property in the table:
+        draw the change in the Game
+        update the json
+
+drawing scene:
+    different color to each sprite
+    big circle for starting position
+    line for each path
+
+-----------------------------------------------------
+
+load var from current level's json,
+function to create table from var
+table changed event:
+    function to change var from table
+    create json from var
+    draw in game from var
