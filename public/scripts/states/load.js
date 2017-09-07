@@ -4,7 +4,6 @@ var Game;
 AT.DEBUG = true;
 
 (function() {
-
     (function() {
         var states = ['sLoad', 'sPlay', 'sIntro', 'sFailed', 'sWin'];
         for (var i in states)
@@ -20,7 +19,6 @@ AT.DEBUG = true;
     })();
 
     sLoad.init = function(args) {
-        // Game.input.resetLocked = true;
         if (!AT.DEBUG)
             Game.stage.disableVisibilityChange = true;
         Game.renderer.renderSession.roundPixels = true;
@@ -52,7 +50,6 @@ AT.DEBUG = true;
         };
 
         Game.stage.backgroundColor = AT.BG_COLOR;
-        // document.getElementsByTagName("body")[0].style.background = "black";
         document.getElementsByTagName("body")[0].style.background = AT.BG_COLOR;
 
         // Game.state.start('sIntro');
@@ -61,7 +58,6 @@ AT.DEBUG = true;
         });
     };
 
-    //////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////
 
     var loadingStyle = {
@@ -98,42 +94,6 @@ AT.DEBUG = true;
         AT.fader.alpha = 0;
     };
 
-    AT.StartScenes = function(data, options) {
-        this.scene = {
-            list: data,
-            onTaskFailed: options.onTaskFailed,
-            onEnd: options.onEnd,
-            isFake: options.isFake,
-            number: -1,
-        };
-        this.NextScene();
-    };
-
-    AT.NextScene = function() {
-        this.scene.number++;
-        var sceneData = this.scene.list[this.scene.number];
-        if (this.scene.data && this.scene.obj)
-            this.scene.obj.destroy();
-        if (sceneData) {
-            if (sceneData.type == "AvoidTask") {
-                this.scene.obj = new AvoidTask(sceneData, this.scene.isFake);
-                this.scene.obj.OnSuccess(this.NextScene, null, this);
-                this.scene.obj.OnFailed(this.scene.onTaskFailed, null, this);
-                this.scene.obj.Start();
-            } else if (sceneData.type == "AnimScene") {
-                this.scene.obj = new AnimScene(sceneData);
-                this.scene.obj.OnFinished(this.NextScene, null, this);
-                this.scene.obj.Start();
-            } else {
-                this.timer.stop();
-                this.timer.add(sceneData.dur * 1000, this.NextScene, this);
-                this.timer.start();
-            }
-        } else {
-            this.scene.onEnd();
-        }
-    };
-
     AT.AddTextButton = function(x, y, width, height, text, textStyle, buttonStyle, onClick) {
         var gButton = Game.add.group();
         gButton.x = x;
@@ -160,6 +120,8 @@ AT.DEBUG = true;
 
         gButton.add(button);
         gButton.add(text);
+
+        return gButton;
     }
 
     AT.InitInput = function() {
@@ -183,5 +145,4 @@ AT.DEBUG = true;
             alpha: 0.7,
         }, 500, Phaser.Easing.Circular.In, true);
     };
-
 })();

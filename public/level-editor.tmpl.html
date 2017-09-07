@@ -1,0 +1,92 @@
+<div id="level-props">
+    <div class="row win-message">
+        <div class="title">Win message</div>
+        <div class="cell">
+            <div><input ng-model="Level.winMessage" /></div>
+        </div>
+    </div>
+    <div class="row" ng-repeat="(key, value) in Level" ng-if="!['winMessage', 'scenes'].includes(key)">
+        <div class="title">{{ ::key }}</div>
+        <div class="cell">
+            <div>X</div>
+            <div><input ng-model="value.x" /></div>
+        </div>
+        <div class="cell">
+            <div>Y</div>
+            <div><input ng-model="value.y" /></div>
+        </div>
+        <div class="cell">
+            <div>X Scale</div>
+            <div><input ng-model="value.scaleX" /></div>
+        </div>
+    </div>
+    <br />
+    <div class="title scenes">
+        Scenes
+    </div>
+    <br />
+    <div class="row" ng-repeat="scene in Level.scenes" ng-class="scene.type">
+        <div></div>
+        <div class="cell">
+            <div>Type</div>
+            <div>
+                <select ng-model="scene.type" ng-options="sceneType.name as sceneType.desc for sceneType in Meta.sceneTypes">
+                </select>
+            </div>
+        </div>
+        <div class="cell small">
+            <div>Duration</div>
+            <div><input ng-model="scene.dur" ng-disabled="!scene.type"/></div>
+        </div>
+        <div class="cell small">
+            <div>X</div>
+            <div><input ng-model="scene.x" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
+        </div>
+        <div class="cell small">
+            <div>Y</div>
+            <div><input ng-model="scene.y" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
+        </div>
+        <div class="cell">
+            <div>Sprite</div>
+            <div>
+                <select ng-model="scene.sprite" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="sprite for sprite in Meta.sprites">
+                </select>
+            </div>
+        </div>
+        <div class="cell">
+            <div>Animation</div>
+            <div>
+                <select ng-model="scene.anim" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="anim for anim in Meta.animations[scene.sprite]">
+                </select>
+            </div>
+        </div>
+        <div class="cell">
+            <div>Character</div>
+            <div><input ng-model="scene.char" ng-disabled="!['AvoidTask', null].includes(scene.type)" /></div>
+        </div>
+        <div class="cell">
+            <div>Color</div>
+            <div><input ng-model="scene.style" ng-disabled="!['AvoidTask', null].includes(scene.type)" /></div>
+        </div>
+        <div class="cell">
+            <div>Locker scene</div>
+            <div><input type="checkbox" ng-model="scene.locker" ng-disabled="!scene.type" /></div>
+        </div>
+        <div class="remove-button">
+            <input type="button" value="-" title="remove" ng-click="removeScene($index)" />
+        </div>
+    </div>
+    <div class="row" id="add-scene">
+        <div class="cell">
+            <input type="button" value="+ Add Scene" ng-click="addScene()"/>
+        </div>
+    </div>
+</div>
+
+</div>
+<br />
+<textarea readonly>
+    {{ Level | json }}
+</textarea>
+<br />
+<input type="button" value="COPY TEXT" ng-click="copyLevel()" />

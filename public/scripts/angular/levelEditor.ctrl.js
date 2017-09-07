@@ -2,16 +2,13 @@
     var app = angular.module('avoidTrump', []);
     app.controller('levelEditorController', function($http, $scope) {
 
-        AT.RefreshLevelEditor = function() {
-            $http.get("data/level" + AT.level.toString().padStart(2, '0') + ".json")
-                .then(function(res) {
-                    $scope.Level = res.data;
+        AT.CreateLevelEditor = function() {
+            $scope.Level = AT.LevelEditorData;
 
-                    for (var i = 0, scene; scene = $scope.Level.scenes[i]; i++) {
-                        if (scene.locker !== undefined)
-                        scene.locker = true;
-                    }
-                });
+            for (var i = 0, scene; scene = $scope.Level.scenes[i]; i++) {
+                if (scene.locker !== undefined)
+                    scene.locker = true;
+            }
 
             for (var i = 0, sprite; sprite = $scope.Meta.sprites[i]; i++) {
                 $scope.Meta.animations[sprite] = [];
@@ -32,10 +29,19 @@
                 desc: 'Avoid task',
             }],
             sprites: ["man", "woman"],
-            animations: {}, // populated at RefreshLevelEditor()
+            animations: {}, // populated at CreateLevelEditor()
         };
 
         $scope.Level = "";
+
+        $scope.removeScene = function(sceneId) {
+            if (window.confirm("Remove scene?"))
+                $scope.Level.scenes.splice(sceneId, 1);
+        };
+
+        $scope.addScene = function() {
+            $scope.Level.scenes.push({});
+        };
 
         $scope.copyLevel = function() {
             var textarea = document.querySelector('#level-editor textarea');

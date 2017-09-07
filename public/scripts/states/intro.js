@@ -39,7 +39,7 @@
             data.scenes, {
                 onTaskFailed: AT.NextScene,
                 onEnd: function() {
-                    AT.scene.number = -1;
+                    AT.SceneMeta.number = -1;
                     AT.NextScene();
                 },
                 isFake: false,

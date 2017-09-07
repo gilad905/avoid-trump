@@ -2,12 +2,13 @@
     AT.win = function() {
         AT.keys.enter.onDown.add(nextLevel);
         showMessage();
+        AT.HideRestartButton();
         showButton();
         AT.FadeBackground();
     };
 
     function showMessage() {
-        Game.add.text(100, 100, AT.winMessage, {
+        Game.add.text(100, 100, AT.LevelData.winMessage, {
             fill: 'lightgreen',
         });
     }
