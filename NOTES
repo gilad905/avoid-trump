@@ -1,3 +1,4 @@
+/*
 changing a property in the table:
     draw the change
 
@@ -5,6 +6,7 @@ drawing:
     different color to each sprite
     big circle for starting position
     line for each path
+*/
 
 play:
     if editor data exists:

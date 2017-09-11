@@ -3,7 +3,7 @@
     AT._timer = null;
 
     sPlay.init = function(args) {
-        AT.level = args.level;
+        AT.LevelNumber = args.level;
         AT.timer = Game.time.create(false);
 
         AT.InitInput();
@@ -17,7 +17,7 @@
         if (AT.LevelEditorData)
             AT.LevelData = JSON.parse(JSON.stringify(AT.LevelEditorData));
         else {
-            AT.LevelData = Game.cache.getJSON('level:' + AT.level);
+            AT.LevelData = Game.cache.getJSON('level:' + AT.LevelNumber);
             AT.LevelEditorData = JSON.parse(JSON.stringify(AT.LevelData));
         }
 
@@ -58,7 +58,7 @@
 
     AT.RestartLevel = function() {
         Game.state.start('sPlay', true, false, {
-            level: AT.level,
+            level: AT.LevelNumber,
         });
     };
 

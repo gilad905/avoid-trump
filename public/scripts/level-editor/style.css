@@ -60,9 +60,9 @@
     margin: auto;
 }
 
-#level-props .remove-button input {
+/*#level-props .remove-button input {
     font-size: 16px;
-}
+}*/
 
 #level-props #add-scene .cell {
     margin: auto 0;

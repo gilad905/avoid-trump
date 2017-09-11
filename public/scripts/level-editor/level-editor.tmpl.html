@@ -9,15 +9,15 @@
         <div class="title">{{ ::key }}</div>
         <div class="cell">
             <div>X</div>
-            <div><input ng-model="value.x" /></div>
+            <div><input type="number" ng-model="value.x" /></div>
         </div>
         <div class="cell">
             <div>Y</div>
-            <div><input ng-model="value.y" /></div>
+            <div><input type="number" ng-model="value.y" /></div>
         </div>
         <div class="cell">
             <div>X Scale</div>
-            <div><input ng-model="value.scaleX" /></div>
+            <div><input type="number" ng-model="value.scaleX" /></div>
         </div>
     </div>
     <br />
@@ -36,15 +36,15 @@
         </div>
         <div class="cell small">
             <div>Duration</div>
-            <div><input ng-model="scene.dur" ng-disabled="!scene.type"/></div>
+            <div><input type="number" ng-model="scene.dur" ng-disabled="!scene.type"/></div>
         </div>
         <div class="cell small">
             <div>X</div>
-            <div><input ng-model="scene.x" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
+            <div><input type="number" ng-model="scene.x" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
         </div>
         <div class="cell small">
             <div>Y</div>
-            <div><input ng-model="scene.y" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
+            <div><input type="number" ng-model="scene.y" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
         </div>
         <div class="cell">
             <div>Sprite</div>
@@ -73,7 +73,7 @@
             <div><input type="checkbox" ng-model="scene.locker" ng-disabled="!scene.type" /></div>
         </div>
         <div class="remove-button">
-            <input type="button" value="-" title="remove" ng-click="removeScene($index)" />
+            <input type="button" value="X" title="remove" ng-click="removeScene($index)" />
         </div>
     </div>
     <div class="row" id="add-scene">

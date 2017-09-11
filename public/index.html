@@ -19,8 +19,8 @@
     <script src="scripts/states/failed.js"></script>
     <script src="scripts/states/win.js"></script>
 
-    <script src="scripts/angular/levelEditor.ctrl.js"></script>
-    <link rel="stylesheet" href="scripts/angular/style.css">
+    <script src="scripts/level-editor/level-editor.ctrl.js"></script>
+    <link rel="stylesheet" href="scripts/level-editor/style.css">
     </style>
 
     <style>
@@ -33,7 +33,7 @@
 <body>
     <div id="game"></div>
     <div id="level-editor" ng-app="avoidTrump" ng-controller="levelEditorController">
-        <div ng-if="Level" ng-include="'level-editor.tmpl.html'"></div>
+        <div ng-if="Level" ng-include="'scripts/level-editor/level-editor.tmpl.html'"></div>
     </div>
 </body>
 

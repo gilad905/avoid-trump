@@ -3,10 +3,12 @@
     app.controller('levelEditorController', function($http, $scope) {
 
         AT.CreateLevelEditor = function() {
+
             $scope.Level = AT.LevelEditorData;
+            $scope.$apply();
 
             for (var i = 0, scene; scene = $scope.Level.scenes[i]; i++) {
-                if (scene.locker !== undefined)
+                if (scene.locker === undefined)
                     scene.locker = true;
             }
 
@@ -49,7 +51,6 @@
             try {
                 document.execCommand('copy');
             } catch (exc) {};
-            // textarea.blur();
         };
 
         function drawLevel() {}

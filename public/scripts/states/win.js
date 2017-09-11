@@ -25,7 +25,7 @@
     }
 
     function nextLevel() {
-        var levelNum = ((AT.level + 1) % AT.LEVEL_COUNT);
+        var levelNum = ((AT.LevelNumber + 1) % AT.LEVEL_COUNT);
         Game.state.start('sPlay', true, false, {
             level: levelNum,
         });
