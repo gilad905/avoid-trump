@@ -1,9 +1,9 @@
 (function(that) {
     AT.failed = function() {
-        AT.keys.enter.onDown.add(AT.RestartLevel);
+        AT.Keys.enter.onDown.add(AT.RestartLevel);
         AT.FadeBackground();
         showMessage();
-        if (!AT.RestartButton)
+        if (!AT.Buttons.Restart)
             AT.ShowRestartButton();
     };
 

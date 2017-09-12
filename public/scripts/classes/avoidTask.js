@@ -1,7 +1,10 @@
 (function(that) {
     that.AvoidTask = function(scene, isFake) {
-        if (!scene || !scene.char || !scene.x || !scene.y || !scene.style)
-            throw "Avoid task: scene argument(s) missing";
+        if (!scene || !scene.x || !scene.y || !scene.dur)
+            throw "Avoid task: argument(s) missing";
+
+        scene.char = scene.char || randomChar();
+        scene.style = scene.style || randomStyle();
 
         this.playing = false;
 
@@ -34,18 +37,29 @@
     that.AvoidTask.prototype.constructor = that.AvoidTask;
     var prototype = that.AvoidTask.prototype;
 
+    function randomChar() {
+        var a = 97;
+        var z = 122;
+        var charCode = Math.floor(Math.random() * (z - a + 1)) + a;
+        return String.fromCharCode(charCode);
+    }
+
+    function randomStyle() {
+        return Math.floor(Math.random() * 16777215 + 1);
+    }
+
     prototype.openKeyListener = function() {
-        this.keyListenerExisted = (AT.keys[this.upChar] !== undefined);
+        this.keyListenerExisted = (AT.Keys[this.upChar] !== undefined);
         if (!this.keyListenerExisted) {
             var key = Phaser.KeyCode[this.upChar];
-            AT.keys[this.upChar] = Game.input.keyboard.addKey(key);
+            AT.Keys[this.upChar] = Game.input.keyboard.addKey(key);
         }
     }
 
     prototype.closeKeyListener = function() {
         if (!this.keyListenerExisted) {
             var key = Phaser.KeyCode[this.upChar];
-            delete AT.keys[this.upChar];
+            delete AT.Keys[this.upChar];
             Game.input.keyboard.removeKey(key);
         }
     }
@@ -53,7 +67,7 @@
     prototype.update = function() {
         if (this.playing) {
             if (!this.isFake) {
-                if (AT.keys[this.upChar].isDown)
+                if (AT.Keys[this.upChar].isDown)
                     this.success();
                 else
                     this.drawArc()
@@ -66,6 +80,7 @@
         var arcLength = this.timer.duration * this.sceneDurationInverse;
         var arcEnd = AvoidTask.START_RADIAN + AvoidTask.DELTA_RADIAN * arcLength;
         AT.graphics.clear();
+        console.log(this.scene.style);
         AT.graphics.lineStyle(8, this.scene.style);
         AT.graphics.arc(
             this.scene.x,

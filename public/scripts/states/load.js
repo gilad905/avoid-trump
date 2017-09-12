@@ -23,10 +23,13 @@ AT.DEBUG = true;
             Game.stage.disableVisibilityChange = true;
         Game.renderer.renderSession.roundPixels = true;
 
-        AT.keys = Game.input.keyboard.addKeys({
+        AT.Keys = Game.input.keyboard.addKeys({
             enter: Phaser.KeyCode.ENTER,
             esc: Phaser.KeyCode.ESC,
         });
+
+        // on-screen buttons
+        AT.Buttons = [];
     };
 
     sLoad.preload = function() {
@@ -52,7 +55,6 @@ AT.DEBUG = true;
         Game.stage.backgroundColor = AT.BG_COLOR;
         document.getElementsByTagName("body")[0].style.background = AT.BG_COLOR;
 
-        // Game.state.start('sIntro');
         Game.state.start('sPlay', true, false, {
             level: 0,
         });
@@ -75,6 +77,7 @@ AT.DEBUG = true;
         text = text || {};
         text.boundsAlignH = text.boundsAlignH || 'center';
         text.boundsAlignV = text.boundsAlignV || 'middle';
+        text.fill = text.fill || 'white';
 
         button = button || {};
         button.lineWidth = button.lineWidth || 0;

@@ -19,7 +19,7 @@
 
     sIntro.init = function() {
         AT.InitInput();
-        AT.keys.enter.onDown.add(startPlay);
+        AT.Keys.enter.onDown.add(startPlay);
         AT.timer = Game.time.create(false);
     };
 

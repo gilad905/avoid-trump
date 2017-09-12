@@ -2,15 +2,25 @@
     font-family: monospace;
     font-size: 14px;
     margin-top: 10px;
-    text-align: center;
     margin: 20px;
-}
-
-#level-props {
     text-align: left;
 }
 
-#level-props .row {
+#level-editor .main-title h3 {
+    float: left;
+}
+
+#level-editor .main-title input {
+    float: right;
+}
+
+#level-editor .main-title:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#level-editor .row {
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid lightseagreen;
@@ -18,53 +28,53 @@
     height: 40px;
 }
 
-#level-props .row.Wait {
+#level-editor .row.Wait {
     background-color: rgba(127, 127, 127, 0.5);
 }
 
-#level-props .row.AvoidTask {
+#level-editor .row.AvoidTask {
     background-color: rgba(255, 94, 30, 0.5);
 }
 
-#level-props .row.win-message input {
+#level-editor .row.level-name input {
+    font-weight: bold;
+}
+
+#level-editor .row.wide input {
     width: 400px;
 }
 
-#level-props .title {
+#level-editor .title {
     width: 140px;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 16px;
 }
 
-#level-props .cell {
+#level-editor .cell {
     margin-right: 20px;
     width: 90px;
     white-space: nowrap;
 }
 
-#level-props .cell.small {
+#level-editor .cell.small {
     width: 60px;
 }
 
-#level-props .cell * {
+#level-editor .cell * {
     width: 100%;
     margin-bottom: 1px;
 }
 
-#level-props .cell select {
+#level-editor .cell select {
     height: 22px;
 }
 
-#level-props .remove-button {
+#level-editor .scene-button {
     margin: auto;
 }
 
-/*#level-props .remove-button input {
-    font-size: 16px;
-}*/
-
-#level-props #add-scene .cell {
+#level-editor #add-scene .cell {
     margin: auto 0;
 }
 

@@ -8,10 +8,10 @@ drawing:
     line for each path
 */
 
-play:
-    if editor data exists:
-        load level data from editor
-    else:
-        load level data from file
-    if debug && editor data doesn't exist:
-        clone level data to editor
+--------------------------------------------------------------------
+
+- melania, coming down from airplane, avoids holding hands
+- polish first lady, ceremony, handshake
+- tiffany, ceremony, kiss
+- japanese first lady, dinner, doesn't speak english
+- "pull & yank"s

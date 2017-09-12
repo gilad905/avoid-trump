@@ -3,18 +3,19 @@
     AT._timer = null;
 
     sPlay.init = function(args) {
+        AT.IsNewLevel = (AT.LevelNumber === undefined || AT.LevelNumber != args.level);
         AT.LevelNumber = args.level;
         AT.timer = Game.time.create(false);
 
         AT.InitInput();
-        AT.keys.esc.onDown.add(AT.GotoIntro);
+        AT.Keys.esc.onDown.add(AT.GotoIntro);
     };
 
     sPlay.create = function() {
         AT.AddFader();
         AT.graphics = Game.add.graphics();
 
-        if (AT.LevelEditorData)
+        if (AT.LevelEditorData && !AT.IsNewLevel)
             AT.LevelData = JSON.parse(JSON.stringify(AT.LevelEditorData));
         else {
             AT.LevelData = Game.cache.getJSON('level:' + AT.LevelNumber);
@@ -31,29 +32,59 @@
         if (AT.DEBUG) {
             AT.CreateLevelEditor();
             AT.ShowRestartButton();
+            AT.ShowNextPrevButtons();
         }
     };
 
-    if (AT.DEBUG) {
-        sPlay.render = function() {
-            Game.debug.inputInfo(32, 32);
-        };
-    }
+    // if (AT.DEBUG) {
+    //     sPlay.render = function() {
+    //         Game.debug.inputInfo(32, 32);
+    //     };
+    // }
 
     AT.ShowRestartButton = function() {
-        AT.RestartButton = AT.AddTextButton(
+        AT.Buttons.Restart = AT.AddTextButton(
             Game.width - 200,
             Game.height - 100, -1, -1,
-            'RESTART', {
-                fill: 'white',
-            }, null,
+            'RESTART', null, null,
             AT.RestartLevel
         );
     };
 
+    AT.ShowNextPrevButtons = function() {
+        AT.AddTextButton(
+            50,
+            Game.height - 100, -1, -1,
+            'NEXT', null, null,
+            AT.NextLevel
+        );
+        AT.AddTextButton(
+            200,
+            Game.height - 100, -1, -1,
+            'PREVIOUS', null, null,
+            AT.PreviousLevel
+        );
+    };
+
+    AT.NextLevel = function() {
+        var levelNum = ((AT.LevelNumber + 1) % AT.LEVEL_COUNT);
+        Game.state.start('sPlay', true, false, {
+            level: levelNum,
+        });
+    };
+
+    AT.PreviousLevel = function() {
+        var levelNum = (AT.LevelNumber == 0 ? AT.LEVEL_COUNT - 1 : AT.LevelNumber - 1);
+        Game.state.start('sPlay', true, false, {
+            level: levelNum,
+        });
+    };
+
     AT.HideRestartButton = function() {
-        AT.RestartButton.destroy();
-        delete AT.RestartButton;
+        if (AT.Buttons.Restart) {
+            AT.Buttons.Restart.destroy();
+            delete AT.Buttons.Restart;
+        }
     };
 
     AT.RestartLevel = function() {

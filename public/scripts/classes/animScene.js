@@ -1,15 +1,8 @@
 (function(that) {
     that.AnimScene = function(scene) {
-        if (!AnimScene.staticsSet) {
-            AnimScene.staticsSet = true;
-            setStatics();
-        }
-
         this.scene = scene;
         this.timer = Game.time.create(false);
     };
-
-    function setStatics() {}
 
     that.AnimScene.prototype = Object.create(Phaser.Sprite.prototype);
     that.AnimScene.prototype.constructor = that.AnimScene;
@@ -25,13 +18,11 @@
     };
 
     prototype.startTween = function(sprite) {
-        // sprite.scale.x = (sprite.x > this.scene.x ? 1 : -1);
-
         var tween = Game.add.tween(sprite);
 
         tween.to({
             x: this.scene.x,
-            y: this.scene.y
+            y: this.scene.y,
         }, this.scene.dur * 1000);
 
         tween.start();
@@ -48,7 +39,7 @@
     prototype.finish = function() {
         if (this.onFinished)
         this.onFinished.callback.call(this.onFinished.context, this.onFinished.args);
-    }
+    };
 
     prototype.Start = function() {
         var sprite = AT[this.scene.sprite];
@@ -59,9 +50,9 @@
         if (this.scene.anim)
             this.startAnimation(sprite);
 
-        if (this.scene.x)
+        if (this.scene.x || this.scene.y)
             this.startTween(sprite);
-    }
+    };
 
     prototype.OnFinished = function(callback, args, context) {
         this.onFinished = {
