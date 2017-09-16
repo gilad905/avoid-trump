@@ -1,4 +1,4 @@
-<h2>Level {{ LevelNumber + 1 }}</h2>
+<h2>Level {{ LevelNumber }}</h2>
 <div class="main-title">
     <input type="button" ng-value="PropsShowing ? '-' : '+'" ng-click="toggleProps()" title="{{ PropsShowing ? 'Collapse' : 'Expand' }} properties" />
     <h3>Properties</h3>
@@ -7,13 +7,13 @@
     <div class="row wide level-name">
         <div class="title">Name</div>
         <div class="cell">
-            <div><input ng-model="Level.name" /></div>
+            <input ng-model="Level.name" />
         </div>
     </div>
     <div class="row wide">
         <div class="title">Win message</div>
         <div class="cell">
-            <div><input ng-model="Level.winMessage" /></div>
+            <input ng-model="Level.winMessage" />
         </div>
     </div>
     <div class="row" ng-repeat="(key, value) in Level" ng-if="!['name', 'winMessage', 'scenes'].includes(key)">
@@ -41,49 +41,53 @@
     <div class="row" ng-repeat="scene in Level.scenes" ng-class="scene.type">
         <div></div>
         <div class="cell">
-            <div>Type</div>
+            <div ng-if="($index % 5 == 0)">Type</div>
             <div>
                 <select ng-model="scene.type" ng-options="sceneType.name as sceneType.desc for sceneType in Meta.sceneTypes">
                 </select>
             </div>
         </div>
         <div class="cell small">
-            <div>Duration</div>
-            <div><input type="number" ng-model="scene.dur" ng-disabled="!scene.type" /></div>
+            <div ng-if="($index % 5 == 0)">Duration</div>
+            <div><input type="number" ng-model="scene.dur" ng-disabled="!scene.type || scene.type == 'Win'" /></div>
         </div>
         <div class="cell small">
-            <div>X</div>
+            <div ng-if="($index % 5 == 0)">X</div>
             <div><input type="number" ng-model="scene.x" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
         </div>
         <div class="cell small">
-            <div>Y</div>
+            <div ng-if="($index % 5 == 0)">Y</div>
             <div><input type="number" ng-model="scene.y" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
         </div>
+        <div class="cell small">
+            <div ng-if="($index % 5 == 0)">X Scale</div>
+            <div><input type="number" ng-model="scene.scaleX" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
+        </div>
         <div class="cell">
-            <div>Sprite</div>
+            <div ng-if="($index % 5 == 0)">Sprite</div>
             <div>
                 <select ng-model="scene.sprite" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="sprite for sprite in Meta.sprites">
                 </select>
             </div>
         </div>
         <div class="cell">
-            <div>Animation</div>
+            <div ng-if="($index % 5 == 0)">Animation</div>
             <div>
                 <select ng-model="scene.anim" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="anim for anim in Meta.animations[scene.sprite]">
                 </select>
             </div>
         </div>
-        <div class="cell">
-            <div>Character</div>
+        <!-- <div class="cell">
+            <div ng-if="($index % 5 == 0)">Character</div>
             <div><input ng-model="scene.char" ng-disabled="!['AvoidTask', null].includes(scene.type)" /></div>
         </div>
         <div class="cell">
-            <div>Color</div>
+            <div ng-if="($index % 5 == 0)">Color</div>
             <div><input ng-model="scene.style" ng-disabled="!['AvoidTask', null].includes(scene.type)" /></div>
-        </div>
+        </div> -->
         <div class="cell">
-            <div>Locker scene</div>
-            <div><input type="checkbox" ng-model="scene.locker" ng-disabled="!scene.type" /></div>
+            <div ng-if="($index % 5 == 0)">Locker scene</div>
+            <div><input type="checkbox" ng-model="scene.locker" ng-disabled="!scene.type || scene.type == 'Win'" /></div>
         </div>
         <div class="scene-button">
             <input type="button" value="▲" title="move up" ng-click="moveScene($index, -1)" />
@@ -103,6 +107,7 @@
 </div>
 
 <br />
+<!-- <input type="button" value="SAVE TO FILE" ng-click="saveToFile()" /> -->
 <input type="button" value="COPY TEXT" ng-click="copyLevel()" />
 <br />
 <textarea readonly>

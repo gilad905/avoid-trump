@@ -1,10 +1,13 @@
 (function(that) {
     AT.failed = function() {
-        AT.Keys.enter.onDown.add(AT.RestartLevel);
-        AT.FadeBackground();
-        showMessage();
-        if (!AT.Buttons.Restart)
-            AT.ShowRestartButton();
+        if (AT.SubState != 'failed') {
+            AT.SubState = 'failed';
+            AT.Keys.enter.onDown.add(AT.RestartLevel);
+            AT.FadeBackground();
+            showMessage();
+            if (!AT.Buttons.Restart)
+                AT.ShowRestartButton();
+        }
     };
 
     function showMessage() {

@@ -40,6 +40,7 @@ AT.DEBUG = true;
         AT.LEVEL_COUNT = 2;
 
         Game.load.image('black', 'assets/black.png');
+        Game.load.image('bg-00', 'assets/level00.png');
 
         Game.load.spritesheet('man', 'assets/trump.png', 272, 334);
         Game.load.spritesheet('woman', 'assets/woman.png', 272, 334);
@@ -147,5 +148,9 @@ AT.DEBUG = true;
         Game.add.tween(AT.fader).to({
             alpha: 0.7,
         }, 500, Phaser.Easing.Circular.In, true);
+    };
+
+    AT.DrawPoint = function(x, y) {
+        Game.debug.geom(new Phaser.Point(x, y), 'rgba(255,255,255,1)');
     };
 })();

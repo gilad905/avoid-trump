@@ -80,7 +80,6 @@
         var arcLength = this.timer.duration * this.sceneDurationInverse;
         var arcEnd = AvoidTask.START_RADIAN + AvoidTask.DELTA_RADIAN * arcLength;
         AT.graphics.clear();
-        console.log(this.scene.style);
         AT.graphics.lineStyle(8, this.scene.style);
         AT.graphics.arc(
             this.scene.x,

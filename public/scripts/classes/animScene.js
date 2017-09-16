@@ -38,13 +38,13 @@
 
     prototype.finish = function() {
         if (this.onFinished)
-        this.onFinished.callback.call(this.onFinished.context, this.onFinished.args);
+            this.onFinished.callback.call(this.onFinished.context, this.onFinished.args);
     };
 
     prototype.Start = function() {
         var sprite = AT[this.scene.sprite];
 
-        if (this.scene.scaleX !== undefined)
+        if (this.scene.scaleX)
             sprite.scale.x = this.scene.scaleX;
 
         if (this.scene.anim)

@@ -1,3 +1,8 @@
+#level-editor input:disabled,
+#level-editor select:disabled {
+    background-color: darkgray;
+}
+
 #level-editor {
     font-family: monospace;
     font-size: 14px;
@@ -68,6 +73,10 @@
 
 #level-editor .cell select {
     height: 22px;
+}
+
+#level-editor .headers {
+
 }
 
 #level-editor .scene-button {

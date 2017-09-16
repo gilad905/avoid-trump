@@ -98,6 +98,6 @@
         "type": "AnimScene",
         "sprite": "man",
         "anim": "shocked",
-        "scaleX": -1
+        "scaleX" : -1,
     }]
 }

@@ -1,10 +1,16 @@
 (function(that) {
-    AT.win = function() {
-        AT.Keys.enter.onDown.add(AT.NextLevel);
-        if (!AT.DEBUG)
-            showButton();
-        showMessage();
-        AT.FadeBackground();
+    AT.win = function(next) {
+        if (AT.SubState != 'win') {
+            AT.SubState = 'win';
+            AT.Keys.enter.onDown.add(AT.NextLevel);
+            if (!AT.DEBUG)
+                showButton();
+            showMessage();
+            AT.FadeBackground();
+
+            if (next)
+                next();
+        }
     };
 
     function showMessage() {
