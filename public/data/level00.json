@@ -1,108 +1,109 @@
-{
-    "name": "Airplane",
-    "winMessage": "Nice! you're a goddamn genius!!!",
-    "man": {
-        "x": 400,
-        "y": 100
+    {
+  "name": "Airplane",
+  "winMessage": "Nice! you're a goddamn genius!!!",
+  "man": {
+    "x": 400,
+    "y": 100
+  },
+  "woman": {
+    "x": 480,
+    "y": 100,
+    "scaleX": null
+  },
+  "scenes": [
+    {
+      "locker": true,
+      "type": "Wait",
+      "dur": 1.5
     },
-    "woman": {
-        "x": 480,
-        "y": 100,
-        "scaleX": null
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 3,
+      "y": 150,
+      "sprite": "man",
+      "anim": "walk"
     },
-    "scenes": [{
-            "locker": true,
-            "type": "Wait",
-            "dur": 1.5
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "dur": 3,
-            "y": 150,
-            "sprite": "man",
-            "anim": "walk"
-        },
-        {
-            "locker": true,
-            "type": "AnimScene",
-            "dur": 3,
-            "y": 150,
-            "sprite": "woman",
-            "anim": "walk"
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "dur": 2,
-            "sprite": "man",
-            "anim": "hand",
-            "y": 220,
-            "scaleX": -1
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "dur": 2,
-            "sprite": "woman",
-            "anim": "uptight",
-            "y": 220,
-            "scaleX": null
-        },
-        {
-            "locker": true,
-            "type": "AvoidTask",
-            "x": 100,
-            "y": 100,
-            "dur": 1.5
-        },
-        {
-            "type": "Win",
-            "locker": true
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "dur": 2,
-            "y": 295,
-            "sprite": "woman",
-            "anim": "walk"
-        },
-        {
-            "locker": true,
-            "type": "AnimScene",
-            "dur": 0.7,
-            "y": 237,
-            "sprite": "man",
-            "anim": "shocked"
-        },
-        {
-            "locker": true,
-            "type": "AnimScene",
-            "dur": 0.7,
-            "y": 295,
-            "sprite": "man",
-            "anim": "walk"
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "y": 800,
-            "dur": 5,
-            "sprite": "man",
-            "anim": "walk",
-            "scaleX": 1,
-            "x": 0
-        },
-        {
-            "locker": true,
-            "type": "AnimScene",
-            "y": 800,
-            "dur": 5,
-            "sprite": "woman",
-            "anim": "walk",
-            "scaleX": null,
-            "x": 100
-        }
-    ]
+    {
+      "locker": true,
+      "type": "AnimScene",
+      "dur": 3,
+      "y": 150,
+      "sprite": "woman",
+      "anim": "walk"
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 2,
+      "sprite": "man",
+      "anim": "hand",
+      "y": 220,
+      "scaleX": -1
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 2,
+      "sprite": "woman",
+      "anim": "uptight",
+      "y": 220,
+      "scaleX": null
+    },
+    {
+      "locker": true,
+      "type": "AvoidTask",
+      "x": 100,
+      "y": 100,
+      "dur": 1.5
+    },
+    {
+      "type": "Win",
+      "locker": true
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 2,
+      "y": 295,
+      "sprite": "woman",
+      "anim": "walk"
+    },
+    {
+      "locker": true,
+      "type": "AnimScene",
+      "dur": 0.7,
+      "y": 237,
+      "sprite": "man",
+      "anim": "shocked"
+    },
+    {
+      "locker": true,
+      "type": "AnimScene",
+      "dur": 0.7,
+      "y": 295,
+      "sprite": "man",
+      "anim": "walk"
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "y": 800,
+      "dur": 5,
+      "sprite": "man",
+      "anim": "walk",
+      "scaleX": 1,
+      "x": 0
+    },
+    {
+      "locker": true,
+      "type": "AnimScene",
+      "y": 800,
+      "dur": 5,
+      "sprite": "woman",
+      "anim": "walk",
+      "scaleX": null,
+      "x": 100
+    }
+  ]
 }

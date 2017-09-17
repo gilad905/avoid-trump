@@ -1,5 +1,5 @@
 if (!this.http) {
-    function http(url, method, body, resJson, next) {
+    function http(url, method, body, reqJson, resJson, next) {
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4) { // 'DONE'
@@ -11,14 +11,18 @@ if (!this.http) {
                         } catch (err) {
                             next(err, null);
                         }
-                        next(null, resText);
-                    } else
-                        global.showError();
+                    }
+                    next(null, resText);
                 }
             }
-            xmlHttp.open(method.toUpperCase(), url, true); // true = async
-            xmlHttp.send(body);
         }
+        xmlHttp.open(method.toUpperCase(), url, true); // true = async
+        if (reqJson) {
+            xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlHttp.send(JSON.stringify(body));
+        } else
+            xmlHttp.send(body);
+
     }
 } else {
     console.error("http already exists");

@@ -1,6 +1,6 @@
 (function() {
     var app = angular.module('avoidTrump', []);
-    app.controller('levelEditorController', function($http, $scope) {
+    app.controller('levelEditorController', function($scope) {
 
         var eArea = null;
 
@@ -85,16 +85,15 @@
             $scope.ScenesShowing = !$scope.ScenesShowing;
         };
 
-        // $scope.saveToFile = function() {
-        //     debugger;
-        //     var earea = getEArea();
-        //     var textArea = eArea.textContent;
-        //     var url = "https://api.github.com/repos/gilad905/avoid-trump/contents" +
-        //         "/public/data/level" + $scope.LevelNumber.padStart(2, '0') + ".json";
-        //     http("PUT", textArea, false, function(res) {
-        //         console.log("!");
-        //     });
-        // };
+        $scope.saveToFile = function() {
+            var earea = $scope.getEArea();
+            var reqBody = {
+                fileData: eArea.textContent
+            };
+            var url = "/Game%20Dev/avoid-trump/public/data/level" +
+                $scope.LevelNumber.toString().padStart(2, '0') + ".json";
+            http(url, "PUT", reqBody, true, false, null);
+        };
 
         // $scope.$watch('Level', drawLevel);
     });
