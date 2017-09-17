@@ -35,16 +35,16 @@
             data.scenes[i].x = taskX;
             data.scenes[i].y = taskY;
         }
-        AT.StartScenes(
-            data.scenes, {
-                onTaskFailed: AT.NextScene,
-                onEnd: function() {
-                    AT.SceneMeta.number = -1;
-                    AT.NextScene();
-                },
-                isFake: false,
-            }
-        );
+        AT.LevelData = {
+            scenes: data.scenes,
+        };
+        AT.StartScenes({
+            onTaskFailed: AT.NextScene,
+            onEnd: function() {
+                AT.SceneMeta.number = -1;
+                AT.NextScene();
+            },
+        });
     }
 
     function loadIntro() {

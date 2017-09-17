@@ -32,12 +32,18 @@ AT.DEBUG = true;
         AT.Buttons = [];
     };
 
+    function LoadLevelsData(levelCount) {
+        if (levelCount) {
+            AT.LEVEL_COUNT = levelCount;
+            for (var i = 0; i < levelCount; i++)
+                Game.load.json('level:' + i, 'data/level' + i.toString().padStart(2, '0') + '.json');
+        }
+    }
+
     sLoad.preload = function() {
         Game.load.json('intro', 'data/intro.json');
 
-        Game.load.json('level:0', 'data/level00.json');
-        Game.load.json('level:1', 'data/level01.json');
-        AT.LEVEL_COUNT = 2;
+        LoadLevelsData(3);
 
         Game.load.image('black', 'assets/black.png');
         Game.load.image('bg-00', 'assets/level00.png');
@@ -56,9 +62,12 @@ AT.DEBUG = true;
         Game.stage.backgroundColor = AT.BG_COLOR;
         document.getElementsByTagName("body")[0].style.background = AT.BG_COLOR;
 
-        Game.state.start('sPlay', true, false, {
-            level: 0,
-        });
+        if (AT.DEBUG) {
+            Game.state.start('sPlay', true, false, {
+                level: 0,
+            });
+        } else
+            Game.state.start('sIntro', true, false);
     };
 
     //////////////////////////////////////////////////////////////

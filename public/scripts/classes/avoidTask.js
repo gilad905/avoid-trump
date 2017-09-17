@@ -1,5 +1,5 @@
 (function(that) {
-    that.AvoidTask = function(scene, isFake) {
+    that.AvoidTask = function(scene) {
         if (!scene || !scene.x || !scene.y || !scene.dur)
             throw "Avoid task: argument(s) missing";
 
@@ -23,9 +23,7 @@
         this.timer = Game.time.create(false);
         this.timer.add(scene.dur * 1000, this.fail, this);
 
-        this.isFake = isFake;
-        if (!isFake)
-            this.openKeyListener();
+        this.openKeyListener();
     }
 
     function setStatics() {
@@ -66,13 +64,10 @@
 
     prototype.update = function() {
         if (this.playing) {
-            if (!this.isFake) {
-                if (AT.Keys[this.upChar].isDown)
-                    this.success();
-                else
-                    this.drawArc()
-            } else
-                this.drawArc();
+            if (AT.Keys[this.upChar].isDown)
+                this.success();
+            else
+                this.drawArc()
         }
     };
 

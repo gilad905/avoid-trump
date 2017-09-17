@@ -1,0 +1,216 @@
+    {
+        "winMessage": "Whoa...! How are you so unbelievably good?!?",
+        "man": {
+            "x": 600,
+            "y": 400
+        },
+        "woman": {
+            "x": 350,
+            "y": 100
+        },
+        "scenes": [{
+                "dur": 1.5,
+                "type": "Wait",
+                "locker": true
+            },
+            {
+                "dur": 1,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "dance",
+                "locker": true
+            },
+            {
+                "dur": 1,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "dance",
+                "scaleX": -1,
+                "locker": true
+            },
+            {
+                "dur": 1,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "stop",
+                "scaleX": 1,
+                "locker": true
+            },
+            {
+                "dur": 2,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "walk",
+                "x": 580,
+                "y": 350,
+                "locker": true
+            },
+            {
+                "dur": 5,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "walk",
+                "x": 400,
+                "y": 130,
+                "locker": false
+            },
+            {
+                "dur": 1.5,
+                "type": "AnimScene",
+                "sprite": "woman",
+                "anim": "nod",
+                "scaleX": -1,
+                "locker": true
+            },
+            {
+                "dur": 3.5,
+                "type": "AnimScene",
+                "sprite": "woman",
+                "anim": "stop",
+                "locker": true
+            },
+            {
+                "dur": 2,
+                "type": "AnimScene",
+                "anim": "stop",
+                "sprite": "man",
+                "locker": true
+            },
+            {
+                "dur": 0.5,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "walk",
+                "x": 380,
+                "y": 130,
+                "locker": false
+            },
+            {
+                "dur": 0.5,
+                "type": "AnimScene",
+                "sprite": "woman",
+                "anim": "walk",
+                "x": 330,
+                "y": 100,
+                "locker": true
+            },
+            {
+                "dur": 0,
+                "type": "AnimScene",
+                "anim": "stop",
+                "sprite": "woman",
+                "locker": true
+            },
+            {
+                "dur": 2,
+                "type": "AnimScene",
+                "anim": "stop",
+                "sprite": "man",
+                "locker": true
+            },
+            {
+                "dur": 0.5,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "walk",
+                "x": 360,
+                "y": 130,
+                "locker": false
+            },
+            {
+                "dur": 0.5,
+                "type": "AnimScene",
+                "sprite": "woman",
+                "anim": "walk",
+                "x": 310,
+                "y": 100,
+                "locker": true
+            },
+            {
+                "dur": 0,
+                "type": "AnimScene",
+                "anim": "stop",
+                "sprite": "woman",
+                "locker": true
+            },
+            {
+                "dur": 3,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "stop",
+                "locker": true
+            },
+            {
+                "dur": 0,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "hand",
+                "locker": true
+            },
+            {
+                "dur": 0,
+                "type": "AnimScene",
+                "sprite": "woman",
+                "anim": "uptight",
+                "locker": true
+            },
+            {
+                "dur": 1.5,
+                "type": "AvoidTask",
+                "char": "b",
+                "style": "0xffd900",
+                "x": 750,
+                "y": 520,
+                "locker": true
+            },
+            {
+                "dur": 1,
+                "type": "AnimScene",
+                "sprite": "woman",
+                "anim": "run",
+                "x": 130,
+                "y": 430,
+                "locker": true
+            },
+            {
+                "dur": 1,
+                "type": "AnimScene",
+                "sprite": "man",
+                "x": 160,
+                "y": 350,
+                "locker": false
+            },
+            {
+                "dur": 1,
+                "type": "AvoidTask",
+                "char": "k",
+                "style": "0xd81111",
+                "x": 700,
+                "y": 400,
+                "locker": true
+            },
+            {
+                "dur": 1.5,
+                "type": "AnimScene",
+                "sprite": "woman",
+                "anim": "jumpUp",
+                "x": 130,
+                "y": -200,
+                "locker": false
+            },
+            {
+                "dur": 0.5,
+                "type": "Wait",
+                "locker": true
+            },
+            {
+                "dur": 0.5,
+                "type": "AnimScene",
+                "sprite": "man",
+                "anim": "shocked",
+                "scaleX": -1,
+                "locker": true
+            }
+        ],
+        "name": "Level 2"
+    }

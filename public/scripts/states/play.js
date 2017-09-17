@@ -23,7 +23,6 @@
         AT.StartScenes({
             onTaskFailed: AT.failed,
             onEnd: AT.win,
-            isFake: false,
         });
 
         if (AT.DEBUG) {
@@ -42,12 +41,12 @@
     AT.AddBackground = function() {
         var bgKey = "bg-" + AT.LevelNumber.toString().padStart(2, '0');
         if (Game.cache.checkImageKey(bgKey))
-        Game.add.sprite(0, 0, bgKey);
+            Game.add.sprite(0, 0, bgKey);
     };
 
     AT.LoadLevelData = function() {
         if (AT.LevelEditorData && !AT.IsNewLevel)
-        AT.LevelData = JSON.parse(JSON.stringify(AT.LevelEditorData));
+            AT.LevelData = JSON.parse(JSON.stringify(AT.LevelEditorData));
         else {
             AT.LevelData = Game.cache.getJSON('level:' + AT.LevelNumber);
             AT.LevelEditorData = JSON.parse(JSON.stringify(AT.LevelData));
@@ -119,7 +118,7 @@
             AT.SceneMeta.obj.destroy();
         if (sceneData) {
             if (sceneData.type == "AvoidTask") {
-                AT.SceneMeta.obj = new AvoidTask(sceneData, AT.SceneMeta.isFake);
+                AT.SceneMeta.obj = new AvoidTask(sceneData);
                 AT.SceneMeta.obj.OnSuccess(AT.NextScene, null, AT);
                 AT.SceneMeta.obj.OnFailed(AT.SceneMeta.onTaskFailed, null, AT);
                 AT.SceneMeta.obj.Start();

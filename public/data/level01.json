@@ -1,168 +1,128 @@
-{
-    "winMessage": "Whoa...! How are you so unbelievably good?!?",
-    "man": {
-        "x": 600,
-        "y": 400
+    {
+  "name": "Level 1",
+  "winMessage": "Nice! you're a goddamn genius!!!",
+  "man": {
+    "x": 800,
+    "y": 400
+  },
+  "woman": {
+    "x": 450,
+    "y": 300,
+    "scaleX": -1
+  },
+  "scenes": [
+    {
+      "dur": 1,
+      "type": "Wait",
+      "locker": true
     },
-    "woman": {
-        "x": 350,
-        "y": 100
+    {
+      "dur": 2,
+      "type": "AnimScene",
+      "sprite": "man",
+      "x": 520,
+      "y": 300,
+      "anim": "walk",
+      "locker": true
     },
-    "scenes": [{
-        "dur": 1.5,
-        "type": "Wait"
-    }, {
-        "dur": 1,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "dance"
-    }, {
-        "dur": 1,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "dance",
-        "scaleX": -1
-    }, {
-        "dur": 1,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "stop",
-        "scaleX": 1
-    }, {
-        "dur": 2,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "walk",
-        "x": 580,
-        "y": 350
-    }, {
-        "dur": 5,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "walk",
-        "x": 400,
-        "y": 130,
-        "locker": false
-    }, {
-        "dur": 1.5,
-        "type": "AnimScene",
-        "sprite": "woman",
-        "anim": "nod",
-        "scaleX": -1
-    }, {
-        "dur": 3.5,
-        "type": "AnimScene",
-        "sprite": "woman",
-        "anim": "stop"
-    }, {
-        "dur": 2,
-        "type": "AnimScene",
-        "anim": "stop",
-        "sprite": "man"
-    }, {
-        "dur": 0.5,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "walk",
-        "x": 380,
-        "y": 130,
-        "locker": false
-    }, {
-        "dur": 0.5,
-        "type": "AnimScene",
-        "sprite": "woman",
-        "anim": "walk",
-        "x": 330,
-        "y": 100
-    }, {
-        "dur": 0,
-        "type": "AnimScene",
-        "anim": "stop",
-        "sprite": "woman"
-    }, {
-        "dur": 2,
-        "type": "AnimScene",
-        "anim": "stop",
-        "sprite": "man"
-    }, {
-        "dur": 0.5,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "walk",
-        "x": 360,
-        "y": 130,
-        "locker": false
-    }, {
-        "dur": 0.5,
-        "type": "AnimScene",
-        "sprite": "woman",
-        "anim": "walk",
-        "x": 310,
-        "y": 100
-    }, {
-        "dur": 0,
-        "type": "AnimScene",
-        "anim": "stop",
-        "sprite": "woman"
-    }, {
-        "dur": 3,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "stop"
-    }, {
-        "dur": 0,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "hand"
-    }, {
-        "dur": 0,
-        "type": "AnimScene",
-        "sprite": "woman",
-        "anim": "uptight"
-    }, {
-        "dur": 1.5,
-        "type": "AvoidTask",
-        "char": "b",
-        "style": "0xffd900",
-        "x": 750,
-        "y": 520
-    }, {
-        "dur": 1,
-        "type": "AnimScene",
-        "sprite": "woman",
-        "anim": "run",
-        "x": 130,
-        "y": 430
-    }, {
-        "dur": 1,
-        "type": "AnimScene",
-        "sprite": "man",
-        "x": 160,
-        "y": 350,
-        "locker": false
-    }, {
-        "dur": 1,
-        "type": "AvoidTask",
-        "char": "k",
-        "style": "0xd81111",
-        "x": 700,
-        "y": 400
-    }, {
-        "dur": 1.5,
-        "type": "AnimScene",
-        "sprite": "woman",
-        "anim": "jumpUp",
-        "x": 130,
-        "y": -200,
-        "locker": false
-    }, {
-        "dur": 0.5,
-        "type": "Wait"
-    }, {
-        "dur": 0.5,
-        "type": "AnimScene",
-        "sprite": "man",
-        "anim": "shocked",
-        "scaleX": -1
-    }]
+    {
+      "dur": 2,
+      "type": "AnimScene",
+      "sprite": "man",
+      "anim": "hand",
+      "locker": false
+    },
+    {
+      "dur": 2,
+      "type": "AnimScene",
+      "sprite": "woman",
+      "anim": "uptight",
+      "locker": false
+    },
+    {
+      "dur": 3,
+      "type": "AvoidTask",
+      "char": "y",
+      "style": "0x000000",
+      "x": 537,
+      "y": 161,
+      "locker": true
+    },
+    {
+      "dur": 0,
+      "type": "AnimScene",
+      "sprite": "man",
+      "anim": "stop",
+      "locker": true
+    },
+    {
+      "dur": 1,
+      "type": "AnimScene",
+      "sprite": "woman",
+      "anim": "walk",
+      "x": 300,
+      "y": 270,
+      "locker": true
+    },
+    {
+      "dur": 0.2,
+      "type": "AnimScene",
+      "sprite": "woman",
+      "anim": "stop",
+      "locker": true
+    },
+    {
+      "dur": 1,
+      "type": "AnimScene",
+      "sprite": "man",
+      "anim": "walk",
+      "x": 500,
+      "y": 290,
+      "locker": true
+    },
+    {
+      "dur": 1,
+      "type": "AnimScene",
+      "sprite": "man",
+      "anim": "hand",
+      "x": 300,
+      "y": 270,
+      "locker": false
+    },
+    {
+      "dur": 2,
+      "type": "AvoidTask",
+      "char": "x",
+      "style": "0xffd900",
+      "x": 441,
+      "y": 89,
+      "locker": true
+    },
+    {
+      "dur": 0.8,
+      "type": "AnimScene",
+      "sprite": "woman",
+      "anim": "jump",
+      "x": 600,
+      "y": 250,
+      "locker": true
+    },
+    {
+      "dur": 3,
+      "type": "AnimScene",
+      "sprite": "woman",
+      "anim": "run",
+      "x": 1500,
+      "y": 100,
+      "locker": false
+    },
+    {
+      "dur": 0.5,
+      "type": "AnimScene",
+      "sprite": "man",
+      "anim": "shocked",
+      "scaleX": -1,
+      "locker": true
+    }
+  ]
 }

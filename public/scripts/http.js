@@ -1,5 +1,6 @@
 if (!this.http) {
     function http(url, method, body, reqJson, resJson, next) {
+        next = next || function() {};
         var xmlHttp = new XMLHttpRequest();
         xmlHttp.onreadystatechange = function() {
             if (xmlHttp.readyState == 4) { // 'DONE'
