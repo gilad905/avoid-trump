@@ -1,4 +1,6 @@
 (function(that) {
+    const FADE_SPEED = .1;
+
     that.AvoidTask = function(scene) {
         if (!scene || !scene.x || !scene.y || !scene.dur)
             throw "Avoid task: argument(s) missing";
@@ -87,6 +89,7 @@
     };
 
     prototype.finish = function(clearGraphics) {
+        AT.FadeBackground(0, FADE_SPEED);
         this.playing = false;
         this.closeKeyListener();
         this.timer.stop();
@@ -109,6 +112,7 @@
     };
 
     prototype.Start = function() {
+        AT.FadeBackground(.3, FADE_SPEED);
         this.playing = true;
         var style = {
             font: "bold 45px Arial",

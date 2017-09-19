@@ -13,13 +13,17 @@
     };
 
     sPlay.create = function() {
-        AT.AddBackground();
+        var levelPad = AT.LevelNumber.toString().padStart(2, '0');
+        AT.AddImageLayer(`${levelPad} bg`);
         AT.AddFader();
+
         AT.graphics = Game.add.graphics();
 
         AT.LoadLevelData();
-
         AT.LoadSprites();
+
+        AT.AddImageLayer(`${levelPad} fg`);
+
         AT.StartScenes({
             onTaskFailed: AT.failed,
             onEnd: AT.win,
@@ -38,10 +42,20 @@
     //     };
     // }
 
-    AT.AddBackground = function() {
-        var bgKey = "bg-" + AT.LevelNumber.toString().padStart(2, '0');
-        if (Game.cache.checkImageKey(bgKey))
-            Game.add.sprite(0, 0, bgKey);
+    AT.AddImageLayer = function(key) {
+        if (Game.cache.checkImageKey(key))
+            Game.add.sprite(0, 0, key);
+    };
+
+    AT.FadeBackground = function(amount, duration) {
+        if (amount === undefined)
+            amount = .7;
+        if (duration === undefined)
+            duration = .5;
+        duration *= 1000;
+        Game.add.tween(AT.fader).to({
+            alpha: amount,
+        }, duration, Phaser.Easing.Circular.In, true);
     };
 
     AT.LoadLevelData = function() {

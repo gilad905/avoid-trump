@@ -41,6 +41,10 @@
     background-color: rgba(255, 94, 30, 0.5);
 }
 
+#level-editor .row.Win {
+    background-color: lightgreen;
+}
+
 #level-editor .row.level-name input {
     font-weight: bold;
 }

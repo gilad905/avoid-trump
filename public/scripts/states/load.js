@@ -32,21 +32,12 @@ AT.DEBUG = true;
         AT.Buttons = [];
     };
 
-    function LoadLevelsData(levelCount) {
-        if (levelCount) {
-            AT.LEVEL_COUNT = levelCount;
-            for (var i = 0; i < levelCount; i++)
-                Game.load.json('level:' + i, 'data/level' + i.toString().padStart(2, '0') + '.json');
-        }
-    }
-
     sLoad.preload = function() {
         Game.load.json('intro', 'data/intro.json');
 
         LoadLevelsData(3);
 
         Game.load.image('black', 'assets/black.png');
-        Game.load.image('bg-00', 'assets/level00.png');
 
         Game.load.spritesheet('man', 'assets/trump.png', 272, 334);
         Game.load.spritesheet('woman', 'assets/woman.png', 272, 334);
@@ -100,6 +91,52 @@ AT.DEBUG = true;
         };
     }
 
+    function LoadLevelsData(levelCount) {
+        if (levelCount) {
+            assetFetchers = [];
+            AT.LEVEL_COUNT = levelCount;
+            for (var i = 0; i < levelCount; i++) {
+                var levelPad = i.toString().padStart(2, '0');
+                var assetNames = [
+                    ['json', `level:${i}`, `data/level${levelPad}.json`],
+                    ['image', `${levelPad} bg`, `assets/${levelPad} bg.png`],
+                    ['image', `${levelPad} fg`, `assets/${levelPad} fg.png`],
+                ];
+                for (var j = 0; j < assetNames.length; j++) {
+                    (function(assetName) {
+                        assetFetchers.push(new Promise(function(resolve) {
+                            fileExists(assetName[2]).then(function(exists) {
+                                resolve();
+                                if (exists)
+                                    Game.load[assetName[0]](assetName[1], assetName[2]);
+                            })
+                        }));
+                    })(assetNames[j]);
+                }
+            }
+
+            Promise.all(assetFetchers).then(function() {
+                console.clear();
+            });
+        }
+    }
+
+    function fileExists(name) {
+        return new Promise(function(resolve) {
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function() {
+                resolve(this.status == 200);
+            };
+            xhr.onerror = function(error) {
+                console.error(error);
+                resolve(false);
+            };
+
+            xhr.open('HEAD', name);
+            xhr.send();
+        });
+    }
+
     AT.AddFader = function() {
         AT.fader = Game.add.sprite(0, 0, 'black');
         AT.fader.width = Game.width;
@@ -151,12 +188,6 @@ AT.DEBUG = true;
 
     AT.GotoIntro = function() {
         Game.state.start('sIntro');
-    };
-
-    AT.FadeBackground = function() {
-        Game.add.tween(AT.fader).to({
-            alpha: 0.7,
-        }, 500, Phaser.Easing.Circular.In, true);
     };
 
     AT.DrawPoint = function(x, y) {

@@ -58,8 +58,10 @@
             }
         };
 
-        $scope.addScene = function() {
-            $scope.Level.scenes.push({
+        $scope.addScene = function(index) {
+            if (index === undefined)
+                index = $scope.Level.scenes.length - 1;
+            $scope.Level.scenes.splice(index + 1, 0, {
                 locker: true,
             });
         };

@@ -86,7 +86,7 @@
             <div><input ng-model="scene.style" ng-disabled="!['AvoidTask', null].includes(scene.type)" /></div>
         </div> -->
         <div class="cell">
-            <div ng-if="($index % 5 == 0)">Locker scene</div>
+            <div ng-if="($index % 5 == 0)">Locker</div>
             <div><input type="checkbox" ng-model="scene.locker" ng-disabled="!scene.type || scene.type == 'Win'" /></div>
         </div>
         <div class="scene-button">
@@ -98,12 +98,15 @@
         <div class="scene-button">
             <input type="button" value="X" title="remove" ng-click="removeScene($index)" />
         </div>
+        <div class="scene-button">
+            <input type="button" value="+" title="add scene" ng-click="addScene($index)" />
+        </div>
     </div>
-    <div class="row" id="add-scene">
+    <!-- <div class="row" id="add-scene">
         <div class="cell">
             <input type="button" value="+ New Scene" ng-click="addScene()" />
         </div>
-    </div>
+    </div> -->
 </div>
 
 <br />

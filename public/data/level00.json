@@ -38,7 +38,7 @@
       "dur": 2,
       "sprite": "man",
       "anim": "hand",
-      "y": 220,
+      "y": 200,
       "scaleX": -1
     },
     {
@@ -47,15 +47,56 @@
       "dur": 2,
       "sprite": "woman",
       "anim": "uptight",
-      "y": 220,
+      "y": 200,
       "scaleX": null
     },
     {
       "locker": true,
       "type": "AvoidTask",
       "x": 100,
-      "y": 100,
+      "y": 130,
       "dur": 1.5
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "sprite": "man",
+      "dur": 1,
+      "anim": "walk",
+      "y": 230,
+      "scaleX": 1
+    },
+    {
+      "locker": true,
+      "type": "AnimScene",
+      "sprite": "woman",
+      "dur": 1,
+      "anim": "walk",
+      "y": 230
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "sprite": "man",
+      "anim": "hand",
+      "dur": 1.5,
+      "y": 270,
+      "scaleX": -1
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 1.5,
+      "y": 270,
+      "sprite": "woman",
+      "anim": "walk"
+    },
+    {
+      "locker": true,
+      "type": "AvoidTask",
+      "dur": 1.5,
+      "x": 700,
+      "y": 130
     },
     {
       "type": "Win",
@@ -65,25 +106,17 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 2,
-      "y": 295,
+      "y": 300,
       "sprite": "woman",
       "anim": "walk"
     },
     {
       "locker": true,
       "type": "AnimScene",
-      "dur": 0.7,
-      "y": 237,
+      "dur": 1.3,
+      "y": 300,
       "sprite": "man",
       "anim": "shocked"
-    },
-    {
-      "locker": true,
-      "type": "AnimScene",
-      "dur": 0.7,
-      "y": 295,
-      "sprite": "man",
-      "anim": "walk"
     },
     {
       "locker": false,
