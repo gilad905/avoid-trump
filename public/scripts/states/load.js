@@ -1,6 +1,7 @@
 var AT = {};
 var Game;
 
+// AT.DEBUG = false;
 AT.DEBUG = true;
 
 (function() {
@@ -137,12 +138,12 @@ AT.DEBUG = true;
         });
     }
 
-    AT.AddFader = function() {
-        AT.fader = Game.add.sprite(0, 0, 'black');
-        AT.fader.width = Game.width;
-        AT.fader.height = Game.height;
-        AT.fader.alpha = 0;
-    };
+    // AT.AddFader = function() {
+    //     AT.fader = Game.add.sprite(0, 0, 'black');
+    //     AT.fader.width = Game.width;
+    //     AT.fader.height = Game.height;
+    //     AT.fader.alpha = 0;
+    // };
 
     AT.AddTextButton = function(x, y, width, height, text, textStyle, buttonStyle, onClick) {
         var gButton = Game.add.group();

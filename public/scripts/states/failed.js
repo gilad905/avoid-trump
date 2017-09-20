@@ -3,7 +3,7 @@
         if (AT.SubState != 'failed') {
             AT.SubState = 'failed';
             AT.Keys.enter.onDown.add(AT.RestartLevel);
-            AT.FadeBackground();
+            AT.FadeBackground(.3, .8);
             showMessage();
             if (!AT.Buttons.Restart)
                 AT.ShowRestartButton();

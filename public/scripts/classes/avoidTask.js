@@ -1,12 +1,10 @@
 (function(that) {
-    const FADE_SPEED = .1;
-
     that.AvoidTask = function(scene) {
         if (!scene || !scene.x || !scene.y || !scene.dur)
             throw "Avoid task: argument(s) missing";
 
-        scene.char = scene.char || randomChar();
-        scene.style = scene.style || randomStyle();
+        this.char = scene.char || randomChar();
+        this.style = scene.style || randomStyle();
 
         this.playing = false;
 
@@ -19,7 +17,7 @@
         Game.add.existing(this);
 
         this.scene = scene;
-        this.upChar = scene.char.toUpperCase();
+        this.upChar = this.char.toUpperCase();
         this.sceneDurationInverse = 1 / (scene.dur * 1000);
 
         this.timer = Game.time.create(false);
@@ -45,7 +43,7 @@
     }
 
     function randomStyle() {
-        return Math.floor(Math.random() * 16777215 + 1);
+        return Math.floor(Math.random() * 0xFFFFFF + 1);
     }
 
     prototype.openKeyListener = function() {
@@ -66,7 +64,7 @@
 
     prototype.update = function() {
         if (this.playing) {
-            if (AT.Keys[this.upChar].isDown)
+            if (AT.Keys[this.upChar] && AT.Keys[this.upChar].isDown)
                 this.success();
             else
                 this.drawArc()
@@ -77,7 +75,7 @@
         var arcLength = this.timer.duration * this.sceneDurationInverse;
         var arcEnd = AvoidTask.START_RADIAN + AvoidTask.DELTA_RADIAN * arcLength;
         AT.graphics.clear();
-        AT.graphics.lineStyle(8, this.scene.style);
+        AT.graphics.lineStyle(8, this.style);
         AT.graphics.arc(
             this.scene.x,
             this.scene.y,
@@ -89,7 +87,6 @@
     };
 
     prototype.finish = function(clearGraphics) {
-        AT.FadeBackground(0, FADE_SPEED);
         this.playing = false;
         this.closeKeyListener();
         this.timer.stop();
@@ -100,19 +97,18 @@
     }
 
     prototype.fail = function() {
+        this.finish();
         if (this.OnFailed)
             this.OnFailed.callback.call(this.OnFailed.context, this.OnFailed.args);
-        this.finish();
     };
 
     prototype.success = function() {
+        this.finish();
         if (this.OnSuccess)
             this.OnSuccess.callback.call(this.OnSuccess.context, this.OnSuccess.args);
-        this.finish();
     };
 
     prototype.Start = function() {
-        AT.FadeBackground(.3, FADE_SPEED);
         this.playing = true;
         var style = {
             font: "bold 45px Arial",
@@ -120,7 +116,7 @@
             boundsAlignH: "center",
             boundsAlignV: "middle",
         };
-        this.text = Game.add.text(this.scene.x, this.scene.y, this.scene.char, style);
+        this.text = Game.add.text(this.scene.x, this.scene.y, this.char, style);
         this.text.anchor = {
             x: .5,
             y: .5

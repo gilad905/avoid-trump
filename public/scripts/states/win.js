@@ -3,10 +3,10 @@
         if (AT.SubState != 'win') {
             AT.SubState = 'win';
             AT.Keys.enter.onDown.add(AT.NextLevel);
+            AT.FadeBackground(.3, .8);
             if (!AT.DEBUG)
                 showButton();
             showMessage();
-            AT.FadeBackground();
 
             if (next)
                 next();

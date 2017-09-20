@@ -1,42 +1,45 @@
 {
     "scenes": [{
-            "dur": 1,
-            "type": "Wait"
-        }, {
-            "dur": 3,
-            "type": "AvoidTask",
-            "char": "y",
-            "style": "0x000000"
-        },
-        {
-            "dur": 1,
-            "type": "AvoidTask",
-            "char": "x",
-            "style": "0xffd900"
-        },
-        {
-            "dur": 2,
-            "type": "AvoidTask",
-            "char": "w",
-            "style": "0xffffff"
-        },
-        {
-            "dur": 3,
-            "type": "AvoidTask",
-            "char": "p",
-            "style": "0xf29292"
-        },
-        {
-            "dur": 1,
-            "type": "AvoidTask",
-            "char": "l",
-            "style": "0x123123"
-        },
-        {
-            "dur": 4,
-            "type": "AvoidTask",
-            "char": "m",
-            "style": "0x765765"
-        }
-    ]
+        "dur": 2,
+        "type": "Wait"
+    }, {
+        "dur": 3,
+        "type": "AvoidTask"
+    }, {
+        "dur": 1,
+        "type": "AvoidTask"
+    }, {
+        "dur": 2,
+        "type": "AvoidTask"
+    }, {
+        "dur": 0.5,
+        "type": "AvoidTask"
+    }, {
+        "dur": 1,
+        "type": "AvoidTask"
+    }, {
+        "dur": 4,
+        "type": "AvoidTask"
+    }, {
+        "dur": 3,
+        "type": "AvoidTask"
+    }, {
+        "dur": 1,
+        "type": "AvoidTask"
+    }, {
+        "dur": 3,
+        "type": "AvoidTask"
+    }, {
+        "dur": 5,
+        "type": "AvoidTask"
+    }, {
+        "dur": 0.5,
+        "type": "AvoidTask"
+    }, {
+        "dur": 3,
+        "type": "AvoidTask"
+    }, {
+        "dur": 1,
+        "type": "AvoidTask"
+    }]
 }
