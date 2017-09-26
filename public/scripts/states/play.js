@@ -14,10 +14,9 @@
 
         var levelPad = AT.LevelNumber.toString().padStart(2, '0');
         AT.BG = addImageLayer(`${levelPad} bg`);
-        // AT.AddFader();
 
         AT.graphics = Game.add.graphics();
-        loadSprites();
+        loadPeople();
         AT.FG = addImageLayer(`${levelPad} fg`);
 
         AT.StartScenes({
@@ -32,11 +31,15 @@
         }
     };
 
-    // if (AT.DEBUG) {
-    //     sPlay.render = function() {
-    //         Game.debug.inputInfo(32, 32);
-    //     };
-    // }
+    sPlay.update = function() {
+        AT.PeopleGroup.sort('y', Phaser.Group.SORT_ASCENDING);
+    };
+
+    if (AT.DEBUG) {
+        sPlay.render = function() {
+            Game.debug.text(Game.input.x + " - " + Game.input.y, Game.width - 100, Game.height - 30, "black", "20px Arial");
+        };
+    }
 
     AT.FadeBackground = function(amount, duration) {
         duration *= 1000;
@@ -173,11 +176,13 @@
         );
     };
 
-    function loadSprites() {
-        AT.woman = new Woman(Game, AT.LevelData.woman);
-        Game.add.existing(AT.woman);
-
-        AT.man = new Man(Game, AT.LevelData.man);
-        Game.add.existing(AT.man);
-    };
+    function loadPeople() {
+        AT.PeopleGroup = Game.add.group();
+        AT.People = [];
+        for (var key in AT.LevelData.people) {
+            AT.People[key] = AT.CreatePerson(Game, AT.LevelData.people[key], key);
+            Game.add.existing(AT.People[key]);
+            AT.PeopleGroup.add(AT.People[key]);
+        }
+    }
 })();

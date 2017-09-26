@@ -7,14 +7,14 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
     <script src="phaser 2.8.3.min.js"></script>
-    <script src="scripts/http.js"></script>
+    <script src="scripts/states/load.js"></script>
 
-    <script src="scripts/classes/man.js"></script>
-    <script src="scripts/classes/woman.js"></script>
+    <script src="scripts/helpers/http.js"></script>
+
+    <script src="scripts/classes/person.js"></script>
     <script src="scripts/classes/avoidTask.js"></script>
     <script src="scripts/classes/animScene.js"></script>
 
-    <script src="scripts/states/load.js"></script>
     <script src="scripts/states/play.js"></script>
     <script src="scripts/states/intro.js"></script>
     <script src="scripts/states/failed.js"></script>
@@ -23,18 +23,12 @@
     <script src="scripts/level-editor/level-editor.ctrl.js"></script>
 
     <link rel="stylesheet" href="scripts/level-editor/style.css">
-    </style>
-
-    <style>
-        canvas {
-            margin: 0 auto;
-        }
-    </style>
 </head>
 
 <body>
-    <div id="game"></div>
-    <div id="level-editor" ng-app="avoidTrump" ng-controller="levelEditorController">
+    <div id="game" onclick="setGameFrozen(false)">
+    </div>
+    <div id="level-editor" onclick="setGameFrozen(true)" ng-app="avoidTrump" ng-controller="levelEditorController as le">
         <div ng-if="Level" ng-include="'scripts/level-editor/level-editor.tmpl.html'"></div>
     </div>
 </body>

@@ -1,6 +1,12 @@
-<h2>Level {{ LevelNumber }}</h2>
+<div id="dashboard">
+    <h2>Level {{ LevelNumber + ' - ' + Level.name }}</h2>
+    <br />
+    <input type="button" value="COPY TEXT" ng-click="le.addScene()" />
+    <input type="button" value="SAVE" ng-click="le.saveToFile()" />
+    <p id="saved-msg" ng-show="SavedMsgOn">SAVED.</p>
+</div>
 <div class="main-title">
-    <input type="button" ng-value="PropsShowing ? '-' : '+'" ng-click="toggleProps()" title="{{ PropsShowing ? 'Collapse' : 'Expand' }} properties" />
+    <input type="button" ng-value="PropsShowing ? '-' : '+'" ng-click="le.toggleProps()" title="{{ PropsShowing ? 'Collapse' : 'Expand' }} properties" />
     <h3>Properties</h3>
 </div>
 <div id="level-props" ng-show="PropsShowing">
@@ -16,7 +22,7 @@
             <input ng-model="Level.winMessage" />
         </div>
     </div>
-    <div class="row" ng-repeat="(key, value) in Level" ng-if="!['name', 'winMessage', 'scenes'].includes(key)">
+    <div class="row" ng-repeat="(key, value) in Level.people">
         <div class="title">{{ ::key }}</div>
         <div class="cell">
             <div>X</div>
@@ -27,92 +33,85 @@
             <div><input type="number" ng-model="value.y" /></div>
         </div>
         <div class="cell">
-            <div>X Scale</div>
-            <div><input type="number" ng-model="value.scaleX" /></div>
+            <div>Facing</div>
+            <div>
+                <select ng-model="value.facing" ng-options="facing for facing in le.Meta.facing">
+                </select>
+            </div>
         </div>
     </div>
     <br />
 </div>
 <div class="main-title">
-    <input type="button" ng-value="ScenesShowing ? '-' : '+'" ng-click="toggleScenes()" title="{{ ScenesShowing ? 'Collapse' : 'Expand' }} scenes" />
+    <input type="button" ng-value="ScenesShowing ? '-' : '+'" ng-click="le.toggleScenes()" title="{{ ScenesShowing ? 'Collapse' : 'Expand' }} scenes" />
     <h3>Scenes</h3>
 </div>
 <div id="level-scenes" ng-show="ScenesShowing">
-    <div class="row" ng-repeat="scene in Level.scenes" ng-class="scene.type">
+    <div class="row" ng-repeat="scene in Level.scenes" ng-class="[scene.type, scene.sprite]">
         <div></div>
         <div class="cell">
-            <div ng-if="($index % 5 == 0)">Type</div>
+            <div class="cell-desc" ng-if="($index % le.Meta.labelsEvery == 0)">Type</div>
             <div>
-                <select ng-model="scene.type" ng-options="sceneType.name as sceneType.desc for sceneType in Meta.sceneTypes">
-                </select>
+                <select ng-model="scene.type" ng-options="sceneType.name as sceneType.desc for sceneType in le.Meta.sceneTypes">
+                    </select>
             </div>
         </div>
         <div class="cell small">
-            <div ng-if="($index % 5 == 0)">Duration</div>
+            <div class="cell-desc" ng-if="($index % le.Meta.labelsEvery == 0)">Duration</div>
             <div><input type="number" ng-model="scene.dur" ng-disabled="!scene.type || scene.type == 'Win'" /></div>
         </div>
         <div class="cell small">
-            <div ng-if="($index % 5 == 0)">X</div>
+            <div class="cell-desc" ng-if="($index % le.Meta.labelsEvery == 0)">X</div>
             <div><input type="number" ng-model="scene.x" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
         </div>
         <div class="cell small">
-            <div ng-if="($index % 5 == 0)">Y</div>
+            <div class="cell-desc" ng-if="($index % le.Meta.labelsEvery == 0)">Y</div>
             <div><input type="number" ng-model="scene.y" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
         </div>
         <div class="cell small">
-            <div ng-if="($index % 5 == 0)">X Scale</div>
-            <div><input type="number" ng-model="scene.scaleX" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" /></div>
+            <div class="cell-desc" ng-if="($index % le.Meta.labelsEvery == 0)">Gap</div>
+            <div><input type="checkbox" ng-model="scene.isGap" ng-disabled="scene.type != 'AnimScene'" /></div>
         </div>
-        <div class="cell">
-            <div ng-if="($index % 5 == 0)">Sprite</div>
+        <div class="cell sprite">
+            <div class="cell-desc" ng-if="($index % le.Meta.labelsEvery == 0)">Sprite</div>
             <div>
-                <select ng-model="scene.sprite" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="sprite for sprite in Meta.sprites">
-                </select>
+                <select ng-model="scene.sprite" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="sprite for sprite in le.Meta.sprites">
+                    </select>
             </div>
         </div>
         <div class="cell">
-            <div ng-if="($index % 5 == 0)">Animation</div>
+            <div class="cell-desc" ng-if="($index % le.Meta.labelsEvery == 0)">Animation</div>
             <div>
-                <select ng-model="scene.anim" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="anim for anim in Meta.animations[scene.sprite]">
+                <select ng-model="scene.anim" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="anim for anim in le.Meta.animations[scene.sprite]">
+                    </select>
+            </div>
+        </div>
+        <div class="cell small">
+            <div class="cell-desc" ng-if="($index % le.Meta.labelsEvery == 0)">Facing</div>
+            <div>
+                <select ng-model="scene.facing" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="facing for facing in le.Meta.facing">
                 </select>
             </div>
         </div>
-        <!-- <div class="cell">
-            <div ng-if="($index % 5 == 0)">Character</div>
-            <div><input ng-model="scene.char" ng-disabled="!['AvoidTask', null].includes(scene.type)" /></div>
-        </div>
-        <div class="cell">
-            <div ng-if="($index % 5 == 0)">Color</div>
-            <div><input ng-model="scene.style" ng-disabled="!['AvoidTask', null].includes(scene.type)" /></div>
-        </div> -->
-        <div class="cell">
-            <div ng-if="($index % 5 == 0)">Locker</div>
-            <div><input type="checkbox" ng-model="scene.locker" ng-disabled="!scene.type || scene.type == 'Win'" /></div>
+        <div class="cell small">
+            <div class="cell-desc" ng-if="($index % le.Meta.labelsEvery == 0)">Locker</div>
+            <div><input type="checkbox" ng-model="scene.locker" ng-disabled="!scene.type || scene.type != 'AnimScene'" /></div>
         </div>
         <div class="scene-button">
-            <input type="button" value="▲" title="move up" ng-click="moveScene($index, -1)" />
+            <input type="button" value="▲" title="move up" ng-click="le.moveScene($index, -1)" />
         </div>
         <div class="scene-button">
-            <input type="button" value="▼" title="move down" ng-click="moveScene($index, 1)" />
+            <input type="button" value="▼" title="move down" ng-click="le.moveScene($index, 1)" />
         </div>
         <div class="scene-button">
-            <input type="button" value="X" title="remove" ng-click="removeScene($index)" />
+            <input type="button" value="X" title="remove" ng-click="le.removeScene($index)" />
         </div>
         <div class="scene-button">
-            <input type="button" value="+" title="add scene" ng-click="addScene($index)" />
+            <input type="button" value="+" title="add scene" ng-click="le.addScene($index)" />
         </div>
     </div>
-    <!-- <div class="row" id="add-scene">
-        <div class="cell">
-            <input type="button" value="+ New Scene" ng-click="addScene()" />
-        </div>
-    </div> -->
 </div>
 
-<br />
-<input type="button" value="SAVE" ng-click="saveToFile()" />
-<input type="button" value="COPY TEXT" ng-click="copyLevel()" />
-<br />
 <textarea readonly>
     {{ Level | json }}
 </textarea>

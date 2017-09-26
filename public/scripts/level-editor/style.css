@@ -1,14 +1,48 @@
-#level-editor input:disabled,
-#level-editor select:disabled {
-    background-color: darkgray;
+body {
+    display: flex;
+}
+
+input, select, textarea, div {
+    border-radius: 2px;
+    border-width: 1px;
+}
+
+canvas {
+    margin: 0 auto;
+}
+
+/*#game, canvas,*/
+#level-editor #dashboard {
+    position: sticky;
+    top: 10px;
 }
 
 #level-editor {
     font-family: monospace;
     font-size: 14px;
-    margin-top: 10px;
     margin: 20px;
+    padding-right: 20px;
     text-align: left;
+}
+
+#level-editor input {
+    padding-left: 2px;
+}
+
+#level-editor input:disabled, #level-editor select:disabled {
+    background-color: darkgray;
+}
+
+#level-editor #dashboard {
+    background-color: lightgray;
+    border: 1px solid darkgray;
+    padding: 8px;
+    margin: auto;
+    width: calc(100% - 27px);
+}
+
+#level-editor #dashboard h2 {
+    margin: 0;
 }
 
 #level-editor .main-title h3 {
@@ -17,6 +51,7 @@
 
 #level-editor .main-title input {
     float: right;
+    margin-top: 16px;
 }
 
 #level-editor .main-title:after {
@@ -28,9 +63,18 @@
 #level-editor .row {
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid lightseagreen;
+    /*border-bottom: 1px solid lightseagreen;*/
     padding: 4px 5px;
-    height: 40px;
+    margin: 5px;
+}
+
+#level-editor .row.trump {
+    background-color: darkseagreen;
+}
+
+#level-editor .row.woman {
+    background-color: rgba(218, 112, 214, 0.5);
+    ;
 }
 
 #level-editor .row.Wait {
@@ -75,16 +119,32 @@
     margin-bottom: 1px;
 }
 
+#level-editor .cell .cell-desc {
+    text-align: center;
+}
+
+
+/*#level-editor .cell.sprite select {
+    color: white;
+}*/
+
+#level-editor .cell.sprite select option {
+    color: black;
+}
+
 #level-editor .cell select {
     height: 22px;
 }
 
-#level-editor .headers {
-
+#level-editor #saved-msg {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 0 8px;
 }
 
 #level-editor .scene-button {
-    margin: auto;
+    margin: auto 4px;
 }
 
 #level-editor #add-scene .cell {
@@ -93,6 +153,7 @@
 
 #level-editor textarea {
     margin-top: 10px;
-    width: 50%;
-    height: 50px;
+    width: 100%;
+    box-sizing: border-box;
+    height: 300px;
 }

@@ -17,12 +17,29 @@
             Game.time.events.add(this.scene.dur * 1000, this.finish, this);
     };
 
+    function getSceneNewCoords(scene, sprite) {
+        function getCoord(name) {
+            if (![null, undefined].includes(scene[name])) {
+                newCoords[name] =
+                    (scene.isGap ? scene[name] + sprite[name] : scene[name]);
+            }
+        }
+
+        var newCoords = {};
+        getCoord('x');
+        getCoord('y');
+
+        return newCoords;
+    }
+
     prototype.startTween = function(sprite) {
         var tween = Game.add.tween(sprite);
 
+        var newCoords = getSceneNewCoords(this.scene, sprite);
+
         tween.to({
-            x: this.scene.x,
-            y: this.scene.y,
+            x: newCoords.x,
+            y: newCoords.y,
         }, this.scene.dur * 1000);
 
         tween.start();
@@ -42,10 +59,11 @@
     };
 
     prototype.Start = function() {
-        var sprite = AT[this.scene.sprite];
+        var sprite = AT.People[this.scene.sprite];
 
-        if (this.scene.scaleX)
-            sprite.scale.x = this.scene.scaleX;
+        if (this.scene.facing) {
+            sprite.scale.x = this.scene.facing == "Left" ? 1 : -1;
+        }
 
         if (this.scene.anim)
             this.startAnimation(sprite);

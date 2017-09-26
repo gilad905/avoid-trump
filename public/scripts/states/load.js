@@ -4,20 +4,22 @@ var Game;
 // AT.DEBUG = false;
 AT.DEBUG = true;
 
+function setGameFrozen(state) {
+    Game.paused = state;
+}
+
 (function() {
-    (function() {
-        var states = ['sLoad', 'sPlay', 'sIntro', 'sFailed', 'sWin'];
+    var states = ['sLoad', 'sPlay', 'sIntro', 'sFailed', 'sWin'];
+    for (var i in states)
+        this[states[i]] = {};
+
+    window.onload = function() {
+        Game = new Phaser.Game(960, 600, Phaser.AUTO, 'game');
         for (var i in states)
-            this[states[i]] = {};
+            Game.state.add(states[i], this[states[i]]);
 
-        window.onload = function() {
-            Game = new Phaser.Game(960, 600, Phaser.AUTO, 'game');
-            for (var i in states)
-                Game.state.add(states[i], this[states[i]]);
-
-            Game.state.start('sLoad');
-        };
-    })();
+        Game.state.start('sLoad');
+    };
 
     sLoad.init = function(args) {
         if (!AT.DEBUG)
@@ -27,6 +29,7 @@ AT.DEBUG = true;
         AT.Keys = Game.input.keyboard.addKeys({
             enter: Phaser.KeyCode.ENTER,
             esc: Phaser.KeyCode.ESC,
+            ctrl: Phaser.KeyCode.CONTROL,
         });
 
         // on-screen buttons
@@ -36,12 +39,17 @@ AT.DEBUG = true;
     sLoad.preload = function() {
         Game.load.json('intro', 'data/intro.json');
 
-        LoadLevelsData(3);
+        AT.LEVEL_COUNT = 3;
+
+
+        LoadLevelsData();
 
         Game.load.image('black', 'assets/black.png');
 
-        Game.load.spritesheet('man', 'assets/trump.png', 272, 334);
+        Game.load.spritesheet('trump', 'assets/trump.png', 272, 334);
         Game.load.spritesheet('woman', 'assets/woman.png', 272, 334);
+        Game.load.spritesheet('man2', 'assets/man - other color.png', 272, 334);
+        Game.load.spritesheet('woman2', 'assets/woman - other color.png', 272, 334);
     };
 
     sLoad.create = function() {
@@ -93,33 +101,15 @@ AT.DEBUG = true;
     }
 
     function LoadLevelsData(levelCount) {
-        if (levelCount) {
-            assetFetchers = [];
-            AT.LEVEL_COUNT = levelCount;
-            for (var i = 0; i < levelCount; i++) {
-                var levelPad = i.toString().padStart(2, '0');
-                var assetNames = [
-                    ['json', `level:${i}`, `data/level${levelPad}.json`],
-                    ['image', `${levelPad} bg`, `assets/${levelPad} bg.png`],
-                    ['image', `${levelPad} fg`, `assets/${levelPad} fg.png`],
-                ];
-                for (var j = 0; j < assetNames.length; j++) {
-                    (function(assetName) {
-                        assetFetchers.push(new Promise(function(resolve) {
-                            fileExists(assetName[2]).then(function(exists) {
-                                resolve();
-                                if (exists)
-                                    Game.load[assetName[0]](assetName[1], assetName[2]);
-                            })
-                        }));
-                    })(assetNames[j]);
-                }
-            }
+        Game.load.json('level:0', 'data/level00.json');
+        Game.load.json('level:1', 'data/level01.json');
+        Game.load.json('level:2', 'data/level02.json');
 
-            Promise.all(assetFetchers).then(function() {
-                console.clear();
-            });
-        }
+        Game.load.image('00 bg', 'assets/00 bg.png');
+        Game.load.image('01 bg', 'assets/01 bg.png');
+        Game.load.image('02 bg', 'assets/02 bg.jpg');
+
+        Game.load.image('01 fg', 'assets/01 fg.png');
     }
 
     function fileExists(name) {
@@ -137,13 +127,6 @@ AT.DEBUG = true;
             xhr.send();
         });
     }
-
-    // AT.AddFader = function() {
-    //     AT.fader = Game.add.sprite(0, 0, 'black');
-    //     AT.fader.width = Game.width;
-    //     AT.fader.height = Game.height;
-    //     AT.fader.alpha = 0;
-    // };
 
     AT.AddTextButton = function(x, y, width, height, text, textStyle, buttonStyle, onClick) {
         var gButton = Game.add.group();
@@ -179,12 +162,6 @@ AT.DEBUG = true;
         Game.input.keyboard.enabled = true;
         Game.input.mouse.capture = true;
         AT.mouseInput = Game.input.activePointer;
-        // if (AT.DEBUG) {
-        //     console.log(" X  -  Y ");
-        //     Game.input.onDown.add(function() {
-        //         console.log(AT.mouseInput.worldX.toFixed() + " - " + AT.mouseInput.worldY.toFixed());
-        //     }, this);
-        // }
     };
 
     AT.GotoIntro = function() {
