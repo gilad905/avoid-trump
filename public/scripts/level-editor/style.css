@@ -7,11 +7,16 @@ input, select, textarea, div {
     border-width: 1px;
 }
 
-canvas {
-    margin: 0 auto;
+#game {
+    width: 960px;
+    flex-shrink: 0;
 }
 
-/*#game, canvas,*/
+#game canvas {
+    margin: 0 auto;
+    position: fixed;
+}
+
 #level-editor #dashboard {
     position: sticky;
     top: 10px;

@@ -31,7 +31,7 @@
 
         AT.CreateLevelEditor = function() {
             $scope.Level = AT.LevelEditorData;
-            $scope.LevelNumber = AT.LevelNumber;
+            $scope.LevelNumber = sPlay.LevelNumber;
 
             for (var i = 0, scene; scene = $scope.Level.scenes[i]; i++) {
                 if (scene.locker === undefined)

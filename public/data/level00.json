@@ -1,140 +1,144 @@
-{
-    "name": "Airplane",
-    "winMessage": "Nice! you're a goddamn genius!!!",
-    "people": {
-        "trump": {
-            "x": 400,
-            "y": 100
-        },
-        "woman": {
-            "x": 480,
-            "y": 100
-        }
+    {
+  "name": "Airplane",
+  "winMessage": "Nice! you're a goddamn genius!!!",
+  "people": {
+    "trump": {
+      "x": 400,
+      "y": 100,
+      "facing": ""
     },
-    "scenes": [{
-            "locker": true,
-            "type": "Wait",
-            "dur": 1.5
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "dur": 3,
-            "y": 150,
-            "sprite": "trump",
-            "anim": "walk"
-        },
-        {
-            "locker": true,
-            "type": "AnimScene",
-            "dur": 3,
-            "y": 150,
-            "sprite": "woman",
-            "anim": "walk"
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "dur": 2,
-            "sprite": "trump",
-            "anim": "hand",
-            "y": 200,
-            "facing": "Right"
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "dur": 2,
-            "sprite": "woman",
-            "anim": "uptight",
-            "y": 200
-        },
-        {
-            "locker": true,
-            "type": "AvoidTask",
-            "x": 100,
-            "y": 130,
-            "dur": 1.5
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "sprite": "trump",
-            "dur": 1,
-            "anim": "walk",
-            "y": 230,
-            "facing": "Left"
-        },
-        {
-            "locker": true,
-            "type": "AnimScene",
-            "sprite": "woman",
-            "dur": 1,
-            "anim": "walk",
-            "y": 230
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "sprite": "trump",
-            "anim": "hand",
-            "dur": 1.5,
-            "y": 270,
-            "facing": "Right"
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "dur": 1.5,
-            "y": 270,
-            "sprite": "woman",
-            "anim": "walk"
-        },
-        {
-            "locker": true,
-            "type": "AvoidTask",
-            "dur": 1.5,
-            "x": 700,
-            "y": 130
-        },
-        {
-            "type": "Win",
-            "locker": true
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "dur": 2,
-            "y": 300,
-            "sprite": "woman",
-            "anim": "walk"
-        },
-        {
-            "locker": true,
-            "type": "AnimScene",
-            "dur": 1.3,
-            "y": 300,
-            "sprite": "trump",
-            "anim": "shocked"
-        },
-        {
-            "locker": false,
-            "type": "AnimScene",
-            "y": 800,
-            "dur": 5,
-            "sprite": "trump",
-            "anim": "walk",
-            "facing": "Left",
-            "x": 0
-        },
-        {
-            "locker": true,
-            "type": "AnimScene",
-            "y": 800,
-            "dur": 5,
-            "sprite": "woman",
-            "anim": "walk",
-            "x": 100
-        }
-    ]
+    "woman": {
+      "x": 480,
+      "y": 100
+    }
+  },
+  "scenes": [
+    {
+      "locker": true,
+      "type": "Wait",
+      "dur": 1.5,
+      "x": null,
+      "y": null
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 3,
+      "y": 150,
+      "sprite": "trump",
+      "anim": "walk"
+    },
+    {
+      "locker": true,
+      "type": "AnimScene",
+      "dur": 3,
+      "y": 150,
+      "sprite": "woman",
+      "anim": "walk"
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 2,
+      "sprite": "trump",
+      "anim": "hand",
+      "y": 200,
+      "facing": "Right"
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 2,
+      "sprite": "woman",
+      "anim": "uptight",
+      "y": 200
+    },
+    {
+      "locker": true,
+      "type": "AvoidTask",
+      "x": 100,
+      "y": 130,
+      "dur": 1.5
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "sprite": "trump",
+      "dur": 1,
+      "anim": "walk",
+      "y": 230,
+      "facing": "Left"
+    },
+    {
+      "locker": true,
+      "type": "AnimScene",
+      "sprite": "woman",
+      "dur": 1,
+      "anim": "walk",
+      "y": 230
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "sprite": "trump",
+      "anim": "hand",
+      "dur": 1.5,
+      "y": 270,
+      "facing": "Right"
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 1.5,
+      "y": 270,
+      "sprite": "woman",
+      "anim": "walk"
+    },
+    {
+      "locker": true,
+      "type": "AvoidTask",
+      "dur": 1.5,
+      "x": 700,
+      "y": 130
+    },
+    {
+      "type": "Win",
+      "locker": true
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "dur": 2,
+      "y": 300,
+      "sprite": "woman",
+      "anim": "walk"
+    },
+    {
+      "locker": true,
+      "type": "AnimScene",
+      "dur": 1.3,
+      "y": 300,
+      "sprite": "trump",
+      "anim": "shocked"
+    },
+    {
+      "locker": false,
+      "type": "AnimScene",
+      "y": 800,
+      "dur": 5,
+      "sprite": "trump",
+      "anim": "walk",
+      "facing": "Left",
+      "x": 0
+    },
+    {
+      "locker": true,
+      "type": "AnimScene",
+      "y": 800,
+      "dur": 5,
+      "sprite": "woman",
+      "anim": "walk",
+      "x": 100
+    }
+  ]
 }

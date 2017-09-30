@@ -17,13 +17,12 @@
         wordWrapWidth: 600,
     };
 
-    sIntro.init = function() {
+    sIntro.proto.init = function() {
         AT.InitInput();
         AT.Keys.enter.onDown.add(startPlay);
-        AT.timer = Game.time.create(false);
     };
 
-    sIntro.create = function() {
+    sIntro.proto.create = function() {
         AT.graphics = Game.add.graphics();
 
         var data = Game.cache.getJSON('intro');
@@ -35,14 +34,14 @@
             data.scenes[i].x = taskX;
             data.scenes[i].y = taskY;
         }
-        AT.LevelData = {
+        sPlay.LevelData = {
             scenes: data.scenes,
         };
-        AT.StartScenes({
-            onTaskFailed: AT.NextScene,
+        sPlay.StartScenes({
+            onTaskFailed: sPlay.NextScene,
             onEnd: function() {
-                AT.SceneMeta.number = -1;
-                AT.NextScene();
+                sPlay.SceneMeta.number = -1;
+                sPlay.NextScene();
             },
         });
     }

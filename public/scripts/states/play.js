@@ -1,129 +1,111 @@
 (function() {
-    sPlay.init = function(args) {
-        AT.IsNewLevel = (AT.LevelNumber === undefined || AT.LevelNumber != args.level);
-        AT.LevelNumber = args.level;
-        AT.SubState = null;
-        AT.timer = Game.time.create(false);
+    sPlay.proto.init = function(args) {
+        sPlay.IsNewLevel = (sPlay.LevelNumber === undefined || sPlay.LevelNumber != args.level);
+        sPlay.LevelNumber = args.level;
+        sPlay.SubState = null;
 
         AT.InitInput();
         AT.Keys.esc.onDown.add(AT.GotoIntro);
+        sPlay.timer = Game.time.create(false);
     };
 
-    sPlay.create = function() {
+    sPlay.proto.create = function() {
         loadLevelData();
 
-        var levelPad = AT.LevelNumber.toString().padStart(2, '0');
+        var levelPad = sPlay.LevelNumber.toString().padStart(2, '0');
         AT.BG = addImageLayer(`${levelPad} bg`);
 
         AT.graphics = Game.add.graphics();
         loadPeople();
         AT.FG = addImageLayer(`${levelPad} fg`);
 
-        AT.StartScenes({
-            onTaskFailed: AT.failed,
-            onEnd: AT.win,
+        sPlay.StartScenes({
+            onTaskFailed: sPlay.failed,
+            onEnd: sPlay.win,
         });
 
         if (AT.DEBUG) {
             AT.CreateLevelEditor();
-            AT.ShowRestartButton();
+            sPlay.ShowRestartButton();
             showNextPrevButtons();
         }
     };
 
-    sPlay.update = function() {
+    sPlay.proto.update = function() {
         AT.PeopleGroup.sort('y', Phaser.Group.SORT_ASCENDING);
     };
 
     if (AT.DEBUG) {
-        sPlay.render = function() {
+        sPlay.proto.render = function() {
             Game.debug.text(Game.input.x + " - " + Game.input.y, Game.width - 100, Game.height - 30, "black", "20px Arial");
         };
     }
 
-    AT.FadeBackground = function(amount, duration) {
-        duration *= 1000;
-
-        var toColor = 0;
-        for (var i = 0; i < 3; i++)
-            toColor = (toColor << 8) + (amount * 0xFF);
-
-        var toFade = [AT.BG, AT.FG];
-        for (var i in toFade) {
-            if (toFade[i]) {
-                tweenTint(toFade[i], toColor, duration, Phaser.Easing.Circular.In);
-                // Game.add.tween(toFade[i]).to({
-                //     tint: amount,
-                // }, duration, Phaser.Easing.Circular.In, true);
-            }
-        }
-    };
-
-    AT.ShowRestartButton = function() {
+    sPlay.ShowRestartButton = function() {
         AT.Buttons.Restart = AT.AddTextButton(
             Game.width - 200,
             Game.height - 100, -1, -1,
             'RESTART', null, null,
-            AT.RestartLevel
+            sPlay.RestartLevel
         );
     };
 
-    AT.NextLevel = function() {
-        var levelNum = ((AT.LevelNumber + 1) % AT.LEVEL_COUNT);
+    sPlay.PreviousLevel = function() {
+        var levelNum = (sPlay.LevelNumber == 0 ? sPlay.LEVEL_COUNT - 1 : sPlay.LevelNumber - 1);
         Game.state.start('sPlay', true, false, {
             level: levelNum,
         });
     };
 
-    AT.PreviousLevel = function() {
-        var levelNum = (AT.LevelNumber == 0 ? AT.LEVEL_COUNT - 1 : AT.LevelNumber - 1);
+    sPlay.NextLevel = function() {
+        var levelNum = ((sPlay.LevelNumber + 1) % sPlay.LEVEL_COUNT);
         Game.state.start('sPlay', true, false, {
             level: levelNum,
         });
     };
 
-    AT.RestartLevel = function() {
+    sPlay.RestartLevel = function() {
         Game.state.start('sPlay', true, false, {
-            level: AT.LevelNumber,
+            level: sPlay.LevelNumber,
         });
     };
 
-    AT.StartScenes = function(options) {
-        AT.SceneMeta = options;
-        AT.SceneMeta.number = -1;
+    sPlay.StartScenes = function(options) {
+        sPlay.SceneMeta = options;
+        sPlay.SceneMeta.number = -1;
 
         this.NextScene();
     };
 
-    AT.NextScene = function() {
+    sPlay.NextScene = function() {
         const AVOID_TASK_FADE_SPEED = .2;
-        AT.SceneMeta.number++;
-        var sceneData = AT.LevelData.scenes[AT.SceneMeta.number];
-        if (AT.SceneMeta.obj)
-            AT.SceneMeta.obj.destroy();
+        sPlay.SceneMeta.number++;
+        var sceneData = sPlay.LevelData.scenes[sPlay.SceneMeta.number];
+        if (sPlay.SceneMeta.obj)
+            sPlay.SceneMeta.obj.destroy();
         if (sceneData) {
             if (sceneData.type == "AvoidTask") {
-                AT.SceneMeta.obj = new AvoidTask(sceneData);
-                AT.SceneMeta.obj.OnSuccess(AT.NextScene, null, AT);
-                AT.SceneMeta.obj.OnFailed(AT.SceneMeta.onTaskFailed, null, AT);
+                sPlay.SceneMeta.obj = new AvoidTask(sceneData);
+                sPlay.SceneMeta.obj.OnSuccess(sPlay.NextScene);
+                sPlay.SceneMeta.obj.OnFailed(sPlay.SceneMeta.onTaskFailed);
                 AT.FadeBackground(.7, AVOID_TASK_FADE_SPEED);
-                AT.SceneMeta.obj.Start();
+                sPlay.SceneMeta.obj.Start();
             } else if (sceneData.type == "AnimScene") {
-                AT.SceneMeta.obj = new AnimScene(sceneData);
-                AT.SceneMeta.obj.OnFinished(AT.NextScene, null, AT);
-                if (AT.SubState != 'win')
+                sPlay.SceneMeta.obj = new AnimScene(sceneData);
+                sPlay.SceneMeta.obj.OnFinished(sPlay.NextScene);
+                if (sPlay.SubState != 'win')
                     AT.FadeBackground(1, AVOID_TASK_FADE_SPEED);
-                AT.SceneMeta.obj.Start();
+                sPlay.SceneMeta.obj.Start();
             } else if (sceneData.type == 'Wait') {
-                AT.timer.stop();
-                AT.timer.add(sceneData.dur * 1000, AT.NextScene, AT);
-                if (AT.SubState != 'win')
+                sPlay.timer.stop();
+                sPlay.timer.add(sceneData.dur * 1000, sPlay.NextScene);
+                if (sPlay.SubState != 'win')
                     AT.FadeBackground(1, AVOID_TASK_FADE_SPEED);
-                AT.timer.start();
+                sPlay.timer.start();
             } else if (sceneData.type == 'Win')
-                AT.SceneMeta.onEnd(AT.NextScene);
+                sPlay.SceneMeta.onEnd(sPlay.NextScene);
         } else
-            AT.SceneMeta.onEnd();
+            sPlay.SceneMeta.onEnd();
     };
 
     function addImageLayer(key) {
@@ -131,33 +113,12 @@
             return Game.add.sprite(0, 0, key);
     };
 
-    function tweenTint(obj, endColor, time, easing, delay, callback) {
-        if (obj) {
-            let colorBlend = {
-                step: 0
-            };
-
-            let colorTween = Game.add.tween(colorBlend).to({
-                step: 100
-            }, time, easing || Phaser.Easing.Linear.None, delay);
-
-            colorTween.onUpdateCallback(() => {
-                obj.tint = Phaser.Color.interpolateColor(obj.tint, endColor, 100, colorBlend.step);
-            });
-
-            if (callback)
-                colorTween.onComplete.add(callback, this);
-
-            colorTween.start();
-        }
-    }
-
     function loadLevelData() {
-        if (AT.LevelEditorData && !AT.IsNewLevel)
-            AT.LevelData = JSON.parse(JSON.stringify(AT.LevelEditorData));
+        if (AT.LevelEditorData && !sPlay.IsNewLevel)
+            sPlay.LevelData = JSON.parse(JSON.stringify(AT.LevelEditorData));
         else {
-            AT.LevelData = Game.cache.getJSON('level:' + AT.LevelNumber);
-            AT.LevelEditorData = JSON.parse(JSON.stringify(AT.LevelData));
+            sPlay.LevelData = Game.cache.getJSON('level:' + sPlay.LevelNumber);
+            AT.LevelEditorData = JSON.parse(JSON.stringify(sPlay.LevelData));
         }
     };
 
@@ -166,21 +127,21 @@
             50,
             Game.height - 100, -1, -1,
             'NEXT', null, null,
-            AT.NextLevel
+            sPlay.NextLevel
         );
         AT.AddTextButton(
             200,
             Game.height - 100, -1, -1,
             'PREVIOUS', null, null,
-            AT.PreviousLevel
+            sPlay.PreviousLevel
         );
     };
 
     function loadPeople() {
         AT.PeopleGroup = Game.add.group();
         AT.People = [];
-        for (var key in AT.LevelData.people) {
-            AT.People[key] = AT.CreatePerson(Game, AT.LevelData.people[key], key);
+        for (var key in sPlay.LevelData.people) {
+            AT.People[key] = AT.CreatePerson(Game, sPlay.LevelData.people[key], key);
             Game.add.existing(AT.People[key]);
             AT.PeopleGroup.add(AT.People[key]);
         }

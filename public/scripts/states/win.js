@@ -1,8 +1,8 @@
 (function(that) {
-    AT.win = function(next) {
-        if (AT.SubState != 'win') {
-            AT.SubState = 'win';
-            AT.Keys.enter.onDown.add(AT.NextLevel);
+    sPlay.win = function(next) {
+        if (sPlay.SubState != 'win') {
+            sPlay.SubState = 'win';
+            AT.Keys.enter.onDown.add(sPlay.NextLevel);
             AT.FadeBackground(.3, .8);
             if (!AT.DEBUG)
                 showButton();
@@ -14,7 +14,7 @@
     };
 
     function showMessage() {
-        Game.add.text(100, 100, AT.LevelData.winMessage, {
+        Game.add.text(100, 100, sPlay.LevelData.winMessage, {
             fill: 'lightgreen',
         });
     }
@@ -24,7 +24,7 @@
             Game.width - 200,
             Game.height - 100, -1, -1,
             'NEXT LEVEL', null, null,
-            AT.NextLevel
+            sPlay.NextLevel
         );
     }
 })(this);

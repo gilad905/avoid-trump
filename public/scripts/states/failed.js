@@ -1,12 +1,12 @@
 (function(that) {
-    AT.failed = function() {
-        if (AT.SubState != 'failed') {
-            AT.SubState = 'failed';
-            AT.Keys.enter.onDown.add(AT.RestartLevel);
+    sPlay.failed = function() {
+        if (sPlay.SubState != 'failed') {
+            sPlay.SubState = 'failed';
+            AT.Keys.enter.onDown.add(sPlay.RestartLevel);
             AT.FadeBackground(.3, .8);
             showMessage();
             if (!AT.Buttons.Restart)
-                AT.ShowRestartButton();
+                sPlay.ShowRestartButton();
         }
     };
 
