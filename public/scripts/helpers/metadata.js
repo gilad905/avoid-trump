@@ -12,6 +12,9 @@ AT.Meta = {
                     bg: '02-bg.png',
                     fg: '02-fg.png',
                 },
+                3: {
+                    bg: '03-bg.png',
+                },
             },
         },
         2: {

@@ -1,0 +1,23 @@
+    {
+  "name": "Red Carpet",
+  "winMessage": "Avoided Once Again... Hi Five!",
+  "people": {
+    "trump": {
+      "x": 790,
+      "y": -100
+    },
+    "woman": {
+      "x": 670,
+      "y": -120
+    }
+  },
+  "scenes": [
+      {
+        "locker": true,
+        "type": "Wait",
+        "dur": 1.5,
+        "x": null,
+        "y": null
+      }
+  ]
+}

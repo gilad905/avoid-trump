@@ -18,11 +18,6 @@ input, select, textarea, div {
     z-index: 1;
 }
 
-#level-editor #dashboard {
-    position: sticky;
-    top: 10px;
-}
-
 #level-editor {
     font-family: monospace;
     font-size: 14px;
@@ -40,11 +35,14 @@ input, select, textarea, div {
 }
 
 #level-editor #dashboard {
+    position: sticky;
+    top: 10px;
     background-color: lightgray;
     border: 1px solid darkgray;
     padding: 8px;
     margin: auto;
     width: calc(100% - 27px);
+    min-width: 570px;
 }
 
 #level-editor #dashboard h2 {
