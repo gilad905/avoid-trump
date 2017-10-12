@@ -15,6 +15,7 @@ input, select, textarea, div {
 #game canvas {
     margin: 0 auto;
     position: fixed;
+    z-index: 1;
 }
 
 #level-editor #dashboard {

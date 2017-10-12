@@ -19,34 +19,18 @@
 
     sIntro.proto.init = function() {
         AT.InitInput();
-        AT.Keys.enter.onDown.add(startPlay);
+        AT.Keys.enter.onDown.add(sChapter.NextChapter);
     };
 
     sIntro.proto.create = function() {
         AT.graphics = Game.add.graphics();
 
         var data = Game.cache.getJSON('intro');
-        loadIntro();
-
-        var taskX = Game.width - 100;
-        var taskY = Game.height / 2;
-        for (var i in data.scenes) {
-            data.scenes[i].x = taskX;
-            data.scenes[i].y = taskY;
-        }
-        sPlay.LevelData = {
-            scenes: data.scenes,
-        };
-        sPlay.StartScenes({
-            onTaskFailed: sPlay.NextScene,
-            onEnd: function() {
-                sPlay.SceneMeta.number = -1;
-                sPlay.NextScene();
-            },
-        });
+        startAvoidTasks(data);
+        loadIntroSprites();
     }
 
-    function loadIntro() {
+    function loadIntroSprites() {
         Game.add.text(100, 100, introText, style);
 
         AT.AddTextButton(
@@ -55,13 +39,28 @@
             'START',
             style,
             null,
-            startPlay
+            sPlay.NextLevel
         );
     };
 
-    function startPlay() {
-        Game.state.start('sPlay', true, false, {
-            level: 0,
+    function startAvoidTasks(data) {
+        var taskX = Game.width - 100;
+        var taskY = Game.height / 2;
+        for (var i in data.scenes) {
+            data.scenes[i].x = taskX;
+            data.scenes[i].y = taskY;
+        }
+
+        sPlay.LevelData = {
+            scenes: data.scenes,
+        };
+
+        sPlay.StartScenes({
+            onTaskFailed: sPlay.NextScene,
+            onEnd: function() {
+                sPlay.SceneMeta.number = -1;
+                sPlay.NextScene();
+            },
         });
     }
 })(this);

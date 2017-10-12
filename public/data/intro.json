@@ -1,8 +1,5 @@
 {
     "scenes": [{
-        "dur": 2,
-        "type": "Wait"
-    }, {
         "dur": 3,
         "type": "AvoidTask"
     }, {

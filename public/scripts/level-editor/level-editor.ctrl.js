@@ -31,7 +31,7 @@
 
         AT.CreateLevelEditor = function() {
             $scope.Level = AT.LevelEditorData;
-            $scope.LevelNumber = sPlay.LevelNumber;
+            $scope.LevelNumber = sPlay.CurLevelNum;
 
             for (var i = 0, scene; scene = $scope.Level.scenes[i]; i++) {
                 if (scene.locker === undefined)
@@ -54,8 +54,7 @@
             var reqBody = {
                 fileData: eArea.textContent,
             };
-            var url = "/Game%20Dev/avoid-trump/public/data/level" +
-                $scope.LevelNumber.toString().padStart(2, '0') + ".json";
+            var url = "/Game%20Dev/avoid-trump/public/data/level" + AT.PaddedNum($scope.LevelNumber) + ".json";
             http(url, "PUT", reqBody, true, false, null);
             showSavedMsg();
             // safeDigest();

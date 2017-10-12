@@ -1,8 +1,11 @@
 var AT = {};
 var Game;
 
+// AT.DEBUG = false;
+AT.DEBUG = true;
+
 (function() {
-    var states = ['sLoad', 'sPlay', 'sIntro'];
+    var states = ['sBoot', 'sLoad', 'sIntro', 'sChapter', 'sPlay', 'sWinGame'];
     for (var i in states)
         this[states[i]] = {
             proto: {},
@@ -13,11 +16,8 @@ var Game;
         for (var i in states)
             Game.state.add(states[i], this[states[i]].proto);
 
-        Game.state.start('sLoad');
+        Game.state.start('sBoot');
     };
-
-    // AT.DEBUG = false;
-    AT.DEBUG = true;
 
     AT.SetGameFrozen = function(state) {
         Game.paused = state;
@@ -83,6 +83,10 @@ var Game;
                 // }, duration, Phaser.Easing.Circular.In, true);
             }
         }
+    };
+
+    AT.PaddedNum = function(num) {
+        return num.toString().padStart(2, '0');
     };
 
     function tweenTint(obj, endColor, time, easing, delay, callback) {

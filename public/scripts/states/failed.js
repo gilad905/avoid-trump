@@ -2,11 +2,11 @@
     sPlay.failed = function() {
         if (sPlay.SubState != 'failed') {
             sPlay.SubState = 'failed';
-            AT.Keys.enter.onDown.add(sPlay.RestartLevel);
+            AT.Keys.enter.onDown.add(sChapter.RestartChapter);
             AT.FadeBackground(.3, .8);
             showMessage();
-            if (!AT.Buttons.Restart)
-                sPlay.ShowRestartButton();
+            sPlay.HideRestartLevelButton();
+            sChapter.ShowRestartChapterButton();
         }
     };
 

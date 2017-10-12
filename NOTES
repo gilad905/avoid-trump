@@ -10,17 +10,28 @@ drawing:
 
 --------------------------------------------------------------------
 
-- melania, coming down from airplane, holding hands
-- melania, red carpet, holding hands
+scenes:
 - polish first lady, ceremony, handshake
 - tiffany, ceremony, kiss
 - japanese first lady, dinner, doesn't speak english
 - "pull & yank"s
 
-- user's face from webcam
-- playbacks of avoids
+--------------------------------------------------------------------
+
+user's face from webcam
+playbacks of avoids
+move win + fail to own states
+move person to own class
 
 --------------------------------------------------------------------
 
-move win + fail to own states
-move person to own class
+chapters:
+    divide /assets and /data to chapters
+    in metadata:
+        all chapters and their levels, with preload meta
+        also all other preload meta
+    sChapter:
+        show chapter start screen
+    nextLevel:
+        get current chapter from meta
+        if in last level of the chapter - start sChapter

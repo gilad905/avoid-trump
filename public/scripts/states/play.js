@@ -1,18 +1,17 @@
 (function() {
     sPlay.proto.init = function(args) {
-        sPlay.IsNewLevel = (sPlay.LevelNumber === undefined || sPlay.LevelNumber != args.level);
-        sPlay.LevelNumber = args.level;
+        sChapter.InNewLevel = (sPlay.CurLevelNum === undefined || sPlay.CurLevelNum != args.level);
+        sPlay.CurLevelNum = args.level;
         sPlay.SubState = null;
 
         AT.InitInput();
         AT.Keys.esc.onDown.add(AT.GotoIntro);
-        sPlay.timer = Game.time.create(false);
     };
 
     sPlay.proto.create = function() {
         loadLevelData();
 
-        var levelPad = sPlay.LevelNumber.toString().padStart(2, '0');
+        var levelPad = AT.PaddedNum(sPlay.CurLevelNum);
         AT.BG = addImageLayer(`${levelPad} bg`);
 
         AT.graphics = Game.add.graphics();
@@ -26,7 +25,7 @@
 
         if (AT.DEBUG) {
             AT.CreateLevelEditor();
-            sPlay.ShowRestartButton();
+            sPlay.ShowRestartLevelButton();
             showNextPrevButtons();
         }
     };
@@ -41,8 +40,34 @@
         };
     }
 
-    sPlay.ShowRestartButton = function() {
-        AT.Buttons.Restart = AT.AddTextButton(
+    sPlay.PreviousLevel = function() {
+        if (sPlay.CurLevelNum == 1)
+            sChapter.PreviousChapter();
+        else
+            sPlay.StartLevel(sPlay.CurLevelNum - 1);
+    };
+
+    sPlay.NextLevel = function() {
+        if (sPlay.CurLevelNum == sChapter.LevelCount)
+            sChapter.NextChapter();
+        else {
+            var nextLevelNum = sPlay.CurLevelNum ? sPlay.CurLevelNum + 1 : 1;
+            sPlay.StartLevel(nextLevelNum);
+        }
+    };
+
+    sPlay.RestartLevel = function() {
+        sPlay.StartLevel(sPlay.CurLevelNum);
+    };
+
+    sPlay.StartLevel = function(levelNum) {
+        Game.state.start('sPlay', true, false, {
+            level: levelNum,
+        });
+    };
+
+    sPlay.ShowRestartLevelButton = function() {
+        AT.Buttons.RestartLevel = AT.AddTextButton(
             Game.width - 200,
             Game.height - 100, -1, -1,
             'RESTART', null, null,
@@ -50,29 +75,15 @@
         );
     };
 
-    sPlay.PreviousLevel = function() {
-        var levelNum = (sPlay.LevelNumber == 0 ? sPlay.LEVEL_COUNT - 1 : sPlay.LevelNumber - 1);
-        Game.state.start('sPlay', true, false, {
-            level: levelNum,
-        });
-    };
-
-    sPlay.NextLevel = function() {
-        var levelNum = ((sPlay.LevelNumber + 1) % sPlay.LEVEL_COUNT);
-        Game.state.start('sPlay', true, false, {
-            level: levelNum,
-        });
-    };
-
-    sPlay.RestartLevel = function() {
-        Game.state.start('sPlay', true, false, {
-            level: sPlay.LevelNumber,
-        });
+    sPlay.HideRestartLevelButton = function() {
+        if (AT.Buttons.RestartLevel)
+            AT.Buttons.RestartLevel.destroy();
     };
 
     sPlay.StartScenes = function(options) {
         sPlay.SceneMeta = options;
         sPlay.SceneMeta.number = -1;
+        sPlay.timer = Game.time.create(false);
 
         this.NextScene();
     };
@@ -114,10 +125,10 @@
     };
 
     function loadLevelData() {
-        if (AT.LevelEditorData && !sPlay.IsNewLevel)
+        if (AT.LevelEditorData && !sChapter.InNewLevel)
             sPlay.LevelData = JSON.parse(JSON.stringify(AT.LevelEditorData));
         else {
-            sPlay.LevelData = Game.cache.getJSON('level:' + sPlay.LevelNumber);
+            sPlay.LevelData = Game.cache.getJSON('level:' + sPlay.CurLevelNum);
             AT.LevelEditorData = JSON.parse(JSON.stringify(sPlay.LevelData));
         }
     };
