@@ -11,12 +11,10 @@
     sPlay.proto.create = function() {
         loadLevelData();
 
-        var levelPad = AT.PaddedNum(sPlay.CurLevelNum);
-        AT.BG = addImageLayer(`${levelPad} bg`);
-
+        AT.BG = addImageLayer(`bg:${sChapter.CurChapterNum}-${sPlay.CurLevelNum}`);
         AT.graphics = Game.add.graphics();
         loadPeople();
-        AT.FG = addImageLayer(`${levelPad} fg`);
+        AT.FG = addImageLayer(`fg:${sChapter.CurChapterNum}-${sPlay.CurLevelNum}`);
 
         sPlay.StartScenes({
             onTaskFailed: sPlay.failed,
@@ -128,7 +126,7 @@
         if (AT.LevelEditorData && !sChapter.InNewLevel)
             sPlay.LevelData = JSON.parse(JSON.stringify(AT.LevelEditorData));
         else {
-            sPlay.LevelData = Game.cache.getJSON('level:' + sPlay.CurLevelNum);
+            sPlay.LevelData = Game.cache.getJSON(`level:${sChapter.CurChapterNum}-${sPlay.CurLevelNum}`);
             AT.LevelEditorData = JSON.parse(JSON.stringify(sPlay.LevelData));
         }
     };

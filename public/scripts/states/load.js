@@ -17,16 +17,16 @@
     //////////////////////////////////////////////////////////////
 
     function loadLevelsData() {
-        for (var iChapter in AT.Meta.Chapters) {
-            var chapter = AT.Meta.Chapters[iChapter];
-            var chapterNum = AT.PaddedNum(iChapter);
+        for (var chapterNum in AT.Meta.Chapters) {
+            var chapter = AT.Meta.Chapters[chapterNum];
+            var chapterPadded = AT.PaddedNum(chapterNum);
             for (var levelNum in chapter.Levels) {
                 var level = chapter.Levels[levelNum];
                 var levelPadded = AT.PaddedNum(levelNum);
-                Game.load.json(`level:${levelNum}`, `data/chapter-${chapterNum}/level-${levelPadded}.json`);
+                Game.load.json(`level:${chapterNum}-${levelNum}`, `data/chapter-${chapterPadded}/level-${levelPadded}.json`);
                 for (var assetType in level) {
                     var asset = level[assetType];
-                    Game.load.image(`${levelPadded} ${assetType}`, `assets/levels/chapter-${chapterNum}/${asset}`);
+                    Game.load.image(`${assetType}:${chapterNum}-${levelNum}`, `assets/levels/chapter-${chapterPadded}/${asset}`);
                 }
             }
         }

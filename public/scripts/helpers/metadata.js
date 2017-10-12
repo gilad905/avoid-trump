@@ -12,10 +12,15 @@ AT.Meta = {
                     bg: '02-bg.png',
                     fg: '02-fg.png',
                 },
-                3: {
-                    bg: '03-bg.jpg',
-                },
             },
+        },
+        2: {
+            Title: "The Shake",
+            Levels: {
+                1: {
+                    bg: '01-bg.jpg',
+                },
+            }
         },
     },
 
