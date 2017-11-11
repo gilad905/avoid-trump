@@ -34,7 +34,7 @@
 
     if (AT.DEBUG) {
         sPlay.proto.render = function() {
-            Game.debug.text(Game.input.x + " - " + Game.input.y, Game.width - 100, Game.height - 30, "black", "20px Arial");
+            Game.debug.text(Game.input.x + " - " + Game.input.y, Game.width - 100, Game.height - 30, "white", "20px Arial");
         };
     }
 

@@ -14,6 +14,8 @@
         AT.Buttons = [];
 
         AT.ChapterCount = Object.keys(AT.Meta.Chapters).length;
+
+        AvoidTask.SetStatics(Game);
     };
 
     sBoot.proto.create = function() {

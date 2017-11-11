@@ -6,7 +6,8 @@
         "Avoid shaking Trump's hand by quickly pressing the correct keys.\n" +
         "When you see a key like in the example ------------->\n" +
         "you need to press that key before the time runs out.\n" +
-        "Good luck!\n";
+        "you have 3 TRIES to get the correct key!\n" +
+        "Good luck!";
 
     var style = {
         font: "bold 24px Arial",
@@ -19,7 +20,9 @@
 
     sIntro.proto.init = function() {
         AT.InitInput();
-        AT.Keys.enter.onDown.add(sChapter.NextChapter);
+        AT.Keys.enter.onDown.add(function() {
+            sChapter.StartChapter(1)
+        });
     };
 
     sIntro.proto.create = function() {

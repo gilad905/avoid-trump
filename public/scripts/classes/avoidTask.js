@@ -1,35 +1,46 @@
 (function(that) {
     that.AvoidTask = function(scene) {
-        if (!scene || !scene.x || !scene.y || !scene.dur)
-            throw "Avoid task: argument(s) missing";
+        if (!scene)
+            throw "Avoid task: scene missing";
+        else {
+            var paramNames = ['x', 'y', 'dur'];
+            paramNames.forEach(function(name) {
+                if (!scene[name])
+                    throw `Avoid task: scene.${name} missing`;
+            });
 
-        this.char = scene.char || randomChar();
-        this.style = scene.style || randomStyle();
+            this.playing = false;
+            this.char = scene.char || randomChar();
+            this.upChar = this.char.toUpperCase();
+            this.style = scene.style || randomStyle();
+            this.scene = scene;
+            this.sceneDurationInverse = 1 / (scene.dur * 1000);
+            this.failAmount = 0;
+            this.timer = Game.time.create(false);
+            this.timer.add(scene.dur * 1000, this.fail, this);
 
-        this.playing = false;
+            Phaser.Sprite.call(this, Game);
+            Game.add.existing(this);
 
-        if (!AvoidTask.staticsSet) {
-            AvoidTask.staticsSet = true;
-            setStatics();
+            this.openKeyListener();
         }
-
-        Phaser.Sprite.call(this, Game);
-        Game.add.existing(this);
-
-        this.scene = scene;
-        this.upChar = this.char.toUpperCase();
-        this.sceneDurationInverse = 1 / (scene.dur * 1000);
-
-        this.timer = Game.time.create(false);
-        this.timer.add(scene.dur * 1000, this.fail, this);
-
-        this.openKeyListener();
     }
 
-    function setStatics() {
-        that.AvoidTask.START_RADIAN = Game.math.degToRad(-90);
-        that.AvoidTask.DELTA_RADIAN = AvoidTask.START_RADIAN - Game.math.degToRad(270);
-    }
+    that.AvoidTask.SetStatics = function(game) {
+        that.AvoidTask.START_RADIAN = game.math.degToRad(-90);
+        that.AvoidTask.DELTA_RADIAN = that.AvoidTask.START_RADIAN - game.math.degToRad(270);
+        that.AvoidTask.ALLOWED_FAIL_AMOUNT = 2;
+
+        that.AvoidTask.INPUT_HANDLER = function(ev) {
+            if (ev.key == this.char)
+                this.success();
+            else {
+                this.failAmount++;
+                if (this.failAmount > AvoidTask.ALLOWED_FAIL_AMOUNT)
+                    this.fail();
+            }
+        };
+    };
 
     that.AvoidTask.prototype = Object.create(Phaser.Sprite.prototype);
     that.AvoidTask.prototype.constructor = that.AvoidTask;
@@ -42,33 +53,23 @@
         return String.fromCharCode(charCode);
     }
 
+    var randomStyles = ['white', 'yellow', 'red', 'green', 'orange', 'black'];
+
     function randomStyle() {
-        return Math.floor(Math.random() * 0xFFFFFF + 1);
+        var randIdx = Math.floor(Math.random() * randomStyles.length);
+        return ColorNameToHex.Convert(randomStyles[randIdx]);
     }
 
     prototype.openKeyListener = function() {
-        this.keyListenerExisted = (AT.Keys[this.upChar] !== undefined);
-        if (!this.keyListenerExisted) {
-            var key = Phaser.KeyCode[this.upChar];
-            AT.Keys[this.upChar] = Game.input.keyboard.addKey(key);
-        }
-    }
+        Game.input.keyboard.addCallbacks(this, AvoidTask.INPUT_HANDLER);
+    };
 
     prototype.closeKeyListener = function() {
-        if (!this.keyListenerExisted) {
-            var key = Phaser.KeyCode[this.upChar];
-            delete AT.Keys[this.upChar];
-            Game.input.keyboard.removeKey(key);
-        }
-    }
+        Game.input.keyboard.onDownCallback = null;
+    };
 
     prototype.update = function() {
-        if (this.playing) {
-            if (AT.Keys[this.upChar] && AT.Keys[this.upChar].isDown)
-                this.success();
-            else
-                this.drawArc()
-        }
+        this.drawArc();
     };
 
     prototype.drawArc = function() {
@@ -97,9 +98,13 @@
     }
 
     prototype.fail = function() {
-        this.finish();
-        if (this.OnFailed)
-            this.OnFailed.callback.call(this.OnFailed.context, this.OnFailed.args);
+        if (AT.GodMode)
+            this.success();
+        else {
+            this.finish();
+            if (this.OnFailed)
+                this.OnFailed.callback.call(this.OnFailed.context, this.OnFailed.args);
+        }
     };
 
     prototype.success = function() {

@@ -1,3 +1,4 @@
+Visual scene editor:
 /*
 changing a property in the table:
     draw the change
@@ -10,16 +11,20 @@ drawing:
 
 --------------------------------------------------------------------
 
-scenes:
+plot (scenes):
 - polish first lady, ceremony, handshake
 - tiffany, ceremony, kiss
 - japanese first lady, dinner, doesn't speak english
 
 --------------------------------------------------------------------
 
-user's face from webcam
-playbacks of avoids
-move win + fail to own states
-move person to own class
+TODOs:
+    // user's face from webcam
+    playbacks of avoids
+    make scene editor easier
+    complete plot
+
+    move win + fail to own states
+    move person to own class
 
 --------------------------------------------------------------------

@@ -3,6 +3,7 @@
     <br />
     <input type="button" value="COPY TEXT" ng-click="le.addScene()" />
     <input type="button" value="SAVE" ng-click="le.saveToFile()" />
+    <input type="checkbox" ng-model="le.godMode" ng-change="le.godModeChanged()">God Mode
     <p id="saved-msg" ng-show="SavedMsgOn">SAVED.</p>
 </div>
 <div class="main-title">

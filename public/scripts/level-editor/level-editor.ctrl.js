@@ -54,7 +54,9 @@
             var reqBody = {
                 fileData: eArea.textContent,
             };
-            var url = "/Game%20Dev/avoid-trump/public/data/level" + AT.PaddedNum($scope.LevelNumber) + ".json";
+            var url = `/Game%20Dev/avoid-trump/public/data/` +
+                `chapter-${AT.PaddedNum(sChapter.CurChapterNum)}/` +
+                `level-${AT.PaddedNum($scope.LevelNumber)}.json`;
             http(url, "PUT", reqBody, true, false, null);
             showSavedMsg();
             // safeDigest();
@@ -90,6 +92,8 @@
         $scope.PropsShowing = true;
         $scope.ScenesShowing = true;
 
+        AT.GodMode = false;
+        le.godMode = AT.GodMode;
         le.ctrlPressed = false;
 
         le.Meta = {
@@ -110,6 +114,10 @@
             facing: ['', "Left", "Right"],
             sprites: ["trump", "woman", "man2", "woman2"],
             animations: {}, // populated at CreateLevelEditor()
+        };
+
+        le.godModeChanged = function() {
+            AT.GodMode = le.godMode;
         };
 
         le.saveToFile = function() {

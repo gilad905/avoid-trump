@@ -3,12 +3,12 @@
   "winMessage": "Avoided Once Again... Hi Five!",
   "people": {
     "trump": {
-      "x": 355,
-      "y": 220
+      "x": 790,
+      "y": -100
     },
     "woman": {
-      "x": 465,
-      "y": 220
+      "x": 670,
+      "y": -120
     }
   },
   "scenes": [

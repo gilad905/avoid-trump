@@ -1,15 +1,16 @@
 var AT = {};
 var Game;
 
-// AT.DEBUG = false;
-AT.DEBUG = true;
+AT.DEBUG = false;
+// AT.DEBUG = true;
 
 (function() {
     var states = ['sBoot', 'sLoad', 'sIntro', 'sChapter', 'sPlay', 'sWinGame'];
-    for (var i in states)
+    for (var i in states) {
         this[states[i]] = {
             proto: {},
         };
+    }
 
     window.onload = function() {
         Game = new Phaser.Game(960, 600, Phaser.AUTO, 'game');
@@ -19,8 +20,8 @@ AT.DEBUG = true;
         Game.state.start('sBoot');
     };
 
-    AT.SetGameFrozen = function(state) {
-        Game.paused = state;
+    AT.SetGameFrozen = function(isFrozen) {
+        Game.paused = isFrozen;
     };
 
     AT.AddTextButton = function(x, y, width, height, text, textStyle, buttonStyle, onClick) {

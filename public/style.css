@@ -15,7 +15,7 @@ input, select, textarea, div {
 #game canvas {
     margin: 0 auto;
     position: fixed;
-    z-index: 1;
+    z-index: s1;
 }
 
 #level-editor {
@@ -24,6 +24,8 @@ input, select, textarea, div {
     margin: 20px;
     padding-right: 20px;
     text-align: left;
+    background-color: inherit;
+    z-index: 2;
 }
 
 #level-editor input {
@@ -37,7 +39,7 @@ input, select, textarea, div {
 #level-editor #dashboard {
     position: sticky;
     top: 10px;
-    background-color: lightgray;
+    background-color: #fafafa;
     border: 1px solid darkgray;
     padding: 8px;
     margin: auto;
@@ -82,11 +84,13 @@ input, select, textarea, div {
 }
 
 #level-editor .row.Wait {
-    background-color: rgba(127, 127, 127, 0.5);
+    background-color: gray;
+    /*background-color: rgba(127, 127, 127, 0.5);*/
 }
 
 #level-editor .row.AvoidTask {
-    background-color: rgba(255, 94, 30, 0.5);
+    /*background-color: rgba(255, 94, 30, 0.5);*/
+    background-color: red;
 }
 
 #level-editor .row.Win {

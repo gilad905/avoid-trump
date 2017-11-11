@@ -110,7 +110,7 @@
     {
       "locker": true,
       "type": "AnimScene",
-      "dur": 0,
+      "dur": 0.5,
       "x": null,
       "y": null,
       "sprite": "trump",
@@ -120,7 +120,7 @@
     {
       "locker": true,
       "type": "AvoidTask",
-      "dur": 1.2,
+      "dur": 1,
       "x": 414,
       "y": 430,
       "sprite": "trump",
@@ -130,7 +130,7 @@
     {
       "locker": true,
       "type": "AvoidTask",
-      "dur": 1.2,
+      "dur": 1,
       "x": 400,
       "y": 450,
       "sprite": "trump",
@@ -150,7 +150,7 @@
     {
       "locker": true,
       "type": "AnimScene",
-      "dur": 0.6,
+      "dur": 1,
       "x": null,
       "y": null,
       "sprite": "woman",
@@ -160,7 +160,7 @@
     {
       "locker": true,
       "type": "AnimScene",
-      "dur": 0.6,
+      "dur": 0,
       "x": null,
       "y": null,
       "sprite": "woman",
@@ -180,7 +180,7 @@
     {
       "locker": true,
       "type": "AnimScene",
-      "dur": 1,
+      "dur": 0.5,
       "x": null,
       "y": null,
       "sprite": "trump",
@@ -190,7 +190,7 @@
     {
       "locker": true,
       "type": "AnimScene",
-      "dur": 0.4,
+      "dur": 0.3,
       "x": null,
       "y": null,
       "sprite": "woman",
@@ -210,37 +210,37 @@
     {
       "locker": true,
       "type": "AvoidTask",
-      "dur": 1.2,
-      "x": 414,
-      "y": 100,
-      "sprite": "trump",
-      "anim": "hand",
-      "facing": ""
-    },
-    {
-      "locker": true,
-      "type": "AvoidTask",
-      "dur": 1.2,
+      "dur": 0.9,
       "x": 430,
-      "y": 110,
-      "sprite": "trump",
-      "anim": "hand",
+      "y": 70,
+      "sprite": "woman",
+      "anim": "uptight",
       "facing": ""
     },
     {
       "locker": true,
       "type": "AvoidTask",
-      "dur": 1.2,
+      "dur": 0.9,
+      "x": 440,
+      "y": 50,
+      "sprite": "woman",
+      "anim": "uptight",
+      "facing": ""
+    },
+    {
+      "locker": true,
+      "type": "AvoidTask",
+      "dur": 0.9,
       "x": 450,
-      "y": 120,
-      "sprite": "trump",
-      "anim": "hand",
+      "y": 66,
+      "sprite": "woman",
+      "anim": "uptight",
       "facing": ""
     },
     {
       "locker": false,
       "type": "AnimScene",
-      "dur": 5,
+      "dur": 3,
       "x": null,
       "y": null,
       "sprite": "trump",
