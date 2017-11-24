@@ -4,11 +4,13 @@
   "people": {
     "trump": {
       "x": 355,
-      "y": 250
+      "y": 250,
+      "facing": "Left"
     },
     "woman": {
       "x": 469,
-      "y": 250
+      "y": 250,
+      "facing": "Left"
     }
   },
   "scenes": [
@@ -26,7 +28,8 @@
       "x": null,
       "y": null,
       "sprite": "trump",
-      "anim": "shocked"
+      "anim": "shocked",
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -35,7 +38,8 @@
       "x": null,
       "y": null,
       "sprite": "trump",
-      "anim": "stop"
+      "anim": "stop",
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -55,7 +59,7 @@
       "y": null,
       "sprite": "trump",
       "anim": "stop",
-      "facing": ""
+      "facing": "Right"
     },
     {
       "locker": true,
@@ -75,7 +79,7 @@
       "y": null,
       "sprite": "trump",
       "anim": "stop",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -85,7 +89,7 @@
       "y": null,
       "sprite": "trump",
       "anim": "dance",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -95,7 +99,7 @@
       "y": null,
       "sprite": "trump",
       "anim": "stop",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -115,7 +119,7 @@
       "y": null,
       "sprite": "trump",
       "anim": "hand",
-      "facing": ""
+      "facing": "Right"
     },
     {
       "locker": true,
@@ -145,7 +149,7 @@
       "y": null,
       "sprite": "trump",
       "anim": "stop",
-      "facing": ""
+      "facing": "Right"
     },
     {
       "locker": true,
@@ -155,7 +159,7 @@
       "y": null,
       "sprite": "woman",
       "anim": "nod",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -165,7 +169,7 @@
       "y": null,
       "sprite": "woman",
       "anim": "stop",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -195,7 +199,7 @@
       "y": null,
       "sprite": "woman",
       "anim": "uptight",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -205,7 +209,7 @@
       "y": null,
       "sprite": "trump",
       "anim": "hand",
-      "facing": ""
+      "facing": "Right"
     },
     {
       "locker": true,
@@ -245,7 +249,7 @@
       "y": null,
       "sprite": "trump",
       "anim": "shocked",
-      "facing": ""
+      "facing": "Right"
     },
     {
       "locker": true,
@@ -255,7 +259,7 @@
       "y": null,
       "sprite": "woman",
       "anim": "nod",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -265,7 +269,7 @@
       "y": null,
       "sprite": "woman",
       "anim": "stop",
-      "facing": ""
+      "facing": "Left"
     }
   ]
 }

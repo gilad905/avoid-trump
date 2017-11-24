@@ -9,15 +9,17 @@
                     throw `Avoid task: scene.${name} missing`;
             });
 
+            this.sceneDur = scene.dur * AT.GAME_SPEED;
+
             this.playing = false;
             this.char = scene.char || randomChar();
             this.upChar = this.char.toUpperCase();
             this.style = scene.style || randomStyle();
             this.scene = scene;
-            this.sceneDurationInverse = 1 / (scene.dur * 1000);
+            this.sceneDurationInverse = 1 / (this.sceneDur * 1000);
             this.failAmount = 0;
             this.timer = Game.time.create(false);
-            this.timer.add(scene.dur * 1000, this.fail, this);
+            this.timer.add(this.sceneDur * 1000, this.fail, this);
 
             Phaser.Sprite.call(this, Game);
             Game.add.existing(this);

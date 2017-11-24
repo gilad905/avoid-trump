@@ -69,9 +69,12 @@ input, select, textarea, div {
 #level-editor .row {
     display: flex;
     flex-direction: row;
-    /*border-bottom: 1px solid lightseagreen;*/
     padding: 4px 5px;
     margin: 5px;
+}
+
+#level-editor .row.headers * {
+    font-weight: bold;
 }
 
 #level-editor .row.trump {
@@ -80,21 +83,22 @@ input, select, textarea, div {
 
 #level-editor .row.woman {
     background-color: rgba(218, 112, 214, 0.5);
-    ;
 }
 
 #level-editor .row.Wait {
     background-color: gray;
-    /*background-color: rgba(127, 127, 127, 0.5);*/
 }
 
 #level-editor .row.AvoidTask {
-    /*background-color: rgba(255, 94, 30, 0.5);*/
     background-color: red;
 }
 
 #level-editor .row.Win {
     background-color: lightgreen;
+}
+
+#level-editor .row.selected-scene {
+    background-color: black !important;
 }
 
 #level-editor .row.level-name input {
@@ -127,14 +131,9 @@ input, select, textarea, div {
     margin-bottom: 1px;
 }
 
-#level-editor .cell .cell-desc {
+#level-editor .cell {
     text-align: center;
 }
-
-
-/*#level-editor .cell.sprite select {
-    color: white;
-}*/
 
 #level-editor .cell.sprite select option {
     color: black;

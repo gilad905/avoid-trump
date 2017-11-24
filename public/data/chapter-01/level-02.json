@@ -4,11 +4,13 @@
   "people": {
     "trump": {
       "x": 790,
-      "y": -100
+      "y": -100,
+      "facing": "Left"
     },
     "woman": {
       "x": 670,
-      "y": -120
+      "y": -120,
+      "facing": "Left"
     }
   },
   "scenes": [
@@ -16,11 +18,12 @@
       "dur": 2,
       "type": "AnimScene",
       "sprite": "trump",
-      "x": -100,
-      "y": 100,
+      "x": 690,
+      "y": 0,
       "anim": "walk",
       "locker": false,
-      "isGap": true
+      "isGap": false,
+      "facing": "Left"
     },
     {
       "dur": 2,
@@ -28,27 +31,29 @@
       "sprite": "woman",
       "anim": "walk",
       "locker": true,
-      "x": -100,
-      "y": 100,
-      "isGap": true
+      "x": 570,
+      "y": -20,
+      "isGap": false,
+      "facing": "Left"
     },
     {
       "locker": false,
       "type": "AnimScene",
       "dur": 2,
-      "x": -100,
-      "y": 100,
-      "isGap": true,
+      "x": 470,
+      "y": 80,
+      "isGap": false,
       "sprite": "woman",
-      "anim": "walk"
+      "anim": "walk",
+      "facing": "Left"
     },
     {
       "locker": true,
       "type": "AnimScene",
       "dur": 1,
-      "x": -50,
+      "x": 640,
       "y": 50,
-      "isGap": true,
+      "isGap": false,
       "sprite": "trump",
       "anim": "dance",
       "facing": "Left"
@@ -57,9 +62,9 @@
       "locker": true,
       "type": "AnimScene",
       "dur": 1,
-      "x": -50,
-      "y": 50,
-      "isGap": true,
+      "x": 590,
+      "y": 100,
+      "isGap": false,
       "sprite": "trump",
       "anim": "dance",
       "facing": "Right"
@@ -68,9 +73,9 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 1,
-      "x": -25,
-      "y": 25,
-      "isGap": true,
+      "x": 565,
+      "y": 125,
+      "isGap": false,
       "sprite": "trump",
       "anim": "hand",
       "facing": "Left"
@@ -79,12 +84,12 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 1,
-      "x": -25,
-      "y": 25,
-      "isGap": true,
+      "x": 445,
+      "y": 105,
+      "isGap": false,
       "sprite": "woman",
       "anim": "jump",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "dur": 1.5,
@@ -97,31 +102,31 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 1,
-      "x": -50,
-      "y": 50,
-      "isGap": true,
+      "x": 515,
+      "y": 175,
+      "isGap": false,
       "sprite": "trump",
       "anim": "shocked",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
       "type": "AnimScene",
       "dur": 0.5,
-      "x": -25,
-      "y": 25,
-      "isGap": true,
+      "x": 420,
+      "y": 130,
+      "isGap": false,
       "sprite": "woman",
       "anim": "walk",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
       "type": "AnimScene",
       "dur": 0.5,
-      "x": -25,
-      "y": 25,
-      "isGap": true,
+      "x": 395,
+      "y": 155,
+      "isGap": false,
       "sprite": "woman",
       "anim": "walk",
       "facing": "Right"
@@ -130,9 +135,9 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 1,
-      "x": -50,
-      "y": 50,
-      "isGap": true,
+      "x": 345,
+      "y": 205,
+      "isGap": false,
       "sprite": "woman",
       "anim": "walk",
       "facing": "Left"
@@ -141,9 +146,9 @@
       "locker": true,
       "type": "AnimScene",
       "dur": 0.5,
-      "x": -25,
-      "y": 25,
-      "isGap": true,
+      "x": 490,
+      "y": 200,
+      "isGap": false,
       "sprite": "trump",
       "anim": "walk",
       "facing": "Right"
@@ -152,9 +157,9 @@
       "locker": true,
       "type": "AnimScene",
       "dur": 0.5,
-      "x": -25,
-      "y": 25,
-      "isGap": true,
+      "x": 465,
+      "y": 225,
+      "isGap": false,
       "sprite": "trump",
       "anim": "walk",
       "facing": "Left"
@@ -163,8 +168,8 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 1.5,
-      "x": null,
-      "y": null,
+      "x": 465,
+      "y": 225,
       "isGap": false,
       "sprite": "trump",
       "anim": "dance",
@@ -174,8 +179,8 @@
       "locker": true,
       "type": "AnimScene",
       "dur": 1.5,
-      "x": null,
-      "y": null,
+      "x": 345,
+      "y": 205,
       "isGap": false,
       "sprite": "woman",
       "anim": "nod",
@@ -185,8 +190,8 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 1.5,
-      "x": null,
-      "y": null,
+      "x": 465,
+      "y": 225,
       "isGap": false,
       "sprite": "trump",
       "anim": "dance",
@@ -196,8 +201,8 @@
       "locker": true,
       "type": "AnimScene",
       "dur": 1.5,
-      "x": null,
-      "y": null,
+      "x": 345,
+      "y": 205,
       "isGap": false,
       "sprite": "woman",
       "anim": "nod",
@@ -207,8 +212,8 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 1.5,
-      "x": null,
-      "y": null,
+      "x": 465,
+      "y": 225,
       "isGap": false,
       "sprite": "trump",
       "anim": "stop",
@@ -218,8 +223,8 @@
       "locker": true,
       "type": "AnimScene",
       "dur": 1.5,
-      "x": null,
-      "y": null,
+      "x": 345,
+      "y": 205,
       "isGap": false,
       "sprite": "woman",
       "anim": "stop",
@@ -229,23 +234,23 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 1,
-      "x": null,
-      "y": null,
+      "x": 465,
+      "y": 225,
       "isGap": false,
       "sprite": "trump",
       "anim": "hand",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": false,
       "type": "AnimScene",
       "dur": 1,
-      "x": null,
-      "y": null,
+      "x": 345,
+      "y": 205,
       "isGap": false,
       "sprite": "woman",
       "anim": "uptight",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
@@ -262,45 +267,45 @@
       "locker": false,
       "type": "AnimScene",
       "dur": 2,
-      "x": -200,
-      "y": 200,
-      "isGap": true,
+      "x": 265,
+      "y": 425,
+      "isGap": false,
       "sprite": "trump",
       "anim": "walk",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": true,
       "type": "AnimScene",
       "dur": 2,
-      "x": -200,
-      "y": 200,
-      "isGap": true,
+      "x": 145,
+      "y": 405,
+      "isGap": false,
       "sprite": "woman",
       "anim": "walk",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": false,
       "type": "AnimScene",
       "dur": 4,
-      "x": -500,
-      "y": null,
-      "isGap": true,
+      "x": -400,
+      "y": 425,
+      "isGap": false,
       "sprite": "trump",
       "anim": "shocked",
-      "facing": ""
+      "facing": "Left"
     },
     {
       "locker": false,
       "type": "AnimScene",
       "dur": 4,
-      "x": -500,
-      "y": null,
-      "isGap": true,
+      "x": -300,
+      "y": 405,
+      "isGap": false,
       "sprite": "woman",
       "anim": "walk",
-      "facing": ""
+      "facing": "Left"
     }
   ]
 }

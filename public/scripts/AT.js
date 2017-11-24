@@ -1,8 +1,9 @@
 var AT = {};
 var Game;
 
-AT.DEBUG = false;
-// AT.DEBUG = true;
+// AT.DEBUG = false;
+AT.DEBUG = true;
+AT.GAME_SPEED = 1;
 
 (function() {
     var states = ['sBoot', 'sLoad', 'sIntro', 'sChapter', 'sPlay', 'sWinGame'];

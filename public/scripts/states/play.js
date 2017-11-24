@@ -16,16 +16,20 @@
         loadPeople();
         AT.FG = addImageLayer(`fg:${sChapter.CurChapterNum}-${sPlay.CurLevelNum}`);
 
-        sPlay.StartScenes({
-            onTaskFailed: sPlay.failed,
-            onEnd: sPlay.win,
-        });
-
         if (AT.DEBUG) {
             AT.CreateLevelEditor();
             sPlay.ShowRestartLevelButton();
             showNextPrevButtons();
         }
+
+        if (!sPlay.EditMode) {
+            sPlay.StartScenes({
+                onTaskFailed: sPlay.failed,
+                onEnd: sPlay.win,
+            });
+        }
+
+        // recordCanvas();
     };
 
     sPlay.proto.update = function() {
@@ -56,6 +60,12 @@
 
     sPlay.RestartLevel = function() {
         sPlay.StartLevel(sPlay.CurLevelNum);
+    };
+
+    sPlay.SceneEditMode = function(sceneId) {
+        sPlay.EditMode = true;
+        sPlay.RestartLevel();
+        renderScene(sceneId);
     };
 
     sPlay.StartLevel = function(levelNum) {
@@ -107,7 +117,7 @@
                 sPlay.SceneMeta.obj.Start();
             } else if (sceneData.type == 'Wait') {
                 sPlay.timer.stop();
-                sPlay.timer.add(sceneData.dur * 1000, sPlay.NextScene);
+                sPlay.timer.add(sceneData.dur * 1000 * AT.GAME_SPEED, sPlay.NextScene);
                 if (sPlay.SubState != 'win')
                     AT.FadeBackground(1, AVOID_TASK_FADE_SPEED);
                 sPlay.timer.start();
@@ -116,6 +126,40 @@
         } else
             sPlay.SceneMeta.onEnd();
     };
+
+    function renderScene(sceneId) {
+        // var leve
+        // for (var iScene = 0; iScene < sceneId; iScene++) {
+        //     // for each person in level data:
+        //
+        // }
+    }
+
+    function recordCanvas() {
+        var eGame = document.getElementsByTagName("canvas")[0];
+        var recorder = new CanvasRecorder(eGame, {
+            disableLogs: true,
+        });
+
+        recorder.record();
+        setTimeout(function() {
+            recorder.stop(function(blob) {
+                var saveBlob = (function() {
+                    var a = document.createElement("a");
+                    document.body.appendChild(a);
+                    a.style = "display: none";
+                    return function(blob, fileName) {
+                        var url = window.URL.createObjectURL(blob);
+                        a.href = url;
+                        a.download = fileName;
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                    };
+                }());
+                saveBlob(blob, "test.webm");
+            });
+        }, 4000);
+    }
 
     function addImageLayer(key) {
         if (Game.cache.checkImageKey(key))

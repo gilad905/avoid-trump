@@ -11,23 +11,12 @@
                 if (c == 83) {
                     e.preventDefault();
                     e.stopPropagation();
+
+                    AT.SaveToFile();
+                    $scope.$digest();
                 }
             }
         };
-
-        $document.bind('keyup', function(e) {
-            if (e.keyCode == 17)
-                le.ctrlPressed = false;
-        });
-
-        $document.bind('keydown', function(e) {
-            if (e.keyCode == 17)
-                le.ctrlPressed = true;
-            if (e.keyCode == 83 && le.ctrlPressed == true) {
-                AT.SaveToFile();
-                $scope.$digest();
-            }
-        });
 
         AT.CreateLevelEditor = function() {
             $scope.Level = AT.LevelEditorData;
@@ -59,9 +48,9 @@
                 `level-${AT.PaddedNum($scope.LevelNumber)}.json`;
             http(url, "PUT", reqBody, true, false, null);
             showSavedMsg();
-            // safeDigest();
-            // $scope.$digest();
         };
+
+        AT.GodMode = true;
 
         //////////////////////////////////////////////////
 
@@ -92,9 +81,9 @@
         $scope.PropsShowing = true;
         $scope.ScenesShowing = true;
 
-        AT.GodMode = false;
         le.godMode = AT.GodMode;
         le.ctrlPressed = false;
+        le.selectedSceneId = null;
 
         le.Meta = {
             labelsEvery: 7,
@@ -116,6 +105,15 @@
             animations: {}, // populated at CreateLevelEditor()
         };
 
+        le.selectedSceneChanged = function(id) {
+            // le.selectedSceneId = id;
+            // sPlay.SceneEditMode(le.selectedSceneId);
+        };
+
+        le.selectedSceneUpdated = function(sceneIdx) {
+            sPlay.SceneEditMode(le.selectedSceneId);
+        };
+
         le.godModeChanged = function() {
             AT.GodMode = le.godMode;
         };
@@ -125,8 +123,11 @@
         };
 
         le.removeScene = function(id) {
-            if (window.confirm("Remove scene?"))
+            if (window.confirm("Remove scene?")) {
                 $scope.Level.scenes.splice(id, 1);
+                if (le.selectedSceneId == id)
+                    le.selectedSceneChanged(id - 1);
+            }
         };
 
         le.moveScene = function(id, dir) {
@@ -135,16 +136,22 @@
                 var temp = scenes[id];
                 scenes[id] = scenes[id + dir];
                 scenes[id + dir] = temp;
+                if (le.selectedSceneId == id)
+                    le.selectedSceneChanged(le.selectedSceneId + dir);
             }
         };
 
-        le.addScene = function(index) {
-            if (index === undefined)
-                index = $scope.Level.scenes.length - 1;
+        le.addScene = function(id, ev) {
+            if (id === undefined)
+                id = $scope.Level.scenes.length - 1;
 
-            var newScene = angular.copy($scope.Level.scenes[index]);
+            var newScene = angular.copy($scope.Level.scenes[id]);
+            $scope.Level.scenes.splice(id + 1, 0, newScene);
 
-            $scope.Level.scenes.splice(index + 1, 0, newScene);
+            // prevent the button click to re-select current row
+            // so the new row can be selected
+            ev.stopPropagation();
+            le.selectedSceneChanged(id + 1);
         };
 
         le.copyLevel = function() {

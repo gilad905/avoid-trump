@@ -1,5 +1,6 @@
 (function(that) {
     that.AnimScene = function(scene) {
+        this.sceneDur = scene.dur * AT.GAME_SPEED;
         this.scene = scene;
         this.timer = Game.time.create(false);
     };
@@ -14,7 +15,7 @@
         if (this.scene.locker === false)
             this.finish();
         else
-            Game.time.events.add(this.scene.dur * 1000, this.finish, this);
+            Game.time.events.add(this.sceneDur * 1000, this.finish, this);
     };
 
     function getSceneNewCoords(scene, sprite) {
@@ -40,7 +41,7 @@
         tween.to({
             x: newCoords.x,
             y: newCoords.y,
-        }, this.scene.dur * 1000);
+        }, this.sceneDur * 1000);
 
         tween.start();
 
