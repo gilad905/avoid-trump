@@ -1,8 +1,8 @@
 var AT = {};
 var Game;
 
-// AT.DEBUG = false;
-AT.DEBUG = true;
+AT.DEBUG = false;
+// AT.DEBUG = true;
 AT.GAME_SPEED = 1;
 
 (function() {
@@ -32,6 +32,11 @@ AT.GAME_SPEED = 1;
 
     const MARGIN = 10;
     const DBL_MARGIN = MARGIN * 2;
+
+    AT.AddImageLayer = function(key) {
+        if (Game.cache.checkImageKey(key))
+            return Game.add.sprite(0, 0, key);
+    };
 
     AT.AddTextButton = function(x, y, width, height, text, textStyle, buttonStyle, onClick) {
         var gButton = Game.add.group();

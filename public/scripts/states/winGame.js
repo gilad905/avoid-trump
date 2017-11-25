@@ -14,6 +14,9 @@
     };
 
     sWinGame.proto.create = function() {
+        AT.BG = AT.AddImageLayer('bg_trump');
+        // AT.BG.width = Game.width;
+        // AT.BG.height = Game.height;
         AT.graphics = Game.add.graphics();
 
         var text =

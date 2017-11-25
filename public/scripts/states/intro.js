@@ -26,6 +26,7 @@
     };
 
     sIntro.proto.create = function() {
+        AT.BG = AT.AddImageLayer('bg_trump_black');
         AT.graphics = Game.add.graphics();
 
         var data = Game.cache.getJSON('intro');

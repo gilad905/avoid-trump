@@ -26,7 +26,7 @@
         AT.AddTextButton(
             Game.width - 200,
             Game.height - 100, -1, -1,
-            'NEXT LEVEL', style, null,
+            'NEXT LEVEL', null, null,
             sPlay.NextLevel
         );
     }

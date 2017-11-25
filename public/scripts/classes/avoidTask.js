@@ -32,12 +32,14 @@
         that.AvoidTask.START_RADIAN = game.math.degToRad(-90);
         that.AvoidTask.DELTA_RADIAN = that.AvoidTask.START_RADIAN - game.math.degToRad(270);
         that.AvoidTask.ALLOWED_FAIL_AMOUNT = 2;
+        that.AvoidTask.FAIL_FADE_DELTA = 1 / (that.AvoidTask.ALLOWED_FAIL_AMOUNT + 1);
 
         that.AvoidTask.INPUT_HANDLER = function(ev) {
             if (ev.key == this.char)
                 this.success();
             else {
                 this.failAmount++;
+                this.fadeTo(this.alpha - AvoidTask.FAIL_FADE_DELTA);
                 if (this.failAmount > AvoidTask.ALLOWED_FAIL_AMOUNT)
                     this.fail();
             }
@@ -48,13 +50,29 @@
     that.AvoidTask.prototype.constructor = that.AvoidTask;
     var prototype = that.AvoidTask.prototype;
 
-    const RANDOM_COLORS = ['white', 'yellow', 'red', 'green', 'orange', 'black'];
+    const RANDOM_COLORS = ['gray', 'brown', 'purple', 'red', 'green', 'orange', 'black'];
     const TEXT_STYLE = {
         font: AT.Meta.FontStyle,
         fill: "#fff",
         boundsAlignH: "center",
         boundsAlignV: "middle",
     };
+
+    prototype.fadeTo = function(alpha) {
+        this.alpha = alpha;
+        this.text.alpha = alpha;
+    };
+
+    prototype.fadeIn = function() {
+        var fadeAlpha = Game.add.tween(this).to({
+            alpha: 1,
+        }, 100, Phaser.Easing.Linear.None);
+        var fadeTextAlpha = Game.add.tween(this.text).to({
+            alpha: 1,
+        }, 100, Phaser.Easing.Linear.None);
+        fadeAlpha.start();
+        fadeTextAlpha.start();
+    }
 
     function randomChar() {
         var a = 97;
@@ -77,14 +95,27 @@
     };
 
     prototype.update = function() {
-        this.drawArc();
+        if (!this.stopDrawingArc)
+            this.drawArc();
     };
+
+    const SHADOW_DIST = 5;
 
     prototype.drawArc = function() {
         var arcLength = this.timer.duration * this.sceneDurationInverse;
         var arcEnd = AvoidTask.START_RADIAN + AvoidTask.DELTA_RADIAN * arcLength;
         AT.graphics.clear();
-        AT.graphics.lineStyle(8, this.style);
+        // shadow first:
+        AT.graphics.lineStyle(8, 1, this.alpha / 2);
+        AT.graphics.arc(
+            this.scene.x + SHADOW_DIST,
+            this.scene.y + SHADOW_DIST,
+            50,
+            AvoidTask.START_RADIAN,
+            arcEnd,
+            false
+        );
+        AT.graphics.lineStyle(8, this.style, this.alpha);
         AT.graphics.arc(
             this.scene.x,
             this.scene.y,
@@ -95,39 +126,50 @@
         );
     };
 
-    prototype.finish = function(clearGraphics) {
+    prototype.clearGraphics = function(that) {
+        that.text.destroy();
+        AT.graphics.clear();
+    };
+
+    prototype.finish = function(next, toClearGraphics) {
         this.playing = false;
         this.closeKeyListener();
         this.timer.stop();
-        if (clearGraphics || clearGraphics === undefined) {
-            this.text.destroy();
-            AT.graphics.clear();
-        }
+        if (toClearGraphics || toClearGraphics === undefined)
+            this.clearGraphics(this);
+
+        if (next && next.callback)
+            next.callback.call(next.context, next.args);
     }
 
     prototype.fail = function() {
         if (AT.GodMode)
             this.success();
-        else {
-            this.finish();
-            if (this.OnFailed && this.OnFailed.callback)
-                this.OnFailed.callback.call(this.OnFailed.context, this.OnFailed.args);
-        }
+        else
+            this.finish(this.OnFailed);
     };
 
+    const SUCCESS_COLOR_HEX = 0xffff00; // yellow
+    const SUCCESS_COLOR_STR = "#ffff00"; // yellow
+
     prototype.success = function() {
-        this.finish();
-        if (this.OnSuccess && this.OnSuccess.callback)
-            this.OnSuccess.callback.call(this.OnSuccess.context, this.OnSuccess.args);
+        this.style = SUCCESS_COLOR_HEX;
+        this.text.fill = SUCCESS_COLOR_STR;
+        this.drawArc();
+        this.finish(this.OnSuccess, false);
+        setTimeout(this.clearGraphics, 100, this);
     };
 
     prototype.Start = function() {
         this.playing = true;
-        this.text = Game.add.text(this.scene.x, this.scene.y, this.char, TEXT_STYLE);
+        this.text = Game.add.text(this.scene.x, this.scene.y + 5, this.upChar, TEXT_STYLE);
         this.text.anchor = {
             x: .5,
             y: .5
         };
+        this.alpha = 0;
+        this.text.alpha = 0;
+        this.fadeIn();
 
         this.timer.start();
     };

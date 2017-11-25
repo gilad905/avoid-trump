@@ -18,6 +18,7 @@
     };
 
     sChapter.proto.create = function() {
+        AT.BG = AT.AddImageLayer('bg_trump_black');
         AT.graphics = Game.add.graphics();
 
         var text =
@@ -58,15 +59,6 @@
 
     sChapter.RestartChapter = function() {
         sPlay.StartLevel(1);
-    };
-
-    sChapter.ShowRestartChapterButton = function() {
-        AT.Buttons.RestartChapter = AT.AddTextButton(
-            Game.width - 200,
-            Game.height - 100, -1, -1,
-            'RESTART', null, null,
-            sChapter.RestartChapter
-        );
     };
 
 })();

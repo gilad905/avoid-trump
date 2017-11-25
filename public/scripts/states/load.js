@@ -7,6 +7,8 @@
         Game.load.image('black', 'assets/black.png');
         Game.load.image('btn_1', 'assets/blue_button00.png');
         Game.load.image('btn_2', 'assets/green_button05.png');
+        Game.load.image('bg_trump', 'assets/trump_bg_edited.png');
+        Game.load.image('bg_trump_black', 'assets/trump_bg_black.png');
 
         // A hack to preload custom fonts
         Game.add.text(0, 0, "hack", {font:"1px Indie Flower", fill:"#FFFFFF"});

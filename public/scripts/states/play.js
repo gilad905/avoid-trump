@@ -15,19 +15,18 @@
         loadLevelData();
 
         // Order here is important:
-        AT.BG = addImageLayer(`bg:${sChapter.CurChapterNum}-${sPlay.CurLevelNum}`);
+        AT.BG = AT.AddImageLayer(`bg:${sChapter.CurChapterNum}-${sPlay.CurLevelNum}`);
         AT.graphics = Game.add.graphics();
         loadPeople();
-        AT.FG = addImageLayer(`fg:${sChapter.CurChapterNum}-${sPlay.CurLevelNum}`);
+        AT.FG = AT.AddImageLayer(`fg:${sChapter.CurChapterNum}-${sPlay.CurLevelNum}`);
 
         if (AT.DEBUG) {
             AT.CreateLevelEditor();
-            sPlay.ShowRestartLevelButton();
+            AT.DeselectScenes();
+            sPlay.ShowRestartButton();
             showNextPrevButtons();
         }
 
-        showingSingleScene = false;
-        AT.DeselectScenes();
         sPlay.StartScenes({
             onTaskFailed: sPlay.failed,
             onEnd: sPlay.win,
@@ -70,8 +69,8 @@
         });
     };
 
-    sPlay.ShowRestartLevelButton = function() {
-        AT.Buttons.RestartLevel = AT.AddTextButton(
+    sPlay.ShowRestartButton = function() {
+        AT.Buttons.Restart = AT.AddTextButton(
             Game.width - 200,
             Game.height - 100, -1, -1,
             'RESTART', null, null,
@@ -80,11 +79,12 @@
     };
 
     sPlay.HideRestartLevelButton = function() {
-        if (AT.Buttons.RestartLevel)
-            AT.Buttons.RestartLevel.destroy();
+        if (AT.Buttons.Restart)
+            AT.Buttons.Restart.destroy();
     };
 
     sPlay.StartScenes = function(options) {
+        showingSingleScene = false;
         sPlay.SceneMeta = options;
         sPlay.SceneMeta.id = -1;
         sPlay.timer = Game.time.create(false);
@@ -207,11 +207,6 @@
             });
         }, 4000);
     }
-
-    function addImageLayer(key) {
-        if (Game.cache.checkImageKey(key))
-            return Game.add.sprite(0, 0, key);
-    };
 
     function loadLevelData() {
         if (AT.LevelEditorData && !sChapter.InNewLevel)
