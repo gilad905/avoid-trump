@@ -12,9 +12,12 @@
         }
     };
 
+    var style = {
+        font: AT.Meta.FontStyle,
+        fill: 'red',
+    }
+
     function showMessage() {
-        Game.add.text(100, 100, 'Awwww... you failed!', {
-            fill: 'red',
-        });
+        Game.add.text(100, 100, 'Awwww... you failed!', style);
     }
 })(this);

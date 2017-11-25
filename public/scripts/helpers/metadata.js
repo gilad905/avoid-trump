@@ -33,4 +33,7 @@ AT.Meta = {
         'man2': 'man - other color.png',
         'woman2': 'woman - other color.png',
     },
+
+    FontFamily: 'Indie Flower',
+    FontStyle: "bold 40px Indie Flower",
 };

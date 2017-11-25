@@ -9,7 +9,7 @@
                     throw `Avoid task: scene.${name} missing`;
             });
 
-            this.sceneDur = scene.dur * AT.GAME_SPEED;
+            this.sceneDur = AT.MultipleBySpeed(scene.dur);
 
             this.playing = false;
             this.char = scene.char || randomChar();
@@ -48,6 +48,14 @@
     that.AvoidTask.prototype.constructor = that.AvoidTask;
     var prototype = that.AvoidTask.prototype;
 
+    const RANDOM_COLORS = ['white', 'yellow', 'red', 'green', 'orange', 'black'];
+    const TEXT_STYLE = {
+        font: AT.Meta.FontStyle,
+        fill: "#fff",
+        boundsAlignH: "center",
+        boundsAlignV: "middle",
+    };
+
     function randomChar() {
         var a = 97;
         var z = 122;
@@ -55,11 +63,9 @@
         return String.fromCharCode(charCode);
     }
 
-    var randomStyles = ['white', 'yellow', 'red', 'green', 'orange', 'black'];
-
     function randomStyle() {
-        var randIdx = Math.floor(Math.random() * randomStyles.length);
-        return ColorNameToHex.Convert(randomStyles[randIdx]);
+        var randIdx = Math.floor(Math.random() * RANDOM_COLORS.length);
+        return ColorNameToHex.Convert(RANDOM_COLORS[randIdx]);
     }
 
     prototype.openKeyListener = function() {
@@ -104,26 +110,20 @@
             this.success();
         else {
             this.finish();
-            if (this.OnFailed)
+            if (this.OnFailed && this.OnFailed.callback)
                 this.OnFailed.callback.call(this.OnFailed.context, this.OnFailed.args);
         }
     };
 
     prototype.success = function() {
         this.finish();
-        if (this.OnSuccess)
+        if (this.OnSuccess && this.OnSuccess.callback)
             this.OnSuccess.callback.call(this.OnSuccess.context, this.OnSuccess.args);
     };
 
     prototype.Start = function() {
         this.playing = true;
-        var style = {
-            font: "bold 45px Arial",
-            fill: "#fff",
-            boundsAlignH: "center",
-            boundsAlignV: "middle",
-        };
-        this.text = Game.add.text(this.scene.x, this.scene.y, this.char, style);
+        this.text = Game.add.text(this.scene.x, this.scene.y, this.char, TEXT_STYLE);
         this.text.anchor = {
             x: .5,
             y: .5

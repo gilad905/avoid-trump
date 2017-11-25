@@ -3,7 +3,8 @@
     <br />
     <input type="button" value="COPY TEXT" ng-click="le.addScene()" />
     <input type="button" value="SAVE" ng-click="le.saveToFile()" />
-    <input type="checkbox" ng-model="le.godMode" ng-change="le.godModeChanged()">God Mode
+    <input type="checkbox" ng-model="le.godMode" ng-change="le.godModeChanged()">God Mode</Input>
+    <input type="number" ng-model="le.speed" ng-change="le.speedChanged()" class="small"> Speed</Input>
     <p id="saved-msg" ng-show="SavedMsgOn">SAVED.</p>
 </div>
 <div class="main-title">
@@ -36,7 +37,7 @@
         <div class="cell">
             <div>Facing</div>
             <div>
-                <select ng-model="value.facing" ng-options="facing for facing in le.Meta.facing">
+                <select ng-model="value.facing" ng-options="facing for facing in ::le.Meta.facing">
                 </select>
             </div>
         </div>
@@ -53,13 +54,13 @@
         <div class="cell small">Duration</div>
         <div class="cell small">X</div>
         <div class="cell small">Y</div>
-        <div class="cell small">Gap</div>
+        <!-- <div class="cell small">Gap</div> -->
         <div class="cell">Sprite</div>
         <div class="cell">Animation</div>
-        <div class="cell small">Facing</div>
+        <div class="cell">Facing</div>
         <div class="cell small">Locker</div>
     </div>
-    <div ng-repeat="scene in Level.scenes" ng-class="['row', scene.type, scene.sprite, { 'selected-scene': le.selectedSceneId == $index }]" ng-click="le.selectedSceneChanged($index)">
+    <div ng-repeat="scene in Level.scenes" ng-class="['row', scene.type, scene.sprite, { 'selected-scene': le.selectedSceneId == $index }]" ng-click="le.sceneSelectionChanged($index)">
         <div class="cell">
             <select ng-model="scene.type" ng-options="sceneType.name as sceneType.desc for sceneType in le.Meta.sceneTypes">
                     </select>
@@ -73,9 +74,9 @@
         <div class="cell small">
             <input type="number" ng-model="scene.y" ng-disabled="!['AvoidTask','AnimScene', null].includes(scene.type)" />
         </div>
-        <div class="cell small">
+        <!-- <div class="cell small">
             <input type="checkbox" ng-model="scene.isGap" ng-disabled="scene.type != 'AnimScene'" />
-        </div>
+        </div> -->
         <div class="cell sprite">
             <select ng-model="scene.sprite" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="sprite for sprite in le.Meta.sprites">
                     </select>
@@ -84,7 +85,7 @@
             <select ng-model="scene.anim" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="anim for anim in le.Meta.animations[scene.sprite]">
                     </select>
         </div>
-        <div class="cell small">
+        <div class="cell">
             <select ng-model="scene.facing" ng-disabled="!['AnimScene', null].includes(scene.type)" ng-options="facing for facing in le.Meta.facing">
                 </select>
         </div>

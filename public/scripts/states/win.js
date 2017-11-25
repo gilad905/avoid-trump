@@ -13,17 +13,20 @@
         }
     };
 
+    var style = {
+        font: AT.Meta.FontStyle,
+        fill: 'lightgreen',
+    };
+
     function showMessage() {
-        Game.add.text(100, 100, sPlay.LevelData.winMessage, {
-            fill: 'lightgreen',
-        });
+        Game.add.text(100, 100, sPlay.LevelData.winMessage, style);
     }
 
     function showButton() {
         AT.AddTextButton(
             Game.width - 200,
             Game.height - 100, -1, -1,
-            'NEXT LEVEL', null, null,
+            'NEXT LEVEL', style, null,
             sPlay.NextLevel
         );
     }

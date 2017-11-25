@@ -1,6 +1,6 @@
 (function() {
     var style = {
-        font: "bold 24px Arial",
+        font: AT.Meta.FontStyle,
         fill: "white",
         boundsAlignH: "center",
         boundsAlignV: "middle",
@@ -26,7 +26,7 @@
             Game.width - 250,
             Game.height - 100, -1, -1,
             'RESTART GAME',
-            style,
+            null,
             null,
             restartGame
         );

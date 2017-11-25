@@ -5,6 +5,11 @@
 
         Game.load.json('intro', 'data/intro.json');
         Game.load.image('black', 'assets/black.png');
+        Game.load.image('btn_1', 'assets/blue_button00.png');
+        Game.load.image('btn_2', 'assets/green_button05.png');
+
+        // A hack to preload custom fonts
+        Game.add.text(0, 0, "hack", {font:"1px Indie Flower", fill:"#FFFFFF"});
     };
 
     sLoad.proto.create = function() {

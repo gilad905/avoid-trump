@@ -1,6 +1,6 @@
 (function(that) {
     that.AnimScene = function(scene) {
-        this.sceneDur = scene.dur * AT.GAME_SPEED;
+        this.sceneDur = AT.MultipleBySpeed(scene.dur);
         this.scene = scene;
         this.timer = Game.time.create(false);
     };
@@ -18,29 +18,12 @@
             Game.time.events.add(this.sceneDur * 1000, this.finish, this);
     };
 
-    function getSceneNewCoords(scene, sprite) {
-        function getCoord(name) {
-            if (![null, undefined].includes(scene[name])) {
-                newCoords[name] =
-                    (scene.isGap ? scene[name] + sprite[name] : scene[name]);
-            }
-        }
-
-        var newCoords = {};
-        getCoord('x');
-        getCoord('y');
-
-        return newCoords;
-    }
-
     prototype.startTween = function(sprite) {
         var tween = Game.add.tween(sprite);
 
-        var newCoords = getSceneNewCoords(this.scene, sprite);
-
         tween.to({
-            x: newCoords.x,
-            y: newCoords.y,
+            x: this.scene.x,
+            y: this.scene.y,
         }, this.sceneDur * 1000);
 
         tween.start();
@@ -55,22 +38,23 @@
     };
 
     prototype.finish = function() {
-        if (this.onFinished)
+        if (this.onFinished && this.onFinished.callback)
             this.onFinished.callback.call(this.onFinished.context, this.onFinished.args);
     };
 
     prototype.Start = function() {
-        var sprite = AT.People[this.scene.sprite];
+        var person = AT.People[this.scene.sprite];
+        person.visible = true;
 
         if (this.scene.facing) {
-            sprite.scale.x = this.scene.facing == "Left" ? 1 : -1;
+            person.scale.x = this.scene.facing == "Left" ? 1 : -1;
         }
 
         if (this.scene.anim)
-            this.startAnimation(sprite);
+            this.startAnimation(person);
 
         if (this.scene.x || this.scene.y)
-            this.startTween(sprite);
+            this.startTween(person);
     };
 
     prototype.OnFinished = function(callback, args, context) {

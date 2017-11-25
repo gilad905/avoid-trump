@@ -1,6 +1,6 @@
 (function() {
     var style = {
-        font: "bold 24px Arial",
+        font: AT.Meta.FontStyle,
         fill: "white",
         boundsAlignH: "center",
         boundsAlignV: "middle",
@@ -28,11 +28,9 @@
 
         AT.AddTextButton(
             Game.width - 150,
-            Game.height - 100,
-            -1,
-            -1,
+            Game.height - 100, -1, -1,
             'START',
-            style,
+            null,
             null,
             sPlay.NextLevel
         );

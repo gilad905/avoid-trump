@@ -1,3 +1,5 @@
+// var le = angular.element($("#level-editor")).controller();
+
 (function() {
     var app = angular.module('avoidTrump', []);
     app.controller('levelEditorController', function($scope, $document, $timeout) {
@@ -21,6 +23,9 @@
         AT.CreateLevelEditor = function() {
             $scope.Level = AT.LevelEditorData;
             $scope.LevelNumber = sPlay.CurLevelNum;
+
+            AT.GodMode = true;
+            le.godMode = AT.GodMode;
 
             for (var i = 0, scene; scene = $scope.Level.scenes[i]; i++) {
                 if (scene.locker === undefined)
@@ -50,7 +55,14 @@
             showSavedMsg();
         };
 
-        AT.GodMode = true;
+        AT.PersonDropped = function(person) {
+            if (le.selectedSceneId >= 0) {
+                AT.LevelEditorData.scenes[le.selectedSceneId].x = person.x;
+                AT.LevelEditorData.scenes[le.selectedSceneId].y = person.y;
+                le.selectedSceneUpdated();
+                safeDigest();
+            }
+        };
 
         //////////////////////////////////////////////////
 
@@ -81,9 +93,9 @@
         $scope.PropsShowing = true;
         $scope.ScenesShowing = true;
 
-        le.godMode = AT.GodMode;
         le.ctrlPressed = false;
         le.selectedSceneId = null;
+        le.speed = AT.GAME_SPEED;
 
         le.Meta = {
             labelsEvery: 7,
@@ -105,13 +117,22 @@
             animations: {}, // populated at CreateLevelEditor()
         };
 
-        le.selectedSceneChanged = function(id) {
-            // le.selectedSceneId = id;
-            // sPlay.SceneEditMode(le.selectedSceneId);
+        AT.DeselectScenes = function() {
+            le.selectedSceneId = -1;
+            safeDigest();
+        };
+
+        le.sceneSelectionChanged = function(id) {
+            le.selectedSceneId = id;
+            sPlay.ShowSingleScene(AT.LevelEditorData, le.selectedSceneId);
         };
 
         le.selectedSceneUpdated = function(sceneIdx) {
-            sPlay.SceneEditMode(le.selectedSceneId);
+            sPlay.ShowSingleScene(AT.LevelEditorData, le.selectedSceneId);
+        };
+
+        le.speedChanged = function() {
+            AT.GAME_SPEED = le.speed;
         };
 
         le.godModeChanged = function() {
@@ -126,7 +147,7 @@
             if (window.confirm("Remove scene?")) {
                 $scope.Level.scenes.splice(id, 1);
                 if (le.selectedSceneId == id)
-                    le.selectedSceneChanged(id - 1);
+                    le.sceneSelectionChanged(id - 1);
             }
         };
 
@@ -137,7 +158,7 @@
                 scenes[id] = scenes[id + dir];
                 scenes[id + dir] = temp;
                 if (le.selectedSceneId == id)
-                    le.selectedSceneChanged(le.selectedSceneId + dir);
+                    le.sceneSelectionChanged(le.selectedSceneId + dir);
             }
         };
 
@@ -151,7 +172,7 @@
             // prevent the button click to re-select current row
             // so the new row can be selected
             ev.stopPropagation();
-            le.selectedSceneChanged(id + 1);
+            le.sceneSelectionChanged(id + 1);
         };
 
         le.copyLevel = function() {

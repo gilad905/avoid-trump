@@ -5,6 +5,8 @@
     <title>Avoid Trump</title>
     <meta charset="utf-8">
 
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script> -->
     <script src="lib/angular.js"></script>
     <script src="lib/phaser 2.8.3.min.js"></script>
@@ -33,12 +35,16 @@
     <script src="scripts/level-editor/level-editor.ctrl.js"></script>
 
     <link rel="stylesheet" href="style.css">
+    <!-- the following is imported locally in style.css: -->
+    <!-- <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet"> -->
 </head>
 
 <body>
-    <div id="game" onclick="AT.SetGameFrozen(false)">
+    <div id="game">
+        <!-- <div id="game" onclick="AT.SetGameFrozen(false)"> -->
     </div>
-    <div id="level-editor" onclick="AT.SetGameFrozen(true)" ng-app="avoidTrump" ng-controller="levelEditorController as le">
+    <div id="level-editor" ng-app="avoidTrump" ng-controller="levelEditorController as le">
+        <!-- <div id="level-editor" onclick="AT.SetGameFrozen(true)" ng-app="avoidTrump" ng-controller="levelEditorController as le"> -->
         <div ng-if="Level" ng-include="'scripts/level-editor/level-editor.tmpl.html'"></div>
     </div>
 </body>

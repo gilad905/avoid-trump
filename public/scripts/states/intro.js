@@ -10,7 +10,7 @@
         "Good luck!";
 
     var style = {
-        font: "bold 24px Arial",
+        font: "bold 25px " + AT.Meta.FontFamily,
         fill: "white",
         boundsAlignH: "center",
         boundsAlignV: "middle",
@@ -40,7 +40,7 @@
             Game.width - 150,
             Game.height - 100, -1, -1,
             'START',
-            style,
+            null,
             null,
             sPlay.NextLevel
         );
@@ -61,7 +61,7 @@
         sPlay.StartScenes({
             onTaskFailed: sPlay.NextScene,
             onEnd: function() {
-                sPlay.SceneMeta.number = -1;
+                sPlay.SceneMeta.id = -1;
                 sPlay.NextScene();
             },
         });

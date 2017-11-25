@@ -1,11 +1,6 @@
 Visual scene editor:
-    when selecting a scene -
-        restart level (will remove any listeners or fail / win states) without playing scenes:
-            set at.editmode = true
-            sPlay.restartlevel
-        calculate & show scene's canvas
-        enable dragging characters (dragged - reset gap x-y to absolute x-y)
-        right-click for changing 'facing'
+    enable dragging characters
+    // right-click for changing 'facing'
 
 --------------------------------------------------------------------
 
@@ -18,12 +13,9 @@ plot (scenes):
 
 TODOs:
     // user's face from webcam
-    (maybe) add support for non-character sprite animations (text balloons)
+    (maybe) non-character sprite animations (text balloons)
     playbacks of avoids
-    make scene editor easier
     complete plot
-
-    move win + fail to own states
-    move person to own class
-
---------------------------------------------------------------------
+    image buttons
+    fade avoid task in/out
+    fade avoid task on wrong keypress

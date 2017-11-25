@@ -94,7 +94,7 @@ input, select, textarea, div {
 }
 
 #level-editor .row.Win {
-    background-color: lightgreen;
+    background-color: yellow;
 }
 
 #level-editor .row.selected-scene {
@@ -122,8 +122,8 @@ input, select, textarea, div {
     white-space: nowrap;
 }
 
-#level-editor .cell.small {
-    width: 60px;
+#level-editor .small {
+    width: 40px;
 }
 
 #level-editor .cell * {
@@ -163,4 +163,9 @@ input, select, textarea, div {
     width: 100%;
     box-sizing: border-box;
     height: 300px;
+}
+
+@font-face {
+    font-family: "Indie Flower";
+    src: url("assets/IndieFlower.ttf");
 }

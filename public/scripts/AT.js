@@ -21,9 +21,17 @@ AT.GAME_SPEED = 1;
         Game.state.start('sBoot');
     };
 
+    AT.MultipleBySpeed = function(dur) {
+        var toRet = (dur * AT.GAME_SPEED).toFixed(2);
+        return toRet;
+    };
+
     AT.SetGameFrozen = function(isFrozen) {
         Game.paused = isFrozen;
     };
+
+    const MARGIN = 10;
+    const DBL_MARGIN = MARGIN * 2;
 
     AT.AddTextButton = function(x, y, width, height, text, textStyle, buttonStyle, onClick) {
         var gButton = Game.add.group();
@@ -32,22 +40,23 @@ AT.GAME_SPEED = 1;
 
         var styles = textButtonDefaults(textStyle, buttonStyle);
 
-        var text = new Phaser.Text(Game, 0, 0, text, styles.text);
+        var text = new Phaser.Text(Game, MARGIN, MARGIN + 5, text, styles.text);
         if (width == -1)
             width = text.width;
         if (height == -1)
             height = text.height;
         text.setTextBounds(0, 0, width, height);
 
-        var button = new Phaser.Button(Game, 0, 0, null, onClick);
-        button.width = width;
-        button.height = height;
+        var button = new Phaser.Button(Game, 0, 0, 'btn_2', onClick);
+        button.width = width + DBL_MARGIN;
+        button.height = height + DBL_MARGIN;
 
-        if (styles.button.backgroundColor)
+        if (styles.button.backgroundColor) {
             AT.graphics.beginFill(styles.button.backgroundColor);
-        AT.graphics.lineStyle(styles.button.lineWidth, styles.button.lineColor, styles.button.lineAlpha);
-        AT.graphics.drawRect(x, y, width, height);
-        AT.graphics.endFill();
+            AT.graphics.lineStyle(styles.button.lineWidth, styles.button.lineColor, styles.button.lineAlpha);
+            AT.graphics.drawRect(x, y, width, height);
+            AT.graphics.endFill();
+        }
 
         gButton.add(button);
         gButton.add(text);
@@ -78,12 +87,8 @@ AT.GAME_SPEED = 1;
 
         var toFade = [AT.BG, AT.FG];
         for (var i in toFade) {
-            if (toFade[i]) {
+            if (toFade[i])
                 tweenTint(toFade[i], toColor, duration, Phaser.Easing.Circular.In);
-                // Game.add.tween(toFade[i]).to({
-                //     tint: amount,
-                // }, duration, Phaser.Easing.Circular.In, true);
-            }
         }
     };
 
@@ -116,7 +121,8 @@ AT.GAME_SPEED = 1;
         text = text || {};
         text.boundsAlignH = text.boundsAlignH || 'center';
         text.boundsAlignV = text.boundsAlignV || 'middle';
-        text.fill = text.fill || 'white';
+        text.font = text.font || ("bold 30px " + AT.Meta.FontFamily);
+        text.fill = text.fill || 'blue';
 
         button = button || {};
         button.lineWidth = button.lineWidth || 0;

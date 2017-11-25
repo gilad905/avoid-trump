@@ -28,7 +28,8 @@
       "y": 150,
       "sprite": "trump",
       "anim": "walk",
-      "facing": "Left"
+      "facing": "Left",
+      "x": 400
     },
     {
       "locker": true,
@@ -37,7 +38,8 @@
       "y": 150,
       "sprite": "woman",
       "anim": "walk",
-      "facing": "Left"
+      "facing": "Left",
+      "x": 480
     },
     {
       "locker": false,
@@ -46,7 +48,8 @@
       "sprite": "trump",
       "anim": "hand",
       "y": 200,
-      "facing": "Right"
+      "facing": "Right",
+      "x": 400
     },
     {
       "locker": false,
@@ -54,7 +57,8 @@
       "dur": 2,
       "sprite": "woman",
       "anim": "uptight",
-      "y": 200
+      "y": 200,
+      "x": 480
     },
     {
       "locker": true,
@@ -70,7 +74,8 @@
       "dur": 1,
       "anim": "walk",
       "y": 230,
-      "facing": "Left"
+      "facing": "Left",
+      "x": 400
     },
     {
       "locker": true,
@@ -79,7 +84,8 @@
       "dur": 1,
       "anim": "walk",
       "y": 230,
-      "facing": "Left"
+      "facing": "Left",
+      "x": 480
     },
     {
       "locker": false,
@@ -88,7 +94,8 @@
       "anim": "hand",
       "dur": 1.5,
       "y": 270,
-      "facing": "Right"
+      "facing": "Right",
+      "x": 400
     },
     {
       "locker": false,
@@ -97,7 +104,8 @@
       "y": 270,
       "sprite": "woman",
       "anim": "walk",
-      "facing": "Left"
+      "facing": "Left",
+      "x": 480
     },
     {
       "locker": true,
@@ -117,7 +125,8 @@
       "y": 300,
       "sprite": "woman",
       "anim": "walk",
-      "facing": "Left"
+      "facing": "Left",
+      "x": 480
     },
     {
       "locker": true,
@@ -126,7 +135,8 @@
       "y": 300,
       "sprite": "trump",
       "anim": "shocked",
-      "facing": "Right"
+      "facing": "Right",
+      "x": 400
     },
     {
       "locker": false,
