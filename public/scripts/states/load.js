@@ -7,14 +7,14 @@
 
     sLoad.proto.create = function() {
         // A hack to preload custom fonts
-        Game.add.text(0, 0, "hack", {
-            font: "1px Indie Flower",
-            fill: "#FFFFFF",
-        });
-        Game.add.text(0, 0, "hack", {
-            font: "1px Varela Round",
-            fill: "#FFFFFF",
-        });
+        // Game.add.text(0, 0, "hack", {
+        //     font: "1px Indie Flower",
+        //     fill: "#FFFFFF",
+        // });
+        // Game.add.text(0, 0, "hack", {
+        //     font: "1px Varela Round",
+        //     fill: "#FFFFFF",
+        // });
         // Game.add.text(0, 0, "hack", {font:"1px Archivo Black", fill:"#FFFFFF"});
 
         if (AT.DEBUG)

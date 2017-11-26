@@ -41,12 +41,14 @@
 
 <body>
     <div id="game">
-        <!-- <div id="game" onclick="AT.SetGameFrozen(false)"> -->
     </div>
     <div id="level-editor" ng-app="avoidTrump" ng-controller="levelEditorController as le">
-        <!-- <div id="level-editor" onclick="AT.SetGameFrozen(true)" ng-app="avoidTrump" ng-controller="levelEditorController as le"> -->
         <div ng-if="Level" ng-include="'scripts/level-editor/level-editor.tmpl.html'"></div>
     </div>
+
+    <!-- hacks for loading TFF fonts for Phaser -->
+    <p style="font-family: Varela Round; opacity: 0;">hack</p>
+    <p style="font-family: Indie Flower; opacity: 0;">hack</p>
 </body>
 
 </html>
