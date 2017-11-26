@@ -1,6 +1,6 @@
 (function() {
     var style = {
-        font: AT.Meta.FontStyle,
+        font: AT.Meta.Styles.OpenText.FontStyle,
         fill: "white",
         boundsAlignH: "center",
         boundsAlignV: "middle",
@@ -14,7 +14,17 @@
         sPlay.CurLevelNum = 0;
 
         AT.InitInput();
-        AT.Keys.enter.onDown.add(sPlay.NextLevel);
+        sChapter.nextLevelTimeout = setTimeout(sPlay.NextLevel, 2000);
+
+        AT.Keys.enter.onDown.add(function() {
+            clearTimeout(sChapter.nextLevelTimeout);
+            sPlay.NextLevel();
+        });
+
+        AT.Keys.esc.onDown.add(function() {
+            clearTimeout(sChapter.nextLevelTimeout);
+            AT.GotoIntro();
+        });
     };
 
     sChapter.proto.create = function() {
@@ -27,14 +37,9 @@
 
         Game.add.text(100, 100, text, style);
 
-        AT.AddTextButton(
-            Game.width - 150,
-            Game.height - 100, -1, -1,
-            'START',
-            null,
-            null,
-            sPlay.NextLevel
-        );
+        AT.ShowExitButton(function() {
+            clearTimeout(sChapter.nextLevelTimeout);
+        });
     };
 
     sChapter.PreviousChapter = function() {
@@ -52,8 +57,10 @@
     };
 
     sChapter.StartChapter = function(chapterNum) {
-        Game.state.start('sChapter', true, false, {
-            chapter: chapterNum,
+        AT.TransitionFade(function() {
+            Game.state.start('sChapter', true, false, {
+                chapter: chapterNum,
+            });
         });
     };
 

@@ -19,6 +19,7 @@
         AT.graphics = Game.add.graphics();
         loadPeople();
         AT.FG = AT.AddImageLayer(`fg:${sChapter.CurChapterNum}-${sPlay.CurLevelNum}`);
+        AT.ShowExitButton();
 
         if (AT.DEBUG) {
             AT.CreateLevelEditor();
@@ -64,18 +65,28 @@
     };
 
     sPlay.StartLevel = function(levelNum) {
-        Game.state.start('sPlay', true, false, {
-            level: levelNum,
+        AT.TransitionFade(function() {
+            Game.state.start('sPlay', true, false, {
+                level: levelNum,
+            });
         });
     };
 
+    AT.MoveButtonToCorner = function(button, toRight, toLeft) {
+        var margin = AT.Meta.Styles.Button.Margin;
+        button.x = toRight ? (Game.width - margin - button.width) : margin;
+        button.y = toLeft ? (Game.height - margin - button.height) : margin;
+    };
+
     sPlay.ShowRestartButton = function() {
-        AT.Buttons.Restart = AT.AddTextButton(
-            Game.width - 200,
-            Game.height - 100, -1, -1,
+        var restart = AT.AddTextButton(
+            0, 0, -1, -1,
             'RESTART', null, null,
             sPlay.RestartLevel
         );
+        AT.MoveButtonToCorner(restart, 1, 1);
+
+        AT.Buttons.Restart = restart;
     };
 
     sPlay.HideRestartLevelButton = function() {

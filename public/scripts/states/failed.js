@@ -12,8 +12,10 @@
     };
 
     var style = {
-        font: AT.Meta.FontStyle,
+        font: AT.Meta.Styles.OpenText.FontStyle,
         fill: 'red',
+        stroke: "white",
+        strokeThickness: 4,
     };
 
     function showMessage() {

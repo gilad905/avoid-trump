@@ -21,6 +21,16 @@ AT.GAME_SPEED = 1;
         Game.state.start('sBoot');
     };
 
+    AT.ShowExitButton = function(callback) {
+        var margin = AT.Meta.Styles.Button.Margin;
+        var button = AT.AddImageButton(0, 0, null, null, 'btn_exit', function() {
+            if (callback)
+                callback();
+            AT.GotoIntro();
+        });
+        AT.MoveButtonToCorner(button, 1, 0);
+    };
+
     AT.MultipleBySpeed = function(dur) {
         var toRet = (dur * AT.GAME_SPEED).toFixed(2);
         return toRet;
@@ -30,12 +40,20 @@ AT.GAME_SPEED = 1;
         Game.paused = isFrozen;
     };
 
-    const MARGIN = 10;
-    const DBL_MARGIN = MARGIN * 2;
-
     AT.AddImageLayer = function(key) {
         if (Game.cache.checkImageKey(key))
             return Game.add.sprite(0, 0, key);
+    };
+
+    AT.AddImageButton = function(x, y, width, height, key, onClick) {
+        var button = Game.add.button(x, y, key, onClick);
+        // var button = new Phaser.Button(Game, 0, 0, key, onClick);
+        if (width)
+            button.width = width;
+        if (height)
+            button.height = height;
+
+        return button;
     };
 
     AT.AddTextButton = function(x, y, width, height, text, textStyle, buttonStyle, onClick) {
@@ -45,7 +63,7 @@ AT.GAME_SPEED = 1;
 
         var styles = textButtonDefaults(textStyle, buttonStyle);
 
-        var text = new Phaser.Text(Game, MARGIN, MARGIN + 5, text, styles.text);
+        var text = new Phaser.Text(Game, AT.Meta.Styles.Button.Padding, AT.Meta.Styles.Button.Padding + 5, text, styles.text);
         if (width == -1)
             width = text.width;
         if (height == -1)
@@ -53,8 +71,8 @@ AT.GAME_SPEED = 1;
         text.setTextBounds(0, 0, width, height);
 
         var button = new Phaser.Button(Game, 0, 0, 'btn_2', onClick);
-        button.width = width + DBL_MARGIN;
-        button.height = height + DBL_MARGIN;
+        button.width = width + AT.Meta.Styles.Button.DoublePadding;
+        button.height = height + AT.Meta.Styles.Button.DoublePadding;
 
         if (styles.button.backgroundColor) {
             AT.graphics.beginFill(styles.button.backgroundColor);
@@ -81,6 +99,35 @@ AT.GAME_SPEED = 1;
 
     AT.DrawPoint = function(x, y) {
         Game.debug.geom(new Phaser.Point(x, y), 'rgba(255,255,255,1)');
+    };
+
+    // fader = null;
+
+    AT.TransitionFade = function(callback, from, to) {
+        var duration = 300;
+        if (from === undefined)
+            from = 0;
+        if (to === undefined)
+            to = 1;
+
+        // var fader = Game.add.sprite(0, 0, 'black');
+        var fader = Game.add.sprite(0, 0, 'turquize');
+        fader.width = Game.width;
+        fader.height = Game.height;
+        fader.alpha = from;
+
+        let alphaTween = Game.add.tween(fader).to({
+            alpha: to,
+        }, duration, Phaser.Easing.Exponential.In);
+
+        if (callback) {
+            alphaTween.onComplete.add(function() {
+                callback();
+                AT.TransitionFade(null, to, from);
+            }, this);
+        }
+
+        alphaTween.start();
     };
 
     AT.FadeBackground = function(amount, duration) {
@@ -126,8 +173,8 @@ AT.GAME_SPEED = 1;
         text = text || {};
         text.boundsAlignH = text.boundsAlignH || 'center';
         text.boundsAlignV = text.boundsAlignV || 'middle';
-        text.font = text.font || ("bold 30px " + AT.Meta.FontFamily);
-        text.fill = text.fill || 'blue';
+        text.font = text.font || AT.Meta.Styles.Button.FontStyle;
+        text.fill = text.fill || AT.Meta.Styles.Button.Color;
 
         button = button || {};
         button.lineWidth = button.lineWidth || 0;

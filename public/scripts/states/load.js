@@ -2,19 +2,21 @@
     sLoad.proto.preload = function() {
         loadLevelsData();
         loadSpritesheetAssets();
-
-        Game.load.json('intro', 'data/intro.json');
-        Game.load.image('black', 'assets/black.png');
-        Game.load.image('btn_1', 'assets/blue_button00.png');
-        Game.load.image('btn_2', 'assets/green_button05.png');
-        Game.load.image('bg_trump', 'assets/trump_bg_edited.png');
-        Game.load.image('bg_trump_black', 'assets/trump_bg_black.png');
-
-        // A hack to preload custom fonts
-        Game.add.text(0, 0, "hack", {font:"1px Indie Flower", fill:"#FFFFFF"});
+        loadImageAssets();
     };
 
     sLoad.proto.create = function() {
+        // A hack to preload custom fonts
+        Game.add.text(0, 0, "hack", {
+            font: "1px Indie Flower",
+            fill: "#FFFFFF",
+        });
+        Game.add.text(0, 0, "hack", {
+            font: "1px Varela Round",
+            fill: "#FFFFFF",
+        });
+        // Game.add.text(0, 0, "hack", {font:"1px Archivo Black", fill:"#FFFFFF"});
+
         if (AT.DEBUG)
             sChapter.NextChapter();
         else
@@ -24,6 +26,7 @@
     //////////////////////////////////////////////////////////////
 
     function loadLevelsData() {
+        Game.load.json('intro', 'data/intro.json');
         for (var chapterNum in AT.Meta.Chapters) {
             var chapter = AT.Meta.Chapters[chapterNum];
             var chapterPadded = AT.PaddedNum(chapterNum);
@@ -44,6 +47,16 @@
 
         for (var key in sheets)
             Game.load.spritesheet(key, 'assets/spritesheets/' + sheets[key], 272, 334);
+    }
+
+    function loadImageAssets() {
+        Game.load.image('turquize', 'assets/turquize.png');
+        Game.load.image('black', 'assets/black.png');
+        Game.load.image('btn_1', 'assets/buttons/blue_button00.png');
+        Game.load.image('btn_2', 'assets/buttons/green_button05.png');
+        Game.load.image('btn_exit', 'assets/buttons/blue_boxCross.png');
+        Game.load.image('bg_trump_yellow', 'assets/trump_bg_edited.png');
+        Game.load.image('bg_trump_black', 'assets/trump_bg_black.png');
     }
 
     function fileExists(name) {

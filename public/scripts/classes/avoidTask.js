@@ -52,7 +52,7 @@
 
     const RANDOM_COLORS = ['gray', 'brown', 'purple', 'red', 'green', 'orange', 'black'];
     const TEXT_STYLE = {
-        font: AT.Meta.FontStyle,
+        font: AT.Meta.Styles.AvoidTask.FontStyle,
         fill: "#fff",
         boundsAlignH: "center",
         boundsAlignV: "middle",

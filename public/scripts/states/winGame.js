@@ -1,7 +1,9 @@
 (function() {
     var style = {
-        font: AT.Meta.FontStyle,
-        fill: "white",
+        font: AT.Meta.Styles.OpenText.FontStyle,
+        fill: "yellow",
+        stroke: "black",
+        strokeThickness: 4,
         boundsAlignH: "center",
         boundsAlignV: "middle",
         wordWrap: true,
@@ -14,9 +16,7 @@
     };
 
     sWinGame.proto.create = function() {
-        AT.BG = AT.AddImageLayer('bg_trump');
-        // AT.BG.width = Game.width;
-        // AT.BG.height = Game.height;
+        AT.BG = AT.AddImageLayer('bg_trump_yellow');
         AT.graphics = Game.add.graphics();
 
         var text =
@@ -25,14 +25,18 @@
 
         Game.add.text(100, 100, text, style);
 
-        AT.AddTextButton(
-            Game.width - 250,
-            Game.height - 100, -1, -1,
+        var restartButton = AT.AddTextButton(
+            0,
+            0, -1, -1,
             'RESTART GAME',
             null,
             null,
             restartGame
         );
+
+        AT.MoveButtonToCorner(restartButton, 1, 1);
+
+        AT.ShowExitButton();
     };
 
     function restartGame() {

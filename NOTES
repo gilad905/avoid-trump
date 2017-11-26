@@ -1,9 +1,3 @@
-Visual scene editor:
-    enable dragging characters
-    // right-click for changing 'facing'
-
---------------------------------------------------------------------
-
 plot (scenes):
 - polish first lady, ceremony, handshake
 - tiffany, ceremony, kiss
@@ -13,9 +7,7 @@ plot (scenes):
 
 TODOs:
     // user's face from webcam
+    add complications to levels
     (maybe) non-character sprite animations (text balloons)
     playbacks of avoids
     complete plot
-    image buttons
-    fade avoid task in/out
-    fade avoid task on wrong keypress

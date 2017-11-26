@@ -3,26 +3,30 @@
         "AVOID TRUMP\n" +
         "\n" +
         "Careful! Trump is coming for you!\n" +
-        "Avoid shaking Trump's hand by quickly pressing the correct keys.\n" +
-        "When you see a key like in the example ------------->\n" +
-        "you need to press that key before the time runs out.\n" +
-        "you have 3 TRIES to get the correct key!\n" +
-        "Good luck!";
+        "But what does he want? is it HOLDING HANDS? :O\n" +
+        "Avoid Trump's hand by quickly pressing the correct character.\n" +
+        "You have 3 TRIES to get it right!\n" +
+        "\n" +
+        "Good luck.";
 
     var style = {
-        font: "bold 25px " + AT.Meta.FontFamily,
-        fill: "white",
+        font: "bold 28px " + AT.Meta.Styles.OpenText.FontFamily,
+        fill: "black",
+        stroke: "white",
+        strokeThickness: 4,
         boundsAlignH: "center",
         boundsAlignV: "middle",
         wordWrap: true,
         wordWrapWidth: 600,
     };
 
+    function startGame() {
+        sChapter.StartChapter(1);
+    }
+
     sIntro.proto.init = function() {
         AT.InitInput();
-        AT.Keys.enter.onDown.add(function() {
-            sChapter.StartChapter(1)
-        });
+        AT.Keys.enter.onDown.add(startGame);
     };
 
     sIntro.proto.create = function() {
@@ -37,14 +41,15 @@
     function loadIntroSprites() {
         Game.add.text(100, 100, introText, style);
 
-        AT.AddTextButton(
-            Game.width - 150,
-            Game.height - 100, -1, -1,
+        var startButton = AT.AddTextButton(
+            0,
+            0, -1, -1,
             'START',
             null,
             null,
-            sPlay.NextLevel
+            startGame,
         );
+        AT.MoveButtonToCorner(startButton, 1, 1);
     };
 
     function startAvoidTasks(data) {

@@ -14,8 +14,10 @@
     };
 
     var style = {
-        font: AT.Meta.FontStyle,
-        fill: 'lightgreen',
+        font: AT.Meta.Styles.OpenText.FontStyle,
+        fill: 'green',
+        stroke: "white",
+        strokeThickness: 4,
     };
 
     function showMessage() {
@@ -24,7 +26,7 @@
 
     function showButton() {
         AT.AddTextButton(
-            Game.width - 200,
+            Game.width - 250,
             Game.height - 100, -1, -1,
             'NEXT LEVEL', null, null,
             sPlay.NextLevel

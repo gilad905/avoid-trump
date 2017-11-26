@@ -34,6 +34,26 @@ AT.Meta = {
         'woman2': 'woman - other color.png',
     },
 
-    FontFamily: 'Indie Flower',
-    FontStyle: "bold 40px Indie Flower",
+    Styles: {
+        Button: {
+            // FontFamily: 'Archivo Black',
+            // FontStyle: "bold 30px Archivo Black",
+            // FontFamily: 'Varela Round',
+            // FontStyle: "bold 30px Varela Round",
+            FontFamily: 'Indie Flower',
+            FontStyle: "bold 30px Indie Flower",
+            Color: "blue",
+            Padding: 10,
+            DoublePadding: 20,
+            Margin: 60,
+        },
+        OpenText: {
+            FontFamily: 'Indie Flower',
+            FontStyle: "bold 40px Indie Flower",
+        },
+        AvoidTask: {
+            FontFamily: 'Varela Round',
+            FontStyle: "bold 30px Varela Round",
+        },
+    }
 };
